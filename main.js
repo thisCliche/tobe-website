@@ -1,10 +1,14 @@
 import App from './App'
-
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 // #ifndef VUE3
 import Vue from 'vue'
 import './uni.promisify.adaptor'
 Vue.config.productionTip = false
 App.mpType = 'app'
+
+Vue.use(ElementUI);
+
 const app = new Vue({
   ...App
 })

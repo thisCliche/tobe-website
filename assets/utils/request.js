@@ -1,0 +1,42 @@
+import axios from 'axios'
+import { Notification } from 'element-ui'
+import { Local } from "@utils/storage";
+import { ACCOUNT_INFO } from '@assets/constant/cacheKey'
+
+let baseURL = "https://oaapitest.wuxunkj.com"
+let config = {
+  baseURL,
+  timeout: 5000,
+  headers: {
+    "Content-Type": "application/json;charset=UTF-8"
+  }
+}
+let service = axios.create(config)
+
+service.interceptors.request.use(config => {
+  let user = Local.get(ACCOUNT_INFO);
+  if (user) {
+    config.headers['X-Access-Token'] = user.token
+  }
+  return config
+}, error => {
+  Promise.reject(error)
+})
+
+service.interceptors.response.use(
+  response => {
+    let data = response.data
+    // 未完善 缺少权限判断 登录过期等等
+    if (data.status == 200) {
+      return data;
+    } else {
+      Notification.error({title:'错误',message:data.msg})
+      return Promise.reject(data);
+    }
+  },
+  error => {
+    Notification.error({title:'错误',message:'网络错误，请稍后再试'})
+    return Promise.reject(error);
+  }
+);
+export default service

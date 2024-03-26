@@ -1,0 +1,178 @@
+// mixin.less
+$primary: #005BAC; // 主题色 0f2ebc
+$secondary: #e4f1ff; 
+$gray:rgb(167, 167, 167);
+$bc: #f4f4f4;
+$fc:#fff;
+$themeColor:#716066;
+$themeFontColor:#592366;
+$footBg:#272422;
+
+@mixin ct1400{
+  width: 1400px;
+  margin: 0 auto;
+}
+@mixin mb($value){
+  margin-bottom: $value;
+}
+@mixin mt($value){
+  margin-top: $value;
+}
+@mixin ml($value){
+  margin-left: $value;
+}
+@mixin mr($value){
+  margin-right: $value;
+}
+@mixin pb($value){
+  padding-bottom: $value;
+}
+@mixin pt($value){
+  padding-top: $value;
+}
+@mixin pl($value){
+  padding-left: $value;
+}
+@mixin pr($value){
+  padding-right: $value;
+}
+// // 背景图片地址和大小
+@mixin bis($url) {
+  background-image: url($url);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+@mixin bis-self($url) {
+  background-image: url($url);
+  background-repeat: no-repeat;
+  background-size: 100% 101%;
+  background-position: center;
+}
+@mixin bisWidth($url){
+  background-image: url($url);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+@mixin bisAcc($url){
+  background-image: url($url);
+  background-size: auto 100%;
+  background-position: center;
+  background-origin: content-box;
+}
+
+// //定位全屏
+@mixin allcover{
+  position:absolute;
+  top:0;
+  right:0;
+}
+
+// //定位上下左右居中
+@mixin center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// //定位上下居中
+@mixin ct {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+// //定位左右居中
+@mixin cl {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+ //宽高
+@mixin wh($width, $height){
+  width: $width;
+  height: $height;
+}
+ //字体大小，颜色
+@mixin sc($size, $color){
+  font-size: $size;
+  color: $color;
+}
+
+ //flex 布局和 子元素 对其方式
+@mixin fj($type: space-between){
+  display: flex;
+  justify-content: $type;
+}
+
+@mixin ellipsis{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+@mixin multi-ellipsis--l2{
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+@mixin multi-ellipsis--l3{
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+@mixin multi-ellipsis--l10{
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 10;
+  -webkit-box-orient: vertical;
+}
+
+@mixin coolBeans {
+	cursor: pointer;
+  border: 2px solid #000;
+  border-radius: 50px;
+  color: #000;
+  font-family: roboto;
+  font-size: 20px;
+  font-weight: 700;
+  overflow: hidden;
+  padding: 10px 20px;
+  position: relative;
+  text-decoration: none;
+  transition: 0.3s transform ease-in-out;
+  will-change: transform;
+  z-index: 0;
+	&::after {
+	  background-color: #ffff00;
+	  border-radius: 50px;
+	  content: '';
+	  display: block;
+	  height: 100%;
+	  width: 100%;
+	  position: absolute;
+	  left: 0;
+	  top: 0;
+	  transform: translate(-100%, 0) rotate(10deg);
+	  transform-origin: top left;
+	  transition: 0.3s transform ease-out;
+	  will-change: transform;
+	  z-index: -1;
+	}
+	&:hover::after {
+  transform: translate(0, 0);
+}
+&:hover {
+  border: 2px solid transparent;
+  color: $themeFontColor;
+  transform: scale(1.05);
+  will-change: transform;
+}
+}
+
+

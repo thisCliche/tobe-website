@@ -3,15 +3,25 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "首页"
+			}
+		},
+		{
+			"path" : "pages/error/index",
+			"style" : 
+			{
+				"navigationBarTitleText" : "404 Not Found",
+				"topWindow": false
+				
 			}
 		}
 	],
 	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"navigationStyle": "custom",
+		"backgroundColor": "#ffffff"
+	},
+	"topWindow": {
+		"path": "assets/components/MyHeader.vue"
 	},
 	"uniIdRouter": {}
 }

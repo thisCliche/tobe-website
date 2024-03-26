@@ -1,0 +1,195 @@
+@import "minix.scss";
+.myHeader {
+  .sitting{
+    height: 92px;
+  }
+  .header-content{
+	  @include bis('../image/navigateBg.png');
+    // background: #fff;
+    -webkit-user-select:none;
+    user-select: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    box-shadow: 0px 1px 2px 0px rgb(224, 224, 224);
+
+
+    .content{
+      .menus {
+		  .logo {
+		    cursor: pointer;
+		    img {
+		      width: 350px;
+		    }
+		  }
+		  .menusInner{
+			  @include ct1400;
+			  @include fj(center);
+			  position: relative;
+			  .loginBtn{
+			        position: absolute;
+			            right: -122px;
+			            padding: 4px 20px;
+			            background: #000;
+			            border-radius: 50px;
+			            transition: background 200ms ease-in;
+			            cursor: pointer;
+			            top: 5px;
+			            color: #fff;
+			            font-weight: 500;
+									 box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+			        &:hover{
+			          background: $themeColor;
+			        }
+			      }
+		  }
+        
+      }
+	  .secondRow{
+		  background: #fff;
+		  height: 52px;
+		  .placehold{
+			  width: 360px
+		  }
+		  .ulEle {
+		    list-style:none;
+		    cursor: pointer;
+		    @include fj();
+			font-weight: 700;
+			.liEle {
+			  list-style:none;
+			  padding: 0 20px;
+			  height: 52px;
+			  line-height: 52px;
+			  span{
+				transition: color 0.6s ease-out;
+			  }
+			}
+			.liEle:hover{
+				  span{
+					color: $themeColor;
+				  }
+				}
+			}
+		  
+	  }
+	  .firstRow{
+		  height: 40px;
+		  .ulEle {
+			  height: 40px;
+		    list-style:none;
+		    cursor: pointer;
+		    @include fj();
+		    @include sc(16px,#fff);
+			font-weight: 700;
+		    .liEle {
+		      list-style:none;
+		      padding: 0 20px;
+		      height: 40px;
+		      line-height: 40px;
+		      position: relative;
+		      span{
+				position: relative;
+				z-index: 1;
+		        transition: color 0.6s ease-out;
+		      }
+		    }
+		    .active{
+		      span{
+		        color: #fff;
+		      }
+		    }
+		    .liEle:before {
+		      content: "";
+		      position: absolute;
+		      z-index: 0;
+		      left:50%;
+			  right: 50%;
+		      height: 100%;
+		      background: $themeColor;
+		      transition-property: left,right;
+		      transition-duration: .3s;
+		      transition-timing-function: ease-out;
+		    }
+		    .active:before {
+		      left:0;
+		      right:0;
+		    }
+		    .priming {
+		      position: fixed;
+		      overflow: hidden;
+		      top: 40px;
+		      background: $themeColor;
+			  width: 434px;
+		      height: 50px;
+		      z-index: 10;
+		      .subMenus {
+		        @include sc(15px,#fff);
+		        position: absolute;
+		        line-height: 50px;
+		        top: 0px;
+		        height: 50px;
+		        z-index: 99;
+		        transition: all 0.2s ease-out;
+		        @include fj(flex-start);
+		        .subItem {
+		          padding: 0 20px;
+		          &:hover{
+		            color: #aaaa7f;
+		          }
+		        }
+		      }
+		    }
+		  }
+	  }
+    }
+  }
+  
+  
+}
+.myFoot{
+  background: #f2f2f2;
+  -webkit-user-select:none;
+  user-select: none;
+  @include pt(64px);
+  color: #555;
+  cursor: default;
+  .menusRow{
+    @include ct1400;
+    @include fj();
+    @include mb(22px);
+    .menusL{
+      flex: 1;
+      @include fj(space-between);
+      margin-right:40px;
+      .menusList{
+        .menusTitle{font-size: 18px;font-weight: 700;@include mb(26px);}
+        .menuItem{@include sc(14px,#6b6b6b);line-height: 30px;cursor: pointer;transition: color .3s ease-in-out;
+          &:hover{color: #005BAC;}
+        }
+        
+      }
+    }
+    .menusR{
+      img{width: 134px;}
+      .tip{
+        @include sc(14px,#acacb1);
+        text-align: center;
+        @include mt(6px);
+      }
+    }
+  }
+  .divier{
+    background: rgb(223, 223, 223);
+    height: 1px;
+  }
+  .copyRight{
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    font-size: 14px;
+    a{color: #555;}
+  }
+}
