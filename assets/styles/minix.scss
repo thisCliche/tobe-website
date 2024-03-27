@@ -13,6 +13,10 @@ $tagBg:#dadada;
   width: 1400px;
   margin: 0 auto;
 }
+@mixin ct1600{
+  width: 1600px;
+  margin: 0 auto;
+}
 @mixin mb($value){
   margin-bottom: $value;
 }

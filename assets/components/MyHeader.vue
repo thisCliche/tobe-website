@@ -6,22 +6,25 @@
 				<view class="menus firstRow">
 					<view class="menusInner">
 						<view class="ulEle" @mouseover="mouseIn" @mouseleave="mouseOut">
-							<view @click="toList(item)" v-for="(item) in homeMenus.slice(0,3)" :key="item.id" :data-idx="1"
-								:class="item.id == currentId ? 'active' : ''" class="liEle" :data-id="item.id">
-								<span>{{ item.nameEn }}</span>
+							<view class="ulWrap ulWrapL">
+								<view @click="toList(item)" v-for="(item) in homeMenus.slice(0,3)" :key="item.id" :data-idx="1"
+									:class="item.id == currentId ? 'active' : ''" class="liEle" :data-id="item.id">
+									<span>{{ item.nickname }}</span>
+								</view>
 							</view>
 							<view class="logo" @click="$router.push('/')">
 								<img :src="logoImg" alt="" />
 							</view>
-							<view @click="toList(item)" v-for="(item) in homeMenus.slice(3,7)" :key="item.id" :data-idx="2"
-								:class="item.id == currentId ? 'active' : ''" class="liEle" :data-id="item.id">
-								<span>{{ item.nameEn }}</span>
+							<view class="ulWrap ulWrapR">
+								<view @click="toList(item)" v-for="(item) in homeMenus.slice(3,7)" :key="item.id" :data-idx="2"
+									:class="item.id == currentId ? 'active' : ''" class="liEle" :data-id="item.id">
+									<span>{{ item.nickname }}</span>
+								</view>
 							</view>
 							<el-collapse-transition>
 								<view class="priming" v-show="isPriming" :style="{ left: leftLength + 'px' }">
 									<view class="subMenus">
-										<view class="subItem" v-for="item in subList" :key="item.id"
-											@click="$router.push(item.path)">
+										<view class="subItem" v-for="item in subList" :key="item.id" @click="$router.push(item.url)">
 											{{ item.name }}
 										</view>
 									</view>
@@ -33,26 +36,33 @@
 				</view>
 				<view class="menus secondRow">
 					<view class="menusInner">
-						<view class="ulEle" >
+						<view class="ulEle">
 							<view @click="toList(item)" v-for="(item) in homeMenus.slice(7,10)" :key="item.id" class="liEle">
 								<span>{{ item.name }}</span>
 							</view>
-							<view class="placehold" ></view>
-							<view @click="toList(item)" v-for="(item) in homeMenus.slice(10,13)" :key="item.id"  class="liEle">
+							<view class="placehold"></view>
+							<view @click="toList(item)" v-for="(item) in homeMenus.slice(10,13)" :key="item.id" class="liEle">
 								<span>{{ item.name }}</span>
 							</view>
 						</view>
 					</view>
-					
+
 				</view>
 			</view>
-			
+
 		</view>
 	</view>
 </template>
 
 <script>
-	import homeMenus from './menuList.js';
+	import {
+		menuApi
+	} from '@api/homeApi.js'
+	import {
+		Local
+	} from '@utils/storage.js'
+
+	// import homeMenus from './menuList.js';
 	import logoImg from '@image/logo.png'
 	export default {
 		name: "MyHeader",
@@ -63,7 +73,7 @@
 				subList: [],
 				leftLength: "",
 				currentId: 0,
-				homeMenus
+				homeMenus: [],
 			};
 		},
 		watch: {
@@ -74,23 +84,26 @@
 		methods: {
 			mouseIn(e) {
 				if (e.target.dataset.hasOwnProperty('idx')) {
-					let {id,idx} = e.target.dataset
-					let item = this.homeMenus.find(item=>item.id == id)
+					let {
+						id,
+						idx
+					} = e.target.dataset
+					let item = this.homeMenus.find(item => item.id == id)
 					this.currentId = id
-					if (item.child.length == 0) {
+					if (item.hasChild != 1) {
 						this.isPriming = false;
 					} else {
 						this.isPriming = true;
-						this.subList = item.child;
+						this.subList = item.childlist;
 						this.$nextTick(() => {
 							let innerBoxLeft = 0;
-							uni.createSelectorQuery().in(this).select('.ulEle').boundingClientRect(data=>{
+							uni.createSelectorQuery().in(this).select('.ulEle').boundingClientRect(data => {
 								innerBoxLeft = data.left;
-							}).exec() 
+							}).exec()
 							if (idx == 2) {
-								this.leftLength = innerBoxLeft+784;
+								this.leftLength = innerBoxLeft + 874;
 							} else {
-								this.leftLength = innerBoxLeft
+								this.leftLength = innerBoxLeft + 80;
 							}
 						})
 					}
@@ -127,11 +140,21 @@
 			// }
 		},
 		created() {
-			// this.getCurrentId()
+			let menuList = Local.get('menuList');
+			if (menuList) {
+				this.homeMenus = menuList;
+			} else {
+				menuApi({}).then(res => {
+					let menuListRes = res.data.reverse();
+					Local.set('menuList', menuListRes);
+					this.homeMenus = menuListRes;
+				})
+			}
+
 		},
 		mounted() {
-			
-			
+
+
 		}
 	};
 </script>

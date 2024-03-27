@@ -36,7 +36,7 @@
 			            border-radius: 50px;
 			            transition: background 200ms ease-in;
 			            cursor: pointer;
-			            top: 5px;
+			            top: 6px;
 			            color: #fff;
 			            font-weight: 500;
 									 box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
@@ -58,6 +58,7 @@
 		    cursor: pointer;
 		    @include fj();
 			font-weight: 700;
+			
 			.liEle {
 			  list-style:none;
 			  padding: 0 20px;
@@ -84,6 +85,16 @@
 		    @include fj();
 		    @include sc(16px,#fff);
 			font-weight: 700;
+			.ulWrap{
+				width: 524px;
+				@include fj();
+			}
+			.ulWrapL{
+				justify-content: flex-end;
+			}
+			.ulWrapR{
+				justify-content: start;
+			}
 		    .liEle {
 		      list-style:none;
 		      padding: 0 20px;
@@ -122,8 +133,8 @@
 		      overflow: hidden;
 		      top: 40px;
 		      background: $themeColor;
-			  width: 434px;
-		      height: 50px;
+			  // width: 434px;
+					@include wh(434px,50px);
 		      z-index: 10;
 		      .subMenus {
 		        @include sc(15px,#fff);

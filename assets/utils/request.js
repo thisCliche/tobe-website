@@ -2,8 +2,7 @@ import axios from 'axios'
 import { Notification } from 'element-ui'
 import { Local } from "@utils/storage";
 import { ACCOUNT_INFO } from '@assets/constant/cacheKey'
-
-let baseURL = "https://oaapitest.wuxunkj.com"
+import baseURL from '../constant/requestUrl.js'
 let config = {
   baseURL,
   timeout: 5000,
@@ -27,7 +26,7 @@ service.interceptors.response.use(
   response => {
     let data = response.data
     // 未完善 缺少权限判断 登录过期等等
-    if (data.status == 200) {
+    if (data.code == 200) {
       return data;
     } else {
       Notification.error({title:'错误',message:data.msg})
