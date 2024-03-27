@@ -11,6 +11,7 @@
 </template>
 
 <script>
+	import playImg from '@image/play.png'
 	import VideoPlay from '@assets/components/VideoPlay.vue'
 export default {
   name: 'VideoProfile',
@@ -18,8 +19,7 @@ export default {
 	components:{VideoPlay},
   data() {
     return {
-			filePath:"http://image.ahsjgs.com/files/2023-09-15/安徽四建控股集团1.mp4",
-      playImg: "//image.ahsjgs.com/images/default/play.png",
+      playImg,
       visble:false,
     }
   },

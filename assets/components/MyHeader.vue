@@ -76,12 +76,17 @@
 				homeMenus: [],
 			};
 		},
-		watch: {
-			$route(to, from) {
-				this.getCurrentId()
-			}
-		},
+		// watch: {
+		// 	$route(to, from) {
+		// 		this.getCurrentId()
+		// 	}
+		// },
 		methods: {
+			loginBtn(){
+				uni.navigateTo({
+					url:"/pages/login/login?type=register"
+				})
+			},
 			mouseIn(e) {
 				if (e.target.dataset.hasOwnProperty('idx')) {
 					let {

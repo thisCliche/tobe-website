@@ -105,7 +105,6 @@
 </template>
 
 <script>
-	import bannerUrl from '@image/banner.png';
 	import {
 		tagIcon,
 	} from './export.js'
