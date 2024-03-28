@@ -60,7 +60,7 @@
 		padding: 60px 0;
 
 		.footWrap {
-			@include ct1600;
+			@include ct1200;
 
 			.row1 {
 				font-size: 30px;

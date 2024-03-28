@@ -25,12 +25,12 @@
 		    }
 		  }
 		  .menusInner{
-			  @include ct1400;
+			  @include ct1200;
 			  @include fj(center);
 			  position: relative;
 			  .loginBtn{
 			        position: absolute;
-			            right: -122px;
+			            right: -100px;
 			            padding: 4px 20px;
 			            background: #000;
 			            border-radius: 50px;
@@ -168,7 +168,7 @@
   color: #555;
   cursor: default;
   .menusRow{
-    @include ct1400;
+    @include ct1200;
     @include fj();
     @include mb(22px);
     .menusL{

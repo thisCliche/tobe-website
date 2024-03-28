@@ -18,17 +18,15 @@
 		<view class="model1">
 			<view class="slogan fadeIn animated">基于人工智留学网站基于人工智能的留学网站基于人工智能的留学网站</view>
 			<view class="pictureCom">
-				<view class="customSlogan">
-					<view class="name">
-						{{model1Comtext.name}}
-					</view>
-					<view class="text">
-						{{model1Comtext.text}}
-					</view>
-				</view>
 				<view class="pictureComWrap animated fadeInUp-20" :class="'list'+idx" v-for="(item,idx) in model1ComImg"
 					:key="idx">
-					<img :src="item" alt="" />
+					<template v-if="idx==2">
+						<img class="img1" :src="item.img1" alt="" />
+						<img class="img2" :src="item.img2" alt="" />
+					</template>
+					<template v-else>
+						<img :src="item" alt="" />
+					</template>
 				</view>
 			</view>
 		</view>
@@ -129,7 +127,7 @@
 				usecase: [], // 1
 				homecase: [], // 1
 				model1ComImg: [],
-				model1Comtext: {},
+				// model1Comtext: {},
 				tagIcon,
 				middleBanner: '', // 1
 				bottomBanner: '', // 1
@@ -151,7 +149,7 @@
 					limit: 3
 				}), bannerApi({
 					type: 2,
-					limit: 5
+					limit: 6
 				}), bannerApi({
 					type: 3,
 					limit: 1
@@ -165,8 +163,7 @@
 					type: 1,
 					limit: 5
 				})]);
-				let model1Comtext = {},
-					videoInfo = [],
+				let videoInfo = [],
 					banner = [],
 					model1ComImg = [],
 					middleBanner = '',
@@ -193,12 +190,14 @@
 							})
 						})
 					} else if (idx == 2) {
-						model1Comtext = {
-							text: res.data[0].text,
-							name: res.data[0].name,
-						}
-						res.data.map(item => {
-							model1ComImg.push(item.image_text)
+						let siger = res.data.slice(0,1);
+						let other = res.data.slice(1);
+						other.map((item,index) => {
+							if(index==2){
+								model1ComImg.push({img1:siger[0].image_text,img2:item.image_text})
+							}else{
+								model1ComImg.push(item.image_text)
+							}
 						})
 					} else if (idx == 3) {
 						res.data.map(item => {
@@ -222,12 +221,12 @@
 							usecase.push({
 								engineerUrl: item.image_text,
 								desc: item.text,
-								id: item.id
+								id: item.id,
+								name:item.name
 							})
 						})
 					}
 				})
-				this.model1Comtext = model1Comtext;
 				this.usecase = usecase;
 				this.homecase = homecase;
 				this.model1ComImg = model1ComImg;
@@ -250,6 +249,7 @@
 	@import "../../assets/styles/minix.scss";
 
 	.IndexPage {
+		width: 100%;
 		.banner {
 			&::v-deep .el-carousel__arrow {
 				width: 50px;
@@ -277,8 +277,8 @@
 		}
 
 		.model8 {
-			@include ct1400;
-			padding: 40px 0;
+			@include ct1200;
+			@include modelPd;
 
 			.slogan1 {
 				font-size: 34px;
@@ -300,16 +300,16 @@
 
 		.model7 {
 			background-color: $bc;
-			padding: 40px 0;
+			@include modelPd;
 
 			.model7Wrap {
-				@include ct1400;
+				@include ct1200;
 				@include fj();
 			}
 		}
 
 		.model6 {
-			@include ct1400;
+			@include ct1200;
 
 			.adsense {
 				width: 100%;
@@ -325,8 +325,8 @@
 		}
 
 		.model5 {
-			@include ct1400;
-			padding: 40px 0;
+			@include ct1200;
+			@include modelPd;
 			font-weight: 700;
 
 			.slogan {
@@ -337,10 +337,10 @@
 
 		.model4 {
 			background-color: $bc;
-			padding: 40px 0;
+			@include modelPd;
 
 			.model4Wrap {
-				@include ct1400;
+				@include ct1200;
 				position: relative;
 
 				.littleTag {
@@ -474,8 +474,8 @@
 		}
 
 		.model3 {
-			@include ct1400;
-			padding: 40px 0;
+			@include ct1200;
+			@include modelPd;
 
 			.adsense {
 				width: 100%;
@@ -495,9 +495,9 @@
 			background-color: $bc;
 
 			.model2Wrap {
-				@include ct1400;
+				@include ct1200;
 				@include fj();
-				padding: 40px 0;
+				@include modelPd;
 
 				.model2L {
 					width: 500px;
@@ -525,6 +525,7 @@
 
 					img {
 						width: 100%;
+						object-fit: cover;
 					}
 				}
 			}
@@ -532,42 +533,22 @@
 		}
 
 		.model1 {
-			@include ct1400;
-			padding: 40px 0;
+			@include ct1200;
+			@include modelPd;
 
 			.pictureCom {
 				@include fj();
 				align-items: flex-end;
 				position: relative;
 
-				.customSlogan {
-					@include cl();
-					top: 20px;
-					font-size: 22px;
-					font-weight: 700;
-					background: $bc;
-					border-radius: 12px;
-					text-align: center;
-					.text{
-						line-height: 38px;
-					}
-					.name{
-						line-height: 40px;
-						background: #000;
-						color: #fff;
-						width: 100px;
-						height: 40px;
-						border-radius: 12px;
-					}
-				}
-
 				.pictureComWrap {
-					width: 244px;
+					width: 204px;
 					height: 346px;
 					border-radius: 10px;
 					overflow: hidden;
 
 					img {
+						object-fit: cover;
 						width: 100%;
 						height: 100%;
 					}
@@ -579,7 +560,19 @@
 				}
 
 				.list2 {
-					height: 120px;
+					height: 330px;
+					@include fj();
+					flex-direction: column;
+
+					.img1 {
+						height: 80px;
+						border-radius: 10px;
+					}
+
+					.img2 {
+						height: 120px;
+						border-radius: 10px;
+					}
 
 				}
 			}

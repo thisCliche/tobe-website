@@ -3,8 +3,9 @@
 		<VueSlickCarousel v-bind="settings">
 			<view class="item" v-for="item in usecase" :key="item.id">
 				<view class="imgWrap">
-					<view class="header"><el-avatar shape="circle" size="small" :src="item.engineerUrl"></el-avatar></view>
+					<view class="header"><el-avatar shape="circle" :src="item.engineerUrl"></el-avatar></view>
 					<view class="des">{{item.desc}}</view>
+					<view class="name">{{item.name}}</view>
 				</view>
 			</view>
 		</VueSlickCarousel>
@@ -75,7 +76,7 @@
 		outline: none;
 		
 		.imgWrap {
-			@include wh(300px, 400px);
+			@include wh(260px, 320px);
 			overflow: hidden;
 			margin: 0 auto;
 			background: $bc;
@@ -83,9 +84,15 @@
 			padding: 30px 24px;
 			box-sizing: border-box;
 			.des{
+				color: $themeColor;
 				line-height: 26px;
 				@include mt(20px);
-				@include multi-ellipsis--l10;
+				@include multi-ellipsis--l(6);
+				height: 156px;
+			}
+			.name{
+				@include mt(20px);
+				text-align: right;
 			}
 		}
 

@@ -10,6 +10,13 @@ $footBg:#272422;
 $tagBg:#dadada;
 $linkColor:#2780F3;
 
+@mixin modelPd{
+	padding: 80px 0;
+}
+@mixin ct1200{
+  width: 1200px;
+  margin: 0 auto;
+}
 @mixin ct1400{
   width: 1400px;
   margin: 0 auto;
@@ -131,11 +138,12 @@ $linkColor:#2780F3;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
-@mixin multi-ellipsis--l10{
+
+@mixin multi-ellipsis--l($type){
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
-  -webkit-line-clamp: 10;
+  -webkit-line-clamp: $type;
   -webkit-box-orient: vertical;
 }
 
@@ -155,7 +163,7 @@ $linkColor:#2780F3;
   will-change: transform;
   z-index: 0;
 	&::after {
-	  background-color: #ffff00;
+	  background-color: $themeFontColor;
 	  border-radius: 50px;
 	  content: '';
 	  display: block;
@@ -175,7 +183,7 @@ $linkColor:#2780F3;
 }
 &:hover {
   border: 2px solid transparent;
-  color: $themeFontColor;
+  color: #fff;
   transform: scale(1.05);
   will-change: transform;
 }

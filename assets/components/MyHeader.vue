@@ -31,7 +31,7 @@
 								</view>
 							</el-collapse-transition>
 						</view>
-						<view class="loginBtn" @click="loginBtn">LOGIN</view>
+						<view class="loginBtn" @click="loginBtn">login</view>
 					</view>
 				</view>
 				<view class="menus secondRow">
@@ -59,7 +59,7 @@
 		menuApi
 	} from '@api/homeApi.js'
 	import {
-		Local
+		Session
 	} from '@utils/storage.js'
 
 	// import homeMenus from './menuList.js';
@@ -145,13 +145,13 @@
 			// }
 		},
 		created() {
-			let menuList = Local.get('menuList');
+			let menuList = Session.get('menuList');
 			if (menuList) {
 				this.homeMenus = menuList;
 			} else {
 				menuApi({}).then(res => {
-					let menuListRes = res.data.reverse();
-					Local.set('menuList', menuListRes);
+					let menuListRes = res.data;
+					Session.set('menuList', menuListRes);
 					this.homeMenus = menuListRes;
 				})
 			}
