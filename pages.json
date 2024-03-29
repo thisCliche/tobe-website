@@ -7,30 +7,35 @@
 			}
 		},
 		{
-			"path" : "pages/error/index",
-			"style" : 
-			{
-				"navigationBarTitleText" : "404 Not Found",
+			"path": "pages/error/index",
+			"style": {
+				"navigationBarTitleText": "404 Not Found",
 				"topWindow": false
-				
+
 			}
 		},
 		{
-			"path" : "pages/login/login",
-			"style" : 
-			{
-				"navigationBarTitleText" : "",
-				"enablePullDownRefresh" : false
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"enablePullDownRefresh": false
 			}
 		},
 		{
-					"path" : "pages/study/index",
-					"style" : 
-					{
-						"navigationBarTitleText" : "留学计划",
-						"enablePullDownRefresh" : false
-					}
-				}
+
+			"path": "pages/partners/partnesIndex/partnesIndex",
+			"style": {
+				"navigationBarTitleText": "伙伴",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/study/index",
+			"style": {
+				"navigationBarTitleText": "留学计划",
+				"enablePullDownRefresh": false
+			}
+		}
 	],
 	"globalStyle": {
 		"navigationStyle": "custom",

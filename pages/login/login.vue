@@ -16,7 +16,7 @@
 				</view>
 			</view>
 			<view class="loginR">
-				<view v-show="displayFlag==1" class="loginIn common">
+				<view key="1" v-if="displayFlag==1" class="loginIn common">
 					<view class="formWrap">
 						<view class="row1">登录</view>
 						<view class="row2">免费登录到您的TOBE留学账号</view>
@@ -49,7 +49,7 @@
 						</el-form>
 					</view>
 				</view>
-				<view v-show="displayFlag==2" class="forgetPass common">
+				<view key="2" v-else-if="displayFlag==2" class="forgetPass common">
 					<view class="formWrap">
 						<view class="row1">忘记密码</view>
 						<view class="row2">找回您的TOBE留学账号密码</view>
@@ -79,7 +79,7 @@
 						</view>
 					</view>
 				</view>
-				<view v-show="displayFlag==3" class="signup common">
+				<view key="3" v-else-if="displayFlag==3" class="signup common">
 					<view class="formWrap">
 						<view class="row1">创建账户</view>
 						<view class="row2">创建您的TOBE留学账号</view>
@@ -301,7 +301,7 @@
 		},
 		methods: {
 			async getCode() {
-				if (!this.phoneregisRight || this.registerForm.phone == '') return;
+				if (!this.phoneregisRight) return;
 				const TimeCount = 59;
 				if (!this.timerRegister) {
 					this.codeDisRegister = false;
@@ -336,6 +336,7 @@
 				} else if (nowType == 3) {
 					this.$refs.registerFormRef.resetFields();
 				} 
+				this.phoneregisRight = false;
 				this.$nextTick(() => {
 					if(type==4){
 						this.isValidCodeLogin = !this.isValidCodeLogin;
