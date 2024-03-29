@@ -3,7 +3,7 @@
     <view class="cover" @click="play">
       <view class="leggings">
 				<img :src="introduction.imageUrl" alt="" v-if="introduction.imageUrl"  />
-				<view class="desctipt">
+				<view class="desctipt" v-if="introduction.discript">
 					{{introduction.discript}}
 					
 				</view>

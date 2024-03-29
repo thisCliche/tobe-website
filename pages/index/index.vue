@@ -3,14 +3,7 @@
 		<view class="banner">
 			<el-carousel trigger="click" :interval="5000" height="680px" indicator-position="none">
 				<el-carousel-item v-for="item in banner" :key="item.id">
-					<view class="name">
-						<view class="">
-							{{item.name}}
-						</view>
-						<view class="">
-							{{item.text}}
-						</view>
-					</view>
+				
 					<img :src="item.bannerUrl" alt="" class="bannerImg" />
 				</el-carousel-item>
 			</el-carousel>

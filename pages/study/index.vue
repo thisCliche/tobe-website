@@ -9,8 +9,7 @@
 			<view class="slogan fadeIn animated">探索专业/留学规划，系统优化出国准备工作</view>
 			<view class="ftitle">选择大于努力是共识，选定一个合适的，能发挥自身价值的塞到，是提升人生成功概率的最优方法论</view>
 			<view class="pictureCom">
-				<view class="pictureComWrap animated fadeInUp-20" :class="list0" v-for="(item,idx) in model1ComImg"
-					:key="idx">
+				<view class="pictureComWrap animated  list0" v-for="(item,idx) in model1ComImg" :key="idx">
 
 					<img :src="item" alt="" />
 
@@ -26,13 +25,12 @@
 						AI测评
 					</view>
 					<view class="textBody">
-						文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字85字
+						文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字
 					</view>
-
 
 				</view>
 				<view class="video">
-					<VideoProfile :introduction='introduction' />
+					<VideoProfile :introduction='introduction2' />
 				</view>
 
 			</view>
@@ -40,23 +38,19 @@
 			<view class="bottom">
 
 				<view class="video">
-					<VideoProfile :introduction='introduction' />
+					<VideoProfile :introduction='introduction2' />
 				</view>
 				<view class="textDiscipt">
 					<view class="textTitle">
 						AI测评
 					</view>
 					<view class="textBody">
-						文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字85字
+						文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字
 					</view>
-
 
 				</view>
 
-
-
 			</view>
-
 
 
 		</view>
@@ -64,37 +58,133 @@
 
 		<view class="model4">
 			<view class="model4Wrap">
-				<view class="slogan1">大大小小的留学团队都依赖TOBE</view>
-				<view class="slogan2">tobe可以安全扩展，支持学生的DIY操作</view>
-				<view class="btns">
-					<view class="btn deepColor">注册成为TOBE的合作伙伴</view>
-					<view class="btn lightColor">欢迎加入TOBE大家庭</view>
+				<view class="slogan fadeIn animated">更懂你的留学AI系统</view>
+				<view class="ftitle">基于职业规划，性格测评，AI测评，人才测评，用心呵护个人用户的留学生涯，倾力协助DIY效能</view>
+				<view class="model4Body">
+					<view class="content content1">
+						<view class="content1Btn">
+							系统规划内容
+						</view>
+						<view class="list" v-for="item in 6" :key="item">
+							<img :src="tagIcon.yiwen" alt="" class="list-img" />
+							<text class="list-text">专业方向</text>
+
+						</view>
+
+
+					</view>
+					<view class="content content2">
+						<view class="list">
+							<view class="list-item" v-for="item in 3" :key="item">
+								<view class="list-top">
+									<view class="light">
+										亮点一
+
+									</view>
+									<view class="light-title">
+										底层算法智能支撑
+
+									</view>
+
+								</view>
+								<view class="list-bottom">
+									基于职业规划，性格测评，AI测评，人才测评，用心呵护个人用户的留学生涯，倾力协助DIY效能
+
+								</view>
+
+							</view>
+
+						</view>
+						<view class="tiyan">
+							立即体验，领取测评报告
+						</view>
+					</view>
+					<view class="content content3">
+						<view class="lunbo-img">
+							<el-carousel trigger="click" :interval="5000" height="320px" indicator-position="none">
+								<el-carousel-item v-for="item in banner" :key="item.id">
+
+									<img :src="item.bannerUrl" alt="" class="bannerImg" />
+								</el-carousel-item>
+							</el-carousel>
+
+						</view>
+
+						<view class="content3-botoom">
+							<view class="content3-btn">
+								<img :src="tagIcon.icon2" alt="" class="btn3" />
+								<text class="btn3-text">职业规划</text>
+
+							</view>
+							<view class="content3-btn">
+								<img :src="tagIcon.icon2" alt="" class="btn3" />
+								<text class="btn3-text">职业规划</text>
+
+							</view>
+
+						</view>
+
+
+
+					</view>
+
 				</view>
-				<view class="countNumWrap">
-					<view class="countNum">
-						<view class="num">84%</view>
-						<view class="des">认为录取更好了</view>
-					</view>
-					<view class="countNum">
-						<view class="num">84%</view>
-						<view class="des">认为录取更好了</view>
-					</view>
-					<view class="countNum">
-						<view class="num">84%</view>
-						<view class="des">认为录取更好了</view>
-					</view>
-				</view>
-				<view class="littleTag">
-					<view class="tagMono" :class="'icon'+idx" v-for="(item,idx) in tagIcon" :key="idx">
-						<img :src="item.url" alt="" />
-						<span>{{item.num}}</span>
-					</view>
-				</view>
+
 			</view>
 		</view>
 		<view class="model5">
-			<view class="slogan">我们的合作伙伴</view>
-			<home-case :homecase="homecase"></home-case>
+			<view class="model5Wrap">
+				<view class="model5WrapTop">
+					<view class="top-left">
+						<text class="leftTitle">规划课</text>
+						<text
+							class="leftDes">详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详
+						</text>
+						<text class="more">探索更多规划课</text>
+						<view class="more-item">
+							<text class="more-item-text" v-for="item in 3" :key="item">课程目录：</text>
+
+						</view>
+
+					</view>
+					<view class="top-right">
+						<view class="right-title">
+							如何做规划
+
+						</view>
+						<view class="video-list">
+							<view class="video-item">
+								<view class="video-item-video">
+									<VideoProfile :introduction='introduction2' />
+
+								</view>
+								<text class="video-item-des">招生官谈录取内幕与长线规划</text>
+
+
+							</view>
+						<view class="video-item">
+							<view class="video-item-video">
+								<VideoProfile :introduction='introduction2' />
+						
+							</view>
+							<view class="video-item-des">招生官谈录取内幕与长线规划</view>
+						
+						
+						</view>
+
+
+						</view>
+
+
+					</view>
+				</view>
+
+				<view class="model5WrapBottom">
+
+				</view>
+
+			</view>
+
 		</view>
 		<view class="model6">
 			<view class="adsense">
@@ -153,9 +243,9 @@
 				introduction: {
 					videoUrl: 'https://www.runoob.com/try/demo_source/movie.mp4',
 					discript: '规划课+AI智能规划+AI测评',
-
-
-
+				},
+				introduction2: {
+					videoUrl: 'https://www.runoob.com/try/demo_source/movie.mp4',
 				}
 			}
 		},
@@ -343,118 +433,338 @@
 
 		.model5 {
 			@include ct1200;
-			@include modelPd;
-			font-weight: 700;
 
-			.slogan {
-				font-size: 34px;
-				text-align: center;
+			.model5Wrap {
+				display: flex;
+				flex-direction: column;
+
+				.model5WrapTop {
+					display: flex;
+
+					.top-left {
+						display: flex;
+						flex-direction: column;
+						max-width: 50%;
+
+						.leftTitle {
+							@include ml('20px');
+							font-size: 40px;
+							font-weight: 700;
+						}
+
+						.leftDes {
+							@include multi-ellipsis--l(4);
+							color: rgb(183, 183, 183);
+						}
+
+						.more {
+							margin: 10px 0 15px;
+
+							font-size: 24px;
+							color: rgb(0, 0, 0);
+							font-weight: 500;
+						}
+
+						.more-item {
+							@include fj('flex-start');
+							flex-direction: column;
+
+							.more-item-text {
+
+								color: rgb(0, 0, 0);
+								font-weight: 500;
+								margin: 3px 0;
+
+
+							}
+
+						}
+
+					}
+
+					.top-right {
+						margin-left: 80px;
+						@include fj(flex-start);
+						flex-direction: column;
+
+						.right-title {
+							@include mt(20px);
+							@include ml(20px);
+							color: rgb(0, 0, 0);
+							font-size: 24px;
+							font-weight: 500;
+
+
+						}
+
+						.video-list {
+							@include mt(20px);
+							@include fj();
+
+
+							.video-item {
+								@include fj(center);
+								flex-direction: column;
+
+								.video-item-video {
+									width: 300px;
+									height: 180px;
+									margin: 0 20px;
+									border-radius: 0px 20px 20px 20px;
+									background: rgb(196, 196, 196);
+
+								}
+
+								.video-item-des {
+									@include ellipsis width: 100%;
+									@include mt(10px);
+								padding-left: 30px;;
+									font-size: 16px;
+									font-weight: 500;
+									color: rgb(0, 0, 0);
+
+
+
+								}
+
+
+							}
+
+
+						}
+
+
+
+					}
+
+				}
+
+				.model5WrapBottom {}
+
+
 			}
+
+
+
+
 		}
 
 		.model4 {
-			background-color: $bc;
 			@include modelPd;
+			@include ct1200;
 
 			.model4Wrap {
-				@include ct1200;
+
 				position: relative;
 
-				.littleTag {
-					.tagMono {
-						position: absolute;
-						width: 100px;
-						height: 60px;
-						background-color: $tagBg;
-						border-radius: 8px;
-						@include fj(center);
-						align-items: center;
-						transition: 0.3s all ease-in-out;
-
-						&:hover {
-							box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-							transform: translate3d(0, -3px, 0px);
-						}
-
-						img {
-							@include wh(44px, 38px);
-							@include mr(8px);
-						}
-
-						span {
-							font-family: Impact;
-							font-size: 28px;
-						}
-					}
-
-					.icon0 {
-						left: 0px;
-						top: 10px;
-					}
-
-					.icon1 {
-						left: 90px;
-						top: 100px;
-					}
-
-					.icon2 {
-						left: 20px;
-						top: 230px;
-					}
-
-					.icon3 {
-						right: 100px;
-						top: 20px;
-					}
-
-					.icon4 {
-						right: 20px;
-						top: 120px;
-					}
-
-					.icon5 {
-						right: 120px;
-						top: 230px;
-					}
+				.slogan {
+					width: 100%;
+					font-size: 32px;
+					font-weight: 700;
+					margin: 0 auto 10px;
+					text-align: center;
+					font-family: 思源黑体;
 
 				}
 
-				.countNumWrap {
+				.ftitle {
+					width: 100%;
+					font-family: 思源黑体;
+					text-align: center;
+					font-size: 20px;
+					color: rgb(183, 183, 183);
+					margin: 0 auto 20px;
+				}
+
+				.model4Body {
 					@include fj();
+					@include mt(40px);
+					padding: 0 20px;
 
-					.countNum {
-						width: 800px;
-						text-align: center;
-						margin: 140px auto 40px;
+					.content {
 
-						.num {
-							font-family: Impact;
-							font-size: 80px;
-							color: $themeFontColor;
+						&.content1 {
+
+							width: 320px;
+							height: 550px;
+							border-radius: 20px;
+							background: rgb(29, 121, 242);
+
+							.content1Btn {
+								@include fj(center);
+								align-items: center;
+								margin: 20px auto 40px;
+								width: 180px;
+								height: 40px;
+								color: #000;
+								font-size: 24px;
+								border-radius: 300px;
+								background: rgb(255, 255, 255);
+							}
+
 						}
 
-						.des {
-							font-family: Impact;
-							font-weight: 700;
-							font-size: 30px;
-							color: $themeFontColor;
+						&.content2 {
+							width: 320px;
+							height: 550px;
+
+							.list {
+								@include fj();
+								flex-direction: column;
+
+								.list-item {
+									@include fj();
+									flex-direction: column;
+
+									.list-top {
+										@include fj();
+										align-items: center;
+
+										.light {
+											@include fj(center);
+											align-items: center;
+											width: 80px;
+											height: 30px;
+											box-sizing: border-box;
+											border: 1px solid rgb(29, 121, 242);
+											border-radius: 20px;
+											background: rgb(255, 255, 255);
+
+
+										}
+
+										.light-title {
+											color: rgb(0, 0, 0);
+											font-family: 思源黑体;
+											font-size: 26px;
+											font-weight: 500;
+											line-height: 52px;
+											letter-spacing: 0px;
+
+										}
+
+
+
+									}
+
+									.list-bottom {
+										@include multi-ellipsis--l(4);
+										margin: 5px 0;
+										color: rgb(183, 183, 183);
+
+
+									}
+
+
+								}
+
+							}
+
+							.tiyan {
+								@include fj(center);
+								margin: 0 auto;
+								align-items: center;
+								width: 80%;
+								height: 48px;
+								box-sizing: border-box;
+								border: 2px solid rgb(29, 121, 242);
+								border-radius: 50px;
+								background: rgb(255, 255, 255);
+								color: rgb(0, 0, 0);
+								font-family: 思源黑体;
+								font-size: 18px;
+								font-weight: 500;
+								letter-spacing: 0px;
+								cursor: pointer;
+
+
+
+							}
+
+
 						}
+
+						&.content3 {
+							width: 320px;
+							height: 550px;
+
+							.lunbo-img {
+								width: '100%';
+								height: 320px;
+
+								&::v-deep .el-carousel__arrow {
+									width: 20px;
+									height: 20px;
+									background-color: rgba(31, 45, 61, 0.5);
+
+									i {
+										font-weight: 700;
+										font-size: 40px;
+									}
+								}
+
+							}
+
+							.content3-botoom {
+								margin: 20px 0;
+								@include fj(center);
+
+								.content3-btn {
+									@include fj(center);
+									align-items: center;
+									width: 140px;
+									height: 40px;
+									margin: 0 10px;
+									border-radius: 10px;
+
+									box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+									background: rgb(241, 241, 241);
+
+									.btn3 {
+										width: 20px;
+										height: 20px;
+									}
+
+									.btn3-text {
+										color: rgb(0, 0, 0);
+										font-family: 思源黑体;
+										font-size: 18px;
+										font-weight: 500;
+										margin-left: 5px;
+									}
+
+								}
+
+
+							}
+
+
+						}
+
 					}
+
+					.list {
+						@include fj(center);
+						margin: 20px 0;
+
+						.list-img {
+							@include wh('30px', '30px');
+
+						}
+
+						.list-text {
+							margin-left: 20px;
+							color: #fff;
+							font-size: 30px;
+						}
+
+
+					}
+
+
+
 				}
 
-				.slogan1 {
-					font-size: 34px;
-					font-weight: 700;
-					margin: 20px auto;
-					text-align: center;
-				}
-
-				.slogan2 {
-					font-size: 24px;
-					font-weight: 700;
-					margin: 40px auto 60px;
-					text-align: center;
-				}
 
 				.btns {
 					@include fj();
@@ -530,7 +840,7 @@
 					flex-direction: column;
 					padding: 0 20px;
 					margin-right: 20px;
-					flex:1;
+					flex: 1;
 
 					.textTitle {
 						font-family: 思源黑体;
@@ -544,16 +854,16 @@
 					}
 
 					.textBody {
-							@include mt(20px);
-							@include multi-ellipsis--l(4);
-							font-family: 思源黑体;
-							font-size: 30px;
+						@include mt(20px);
+						@include multi-ellipsis--l(4);
+						font-family: 思源黑体;
+						font-size: 30px;
 					}
 				}
 
 				.video {
 					width: 510px;
-						height: 300px;
+					height: 300px;
 					border-radius: 20px;
 					background: rgb(196, 196, 196);
 
@@ -572,11 +882,11 @@
 					align-items: flex-end;
 					padding: 0 20px;
 					margin-left: 20px;
-					flex:1;
+					flex: 1;
 
 					.textTitle {
 						@include multi-ellipsis--l(4);
-							@include mt(20px);
+						@include mt(20px);
 						font-family: 思源黑体;
 						font-size: 30px;
 						font-weight: 700;
@@ -595,7 +905,7 @@
 				}
 
 				.video {
-				width: 510px;
+					width: 510px;
 					height: 300px;
 					border-radius: 20px;
 					background: rgb(196, 196, 196);
