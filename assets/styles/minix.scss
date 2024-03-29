@@ -9,9 +9,18 @@ $themeFontColor:#592366;
 $footBg:#272422;
 $tagBg:#dadada;
 $linkColor:#2780F3;
+$partnerTitle:#989692;
 
 @mixin modelPd{
 	padding: 80px 0;
+}
+@mixin imgLayout{
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+@mixin modelPdOther{
+	padding: 40px 0;
 }
 @mixin ct1200{
   width: 1200px;

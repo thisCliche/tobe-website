@@ -3,7 +3,6 @@
 		<view class="banner">
 			<el-carousel trigger="click" :interval="5000" height="680px" indicator-position="none">
 				<el-carousel-item v-for="item in banner" :key="item.id">
-				
 					<img :src="item.bannerUrl" alt="" class="bannerImg" />
 				</el-carousel-item>
 			</el-carousel>
@@ -270,7 +269,7 @@
 			.bannerImg {
 				width: 100%;
 				height: 100%;
-				object-fit: cover;
+				@include imgLayout;
 			}
 		}
 
@@ -315,9 +314,7 @@
 				overflow: hidden;
 
 				img {
-					width: 100%;
-					height: 100%;
-					object-fit: cover;
+					@include imgLayout;
 				}
 			}
 		}
@@ -482,9 +479,7 @@
 				overflow: hidden;
 
 				img {
-					width: 100%;
-					height: 100%;
-					object-fit: cover;
+					@include imgLayout;
 				}
 			}
 		}
@@ -522,8 +517,7 @@
 					overflow: hidden;
 
 					img {
-						width: 100%;
-						object-fit: cover;
+						@include imgLayout;
 					}
 				}
 			}
@@ -546,9 +540,7 @@
 					overflow: hidden;
 
 					img {
-						object-fit: cover;
-						width: 100%;
-						height: 100%;
+						@include imgLayout;
 					}
 				}
 
