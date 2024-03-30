@@ -35,6 +35,13 @@
 				"navigationBarTitleText": "留学计划",
 				"enablePullDownRefresh": false
 			}
+		},
+		{
+			"path": "pages/evaluate/index",
+			"style": {
+				"navigationBarTitleText": "AI评测",
+				"enablePullDownRefresh": false
+			}
 		}
 	],
 	"globalStyle": {

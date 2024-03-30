@@ -239,7 +239,7 @@
 	import {
 		tagIcon,
 	} from './export.js'
-	import HomeCase from './HomeCase.vue';
+
 	import UseCase from './UseCase.vue';
 	import VideoProfile from './VideoProfile.vue';
 	import {
@@ -251,7 +251,6 @@
 	export default {
 		name: 'PagesIndex',
 		components: {
-			HomeCase,
 			UseCase,
 			VideoProfile
 		},
