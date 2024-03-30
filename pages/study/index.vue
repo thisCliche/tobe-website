@@ -162,15 +162,15 @@
 
 
 							</view>
-						<view class="video-item">
-							<view class="video-item-video">
-								<VideoProfile :introduction='introduction2' />
-						
+							<view class="video-item">
+								<view class="video-item-video">
+									<VideoProfile :introduction='introduction2' />
+
+								</view>
+								<view class="video-item-des">招生官谈录取内幕与长线规划</view>
+
+
 							</view>
-							<view class="video-item-des">招生官谈录取内幕与长线规划</view>
-						
-						
-						</view>
 
 
 						</view>
@@ -180,6 +180,24 @@
 				</view>
 
 				<view class="model5WrapBottom">
+					<view class="model5WrapBottom-title">
+						如何开启规划：
+					</view>
+					<view class="warp-video-list">
+						<view class="video-item" v-for="item in 4" :key="item">
+							<view class="video-video">
+								<VideoProfile :introduction='introduction2' />
+
+							</view>
+							<view class="video-name">
+								Grade 8规划课
+							</view>
+
+
+						</view>
+
+
+					</view>
 
 				</view>
 
@@ -187,22 +205,31 @@
 
 		</view>
 		<view class="model6">
-			<view class="adsense">
-				<img :src="bottomBanner" alt="" />
+			<view class="model6Wrap">
+				<view class="left-img">
+					<img src="" alt="" srcset="" />
+				</view>
+				<view class="right-content">
+					<view class="content-name">
+						AI 1V1规划导师
+
+					</view>
+					<view class="content-des">
+						文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文133字
+					</view>
+
+				</view>
+
 			</view>
-		</view>
-		<view class="model7">
-			<view class="model7Wrap">
-				<video-profile v-for="(item,idx) in videoInfo" :key="idx" :introduction="item"></video-profile>
+
+			<view class="adsense">
+				<img src="bottomBanner" alt="" />
 			</view>
 		</view>
 		<view class="model8">
-			<view class="slogan1">听听用户怎么说...</view>
+			<view class="slogan1">学生反馈</view>
 			<use-case :usecase="usecase"></use-case>
-			<view class="slogan2">
-				<span>TOBE正成为最具创造力和责任心的留学公司，</span><span
-					class="grayColor">致力于以创意方式助学生实现梦想。我们聚集最优秀的年轻人，恪守严格的道德准则，以几近苛刻的要求和最卓越的专业水平，为客户提供一流的留学咨询和能力培养服务。</span>
-			</view>
+			
 		</view>
 		<my-foot></my-foot>
 	</view>
@@ -343,7 +370,8 @@
 						})
 					}
 				})
-				this.usecase = usecase;
+				usecase.push(usecase[0])
+				this.usecase = usecase
 				this.homecase = homecase;
 				this.model1ComImg = [1, 2, 4];
 				this.middleBanner = middleBanner;
@@ -364,7 +392,8 @@
 		width: 100%;
 
 		.banner {
-			@include fj(center) width: 100%;
+			@include fj(center);
+			width: 100%;
 			height: 570px;
 			border-radius: 20px;
 			background: rgb(196, 196, 196);
@@ -388,39 +417,69 @@
 			@include modelPd;
 
 			.slogan1 {
+				@include fj(center);
+				@include mb(20px);
 				font-size: 34px;
 				font-weight: 700;
 			}
 
-			.slogan2 {
-				width: 1100px;
-				margin: 30px auto;
-				font-size: 26px;
-				font-weight: 700;
-				text-align: center;
-
-				.grayColor {
-					color: $gray;
-				}
-			}
-		}
-
-		.model7 {
-			background-color: $bc;
-			@include modelPd;
-
-			.model7Wrap {
-				@include ct1200;
-				@include fj();
-			}
 		}
 
 		.model6 {
 			@include ct1200;
+			@include modelPd;
+
+			.model6Wrap {
+				@include ct1200;
+				@include fj();
+
+				.left-img {
+					width: 520px;
+					height: 480px;
+					background-color: red;
+
+					img {
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+					}
+
+				}
+
+				.right-content {
+					@include pl(200px);
+					@include pr(100px);
+					display: flex;
+					flex-direction: column;
+					width: 100%;
+
+					.content-name {
+						@include fj(center);
+						align-items: center;
+						color: rgb(0, 0, 0);
+						font-family: 思源黑体;
+						font-size: 52px;
+						font-weight: 700;
+						line-height: 72px;
+
+
+					}
+
+					.content-des {
+						@include mt(80px);
+						@include multi-ellipsis--l(7);
+						font-size: 28px;
+
+					}
+
+
+				}
+			}
 
 			.adsense {
+				margin: 40px 0;
 				width: 100%;
-				height: 560px;
+				height: 260px;
 				overflow: hidden;
 
 				img {
@@ -518,7 +577,8 @@
 								.video-item-des {
 									@include ellipsis width: 100%;
 									@include mt(10px);
-								padding-left: 30px;;
+									padding-left: 30px;
+									;
 									font-size: 16px;
 									font-weight: 500;
 									color: rgb(0, 0, 0);
@@ -539,7 +599,50 @@
 
 				}
 
-				.model5WrapBottom {}
+				.model5WrapBottom {
+					@include mt(10px);
+
+					.model5WrapBottom-title {
+						@include mt(10px);
+						@include mb(10px);
+						color: rgb(0, 0, 0);
+						font-size: 22px;
+						font-weight: 500;
+
+					}
+
+					.warp-video-list {
+						@include fj();
+
+						.video-item {
+							@include fj(center);
+							@include mr(20px);
+							flex-direction: column;
+
+							.video-video {
+								@include wh(260px, 160px);
+								border-radius: 20px;
+								background: rgb(196, 196, 196);
+								align-items: center;
+
+							}
+
+							.video-name {
+								@include mt(5px);
+								font-weight: 500;
+								color: rgb(8, 8, 8);
+								font-size: 16px;
+
+							}
+
+
+
+						}
+
+					}
+
+
+				}
 
 
 			}

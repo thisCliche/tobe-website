@@ -4,8 +4,12 @@
 			<view class="item" v-for="item in usecase" :key="item.id">
 				<view class="imgWrap">
 					<view class="header"><el-avatar shape="circle" :src="item.engineerUrl"></el-avatar></view>
-					<view class="des">{{item.desc}}</view>
 					<view class="name">{{item.name}}</view>
+					<view class="nis">大学大学大学大学大学</view>
+					<view class="city">韩国</view>
+					<view class="line"></view>
+					<view class="des">{{item.desc}}</view>
+
 				</view>
 			</view>
 		</VueSlickCarousel>
@@ -74,32 +78,73 @@
 
 	.item {
 		outline: none;
-		
+
 		.imgWrap {
-			@include wh(260px, 320px);
+			@include wh(200px, 380px);
 			overflow: hidden;
-			margin: 0 auto;
-			background: $bc;
 			border-radius: 10px;
-			padding: 30px 24px;
+			padding: 26px 16px;
 			box-sizing: border-box;
-			.des{
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+
+			.header {
+				display: flex;
+				justify-content: center;
+			}
+
+			.des {
 				color: $themeColor;
 				line-height: 26px;
 				@include mt(20px);
 				@include multi-ellipsis--l(6);
 				height: 156px;
 			}
-			.name{
-				@include mt(20px);
-				text-align: right;
+
+			.name {
+				@include mt(5px);
+				font-weight: 700;
+				color: #3B6AAB;
+				text-align: center;
+
 			}
+
+			.nis {
+				@include mt(5px);
+				text-align: center;
+			}
+
+			.city {
+				@include mt(5px);
+				text-align: center;
+			}
+
+			.line {
+				@include mt(10px);
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 30px;
+				height: 5px;
+				background-color: #3B6AAB;
+			}
+
+
 		}
 
 
 
 		&::v-deep .slick-list .slick-track {
 			margin: 0 !important;
+		}
+
+		&::v-deep .el-avatar {
+			width: 120px;
+			height: 120px;
+			display: flex;
+			justify-content: center;
 		}
 	}
 </style>
