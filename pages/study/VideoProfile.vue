@@ -63,6 +63,7 @@ export default {
 		   width: 100%;
 		   position: absolute;
 		   top: 30%;
+		   z-index: 99;
 		   
 	   }
 			img{

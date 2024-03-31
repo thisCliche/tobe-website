@@ -6,8 +6,8 @@
 
 		</view>
 		<view class="model1">
-			<view class="slogan fadeIn animated">探索专业/留学规划，系统优化出国准备工作</view>
-			<view class="ftitle">选择大于努力是共识，选定一个合适的，能发挥自身价值的塞到，是提升人生成功概率的最优方法论</view>
+			<view class="slogan fadeIn animated">{{PlanningConfigInfo.planning_title}}</view>
+			<view class="ftitle">{{PlanningConfigInfo.planning_subtitle}}</view>
 			<view class="pictureCom">
 				<view class="pictureComWrap animated  list0" v-for="(item,idx) in model1ComImg" :key="idx">
 
@@ -22,15 +22,15 @@
 			<view class="top">
 				<view class="textDiscipt">
 					<view class="textTitle">
-						AI测评
+						{{cePinginfo.one.textcontent.title}}
 					</view>
 					<view class="textBody">
-						文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字
+						{{cePinginfo.one.textcontent.text}}
 					</view>
 
 				</view>
 				<view class="video">
-					<VideoProfile :introduction='introduction2' />
+					<VideoProfile :introduction='cePinginfo.one.introduction' />
 				</view>
 
 			</view>
@@ -38,14 +38,14 @@
 			<view class="bottom">
 
 				<view class="video">
-					<VideoProfile :introduction='introduction2' />
+					<VideoProfile :introduction='cePinginfo.one.introduction' />
 				</view>
 				<view class="textDiscipt">
 					<view class="textTitle">
-						AI测评
+						{{cePinginfo.one.textcontent.title}}
 					</view>
 					<view class="textBody">
-						文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字
+						{{cePinginfo.one.textcontent.text}}
 					</view>
 
 				</view>
@@ -58,8 +58,8 @@
 
 		<view class="model4">
 			<view class="model4Wrap">
-				<view class="slogan fadeIn animated">更懂你的留学AI系统</view>
-				<view class="ftitle">基于职业规划，性格测评，AI测评，人才测评，用心呵护个人用户的留学生涯，倾力协助DIY效能</view>
+				<view class="slogan fadeIn animated">{{tPlanningClassConfigInfo.planning_class}}</view>
+				<view class="ftitle">{{tPlanningClassConfigInfo.more}}</view>
 				<view class="model4Body">
 					<view class="content content1">
 						<view class="content1Btn">
@@ -102,7 +102,7 @@
 					<view class="content content3">
 						<view class="lunbo-img">
 							<el-carousel trigger="click" :interval="5000" height="320px" indicator-position="none">
-								<el-carousel-item v-for="item in banner" :key="item.id">
+								<el-carousel-item v-for="item in bannerList" :key="item.id">
 
 									<img :src="item.bannerUrl" alt="" class="bannerImg" />
 								</el-carousel-item>
@@ -153,24 +153,16 @@
 
 						</view>
 						<view class="video-list">
-							<view class="video-item">
+							<view class="video-item" v-for="(item,index) in howVideoInfo" :key="item.id">
 								<view class="video-item-video">
-									<VideoProfile :introduction='introduction2' />
+									<VideoProfile :introduction='item.introduction' />
 
 								</view>
-								<text class="video-item-des">招生官谈录取内幕与长线规划</text>
+								<text class="video-item-des">{{item.name}}</text>
 
 
 							</view>
-							<view class="video-item">
-								<view class="video-item-video">
-									<VideoProfile :introduction='introduction2' />
 
-								</view>
-								<view class="video-item-des">招生官谈录取内幕与长线规划</view>
-
-
-							</view>
 
 
 						</view>
@@ -184,13 +176,13 @@
 						如何开启规划：
 					</view>
 					<view class="warp-video-list">
-						<view class="video-item" v-for="item in 4" :key="item">
+						<view class="video-item" v-for="item in kaiqiVideo" :key="item.id">
 							<view class="video-video">
-								<VideoProfile :introduction='introduction2' />
+								<VideoProfile :introduction='item.introduction' />
 
 							</view>
 							<view class="video-name">
-								Grade 8规划课
+								{{item.name}}
 							</view>
 
 
@@ -207,15 +199,16 @@
 		<view class="model6">
 			<view class="model6Wrap">
 				<view class="left-img">
-					<img src="" alt="" srcset="" />
+					<img :src="daoshiBanImg" alt="" srcset="" />
+
 				</view>
 				<view class="right-content">
 					<view class="content-name">
-						AI 1V1规划导师
+						{{guiHuavideo.name}}
 
 					</view>
 					<view class="content-des">
-						文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文133字
+						{{guiHuavideo.text}}
 					</view>
 
 				</view>
@@ -223,19 +216,22 @@
 			</view>
 
 			<view class="adsense">
-				<img src="bottomBanner" alt="" />
+				<img :src="liuChenegBanner" alt="" />
 			</view>
 		</view>
 		<view class="model8">
 			<view class="slogan1">学生反馈</view>
 			<use-case :usecase="usecase"></use-case>
-			
+
 		</view>
 		<my-foot></my-foot>
 	</view>
 </template>
 
 <script>
+	import {
+		KeepAlive
+	} from "vue";
 	import {
 		tagIcon,
 	} from './export.js'
@@ -246,8 +242,9 @@
 		videoApi,
 		bannerApi,
 		configApi,
-		userSide
-	} from '@api/homeApi.js'
+		userSide,
+		textConfig
+	} from '@api/study.js'
 	export default {
 		name: 'PagesIndex',
 		components: {
@@ -256,23 +253,18 @@
 		},
 		data() {
 			return {
-				usecase: [], // 1
-				homecase: [], // 1
-				model1ComImg: [],
-				// model1Comtext: {},
+				cePinginfo: {}, // 1
+				howVideoInfo: [],
+				kaiqiVideo: [],
+				guiHuavideo: {},
+				PlanningConfigInfo: {},
+				tPlanningClassConfigInfo:{},
+				liuChenegBanner:'',
+				daoshiBanImg:'',
 				tagIcon,
-				middleBanner: '', // 1
-				bottomBanner: '', // 1
-				aboutUs: {}, // 1
-				banner: [],
-				videoInfo: [],
-				introduction: {
-					videoUrl: 'https://www.runoob.com/try/demo_source/movie.mp4',
-					discript: '规划课+AI智能规划+AI测评',
-				},
-				introduction2: {
-					videoUrl: 'https://www.runoob.com/try/demo_source/movie.mp4',
-				}
+				bannerList:[]
+			
+			
 			}
 		},
 		onLoad() {
@@ -281,83 +273,118 @@
 		methods: {
 			async getData() {
 				let resDataList = await Promise.all([videoApi({
-					type: 1,
-					limit: 2
-				}), bannerApi({
-					type: 1,
-					limit: 3
-				}), bannerApi({
-					type: 2,
-					limit: 6
-				}), bannerApi({
-					type: 3,
-					limit: 1
-				}), bannerApi({
-					type: 4,
-					limit: 5
-				}), bannerApi({
-					type: 5,
-					limit: 1
-				}), configApi({}), userSide({
-					type: 1,
-					limit: 5
-				})]);
-				let videoInfo = [],
-					banner = [],
-					model1ComImg = [],
-					middleBanner = '',
-					homecase = [],
-					bottomBanner = '',
-					aboutUs = {},
+						type: 4,
+						limit: 1
+					}),
+					videoApi({
+						type: 5,
+						limit: 2
+					}),
+
+					videoApi({
+						type: 6,
+						limit: 2
+					}),
+					videoApi({
+						type: 7,
+						limit: 4
+					}),
+					videoApi({
+						type: 8,
+						limit: 1
+					}),
+					configApi({}),textConfig({}),
+					 userSide({
+						type: 1,
+						limit: 5
+					}),
+					bannerApi({
+						type: 15,
+						limit: 1
+					}),
+					bannerApi({
+						type: 14,
+						limit: 1
+					}),
+					
+				]);
+				let topVideo = [],
+					cePinginfo = [],
+					howVideoInfo = [],
+					kaiqiVideo = [],
+					guiHuavideo = [],
+					PlanningConfigInfo = {},
+					tPlanningClassConfigInfo={},
+					
 					usecase = [];
 				resDataList.map((res, idx) => {
 					if (idx == 0) {
 						res.data.map(item => {
-							videoInfo.push({
+							topVideo.push({
 								imageUrl: item.image_text,
 								videoUrl: item.video_text,
+								discript: item.name,
+								text: item.text,
 								id: item.id
 							})
 						})
 					} else if (idx == 1) {
 						res.data.map(item => {
-							banner.push({
-								bannerUrl: item.image_text,
+							cePinginfo.push({
+								imageUrl: item.image_text,
 								id: item.id,
+								videoUrl: item.video_text,
 								name: item.name,
 								text: item.text
 							})
 						})
 					} else if (idx == 2) {
-						let siger = res.data.slice(0, 1);
-						let other = res.data.slice(1);
-						other.map((item, index) => {
-							if (index == 2) {
-								model1ComImg.push({
-									img1: siger[0].image_text,
-									img2: item.image_text
-								})
-							} else {
-								model1ComImg.push(item.image_text)
-							}
+						res.data.map(item => {
+							howVideoInfo.push({
+								id: item.id,
+								name: item.name,
+								introduction: {
+									imageUrl: item.image_text,
+									videoUrl: item.video_text
+								}
+
+
+							})
 						})
+
+
+
 					} else if (idx == 3) {
 						res.data.map(item => {
-							middleBanner = item.image_text
+							kaiqiVideo.push({
+								id: item.id,
+								name: item.name,
+								introduction: {
+									imageUrl: item.image_text,
+									videoUrl: item.video_text
+								}
+
+
+							})
+
 						})
+
 					} else if (idx == 4) {
 						res.data.map(item => {
-							homecase.push({
-								engineerUrl: item.image_text,
-								contentId: item.id
+							guiHuavideo.push({
+								id: item.id,
+								name: item.name,
+								text: item.text,
+								introduction: {
+									imageUrl: item.image_text,
+									videoUrl: item.video_text
+								}
 							})
 						})
 					} else if (idx == 5) {
-						res.data.map(item => {
-							bottomBanner = item.image_text
-						})
+						PlanningConfigInfo = res.data
 					} else if (idx == 6) {
-						aboutUs = res.data
+						tPlanningClassConfigInfo=res.data
 					} else if (idx == 7) {
 						res.data.map(item => {
 							usecase.push({
@@ -368,16 +395,46 @@
 							})
 						})
 					}
+					else if (idx == 8) {
+					let data=res.data
+
+					this.liuChenegBanner=data[0].image_text
+					}
+					else if (idx == 9) {
+					let data=res.data
+					
+					this.daoshiBanImg=data[0].image_text
+					}
 				})
-				usecase.push(usecase[0])
-				this.usecase = usecase
+
+				this.introduction = topVideo[0]
+
+				this.cePinginfo = {
+					one: {
+						textcontent: {
+							title: cePinginfo[0].name,
+							text: cePinginfo[0].text,
+						},
+						introduction: {
+							imageUrl: cePinginfo[0].imageUrl,
+							videoUrl: cePinginfo[0].imageUrl,
+							id: cePinginfo[0].id
+
+						}
+
+					}
+				}
+				console.log(cePinginfo)
+				console.log(this.cePinginfo)
+
+				this.howVideoInfo = howVideoInfo;
+				this.kaiqiVideo = kaiqiVideo;
+				this.guiHuavideo = guiHuavideo[0]
+				this.PlanningConfigInfo = PlanningConfigInfo;
+				this.tPlanningClassConfigInfo=tPlanningClassConfigInfo;
+				this.usecase = usecase;
 				this.homecase = homecase;
-				this.model1ComImg = [1, 2, 4];
-				this.middleBanner = middleBanner;
-				this.bottomBanner = bottomBanner;
-				this.aboutUs = aboutUs;
-				this.banner = banner;
-				this.videoInfo = videoInfo;
+			
 			},
 
 		}
@@ -435,13 +492,7 @@
 				.left-img {
 					width: 520px;
 					height: 480px;
-					background-color: #C4C4C4;
 
-					img {
-						width: 100%;
-						height: 100%;
-						object-fit: cover;
-					}
 
 				}
 
