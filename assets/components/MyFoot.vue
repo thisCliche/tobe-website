@@ -91,6 +91,10 @@
 					font-size: 24px;
 					.item{
 						cursor:pointer;
+						transition: 0.6s ease;
+						&:hover{
+							color:$themeColor;
+						}
 					}
 				}
 			}

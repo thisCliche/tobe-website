@@ -42,6 +42,21 @@
 				"navigationBarTitleText": "AI评测",
 				"enablePullDownRefresh": false
 			}
+		},
+		{
+			"path": "pages/partners/joinUs/joinUs",
+			"style": {
+				"navigationBarTitleText": "加入我们",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/aboutUs/aboutUs",
+			"style": {
+				"navigationBarTitleText": "关于我们",
+				"enablePullDownRefresh": false
+
+			}
 		}
 	],
 	"globalStyle": {

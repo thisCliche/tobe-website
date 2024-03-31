@@ -28,15 +28,20 @@
 			  @include ct1200;
 			  @include fj(center);
 			  position: relative;
+				.userInfo{
+					@include mt(2px);
+					cursor: pointer;
+				}
 			  .loginBtn{
-			        position: absolute;
-			            right: -100px;
-			            padding: 4px 20px;
+			   
+									@include mt(3px);
+									height: 34px;
+									line-height: 34px;
+			            padding: 0px 20px;
 			            background: #000;
 			            border-radius: 50px;
 			            transition: background 200ms ease-in;
 			            cursor: pointer;
-			            top: 6px;
 			            color: #fff;
 			            font-weight: 500;
 									 box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
@@ -58,6 +63,7 @@
 		    cursor: pointer;
 		    @include fj();
 			font-weight: 700;
+			cursor: pointer;
 			
 			.liEle {
 			  list-style:none;
@@ -81,7 +87,7 @@
 		  .ulEle {
 			  height: 40px;
 		    list-style:none;
-		    cursor: pointer;
+		    
 		    @include fj();
 		    @include sc(16px,#fff);
 			font-weight: 700;
@@ -101,6 +107,7 @@
 		      height: 40px;
 		      line-height: 40px;
 		      position: relative;
+					cursor: pointer;
 		      span{
 				position: relative;
 				z-index: 1;

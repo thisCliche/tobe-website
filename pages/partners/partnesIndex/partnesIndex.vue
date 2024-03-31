@@ -1,22 +1,19 @@
 <template>
 	<view class="partnes">
 		<view class="banner">
-			<img :src="partnersBanner" alt="" />
+			<img :src="topBanner.image_text" alt="" />
 		</view>
 		<view class="model1">
 			<view class="button">
-				<view class="">
-					注册成为我们的一员
-				</view>
-				<view class="">
-					马上开启你的教学/升学之旅
+				<view class="" style="white-space: pre-line;">
+					{{buttonText.partners_text}}
 				</view>
 			</view>
 			<view class="slogan">
-				我们致力于为学生提供最直接的资源，连接最好的学术老师，也欢迎老师加入我们，在这里发展你的事业。我们为你提供教学题库和管理平台。
+				{{buttonText.partners_subtitle}}
 			</view>
 		</view>
-		<view class="model2">
+		<view class="model2 swiperWrap">
 			<view class="modelTitle">
 				<view class="">
 					College Ambassador
@@ -26,12 +23,12 @@
 				</view>
 			</view>
 			<el-carousel trigger="click" :interval="5000" height="488px" arrow="always" indicator-position="none">
-				<el-carousel-item v-for="(page,idx) in CollegeList" :key="idx">
+				<el-carousel-item v-for="(page,idx) in collegeList" :key="idx">
 					<el-row :gutter="80">
 						<el-col :span="6" v-for="item in page" :key="item.id">
 							<view class="collegeItem">
 								<view class="imgWrap">
-									<img :src="item.url" alt="" class="collegeImg" />
+									<img :src="item.image_text" alt="" class="collegeImg" />
 								</view>
 								<view class="collegeName">
 									{{item.name}}
@@ -42,104 +39,205 @@
 				</el-carousel-item>
 			</el-carousel>
 			<view class="btn">
-				<view class="coolBeans">立即加入</view>
+				<view class="coolBeans" @click="toDetail">立即加入</view>
 			</view>
 		</view>
-		<!-- <roll-entry></roll-entry> -->
+		<view class="model3 swiperWrap">
+			<view class="modelTitle">
+				<view class="">
+					国外高中招生代表
+				</view>
+			</view>
+			<el-carousel trigger="click" :interval="5000" height="488px" arrow="always" indicator-position="none">
+				<el-carousel-item v-for="(page,idx) in hightScoolList" :key="idx">
+					<el-row :gutter="80">
+						<el-col :span="6" v-for="item in page" :key="item.id">
+							<view class="collegeItem">
+								<view class="imgWrap">
+									<img :src="item.image_text" alt="" class="collegeImg" />
+								</view>
+								<view class="collegeName">
+									{{item.name}}
+								</view>
+							</view>
+						</el-col>
+					</el-row>
+				</el-carousel-item>
+			</el-carousel>
+			<view class="btn">
+				<view class="coolBeans" @click="toDetail">立即加入</view>
+			</view>
+		</view>
+		<view class="model4 entry3d">
+			<view class="modelTitle">
+				<view class="">
+					学术辅导老师
+				</view>
+			</view>
+			<roll-entry></roll-entry>
+			<view class="hr"></view>
+			<use-case :usecase="scienceList"></use-case>
+			<view class="btn">
+				<view class="coolBeans" @click="toDetail">立即加入</view>
+			</view>
+		</view>
+		<view class="model5 entry3d">
+			<view class="modelTitle">
+				<view class="">
+					升学指导老师
+				</view>
+			</view>
+			<roll-entry></roll-entry>
+			<view class="hr"></view>
+			<use-case :usecase="higherGradeTeacher"></use-case>
+			<view class="btn">
+				<view class="coolBeans" @click="toDetail">立即加入</view>
+			</view>
+		</view>
+		<view class="model6">
+			<view class="modelTitle">
+				<view class="">
+					升学指导机构
+				</view>
+			</view>
+			<institution-case :usecase="higherGradeInstitution"></institution-case>
+			<view class="btn">
+				<view class="coolBeans" @click="toDetail">立即加入</view>
+			</view>
+		</view>
+		<view class="model7">
+			<view class="modelTitle">
+				<view class="">
+					外教导师
+				</view>
+			</view>
+			<foreign-case :usecase="foreignTeacher"></foreign-case>
+			<view class="btn">
+				<view class="coolBeans" @click="toDetail">JOIN NOW</view>
+			</view>
+		</view>
+		<my-foot></my-foot>
 	</view>
 </template>
 
 <script>
-	import partnersBanner from '@image/partnersBanner.png'
-	import universityLogo from '@image/universityLogo.jpg'
 	import RollEntry from './RollEntry.vue'
+	import UseCase from './UseCase.vue'
+	import InstitutionCase from './InstitutionCase.vue'
+	import ForeignCase from './ForeignCase.vue'
+
+	import {
+		teacherApi,
+		otherBannerApi,
+		buttonConfigApi
+	} from '@api/partnerApi.js'
 	export default {
 		name: 'partnes',
 		data() {
 			return {
-				partnersBanner,
-				CollegeList: [
-					[{
-							name: '某某学校限定10个字符',
-							url: universityLogo,
-							id: 1
-						},
-						{
-							name: '某某学校限定10个字符',
-							url: universityLogo,
-							id: 2
-						},
-						{
-							name: '某某学校限定10个字符',
-							url: universityLogo,
-							id: 3
-						},
-						{
-							name: '某某学校限定10个字符',
-							url: universityLogo,
-							id: 4
-						},
-						{
-							name: '某某学校限定10个字符',
-							url: universityLogo,
-							id: 5
-						},
-						{
-							name: '某某学校限定10个字符',
-							url: universityLogo,
-							id: 6
-						},
-						{
-							name: '某某学校限定10个字符',
-							url: universityLogo,
-							id: 7
-						},
-						{
-							name: '某某学校限定10个字符',
-							url: universityLogo,
-							id: 8
-						},
-					],
-					[{
-							name: '某某学校限定10个字符',
-							url: universityLogo,
-							id: 9
-						},
-						{
-							name: '某某学校限定10个字符',
-							url: universityLogo,
-							id: 10
-						},
-						{
-							name: '某某学校限定10个字符',
-							url: universityLogo,
-							id: 11
-						},
-						{
-							name: '某某学校限定10个字符',
-							url: universityLogo,
-							id: 12
-						},
-						{
-							name: '某某学校限定10个字符',
-							url: universityLogo,
-							id: 13
-						},
-						{
-							name: '某某学校限定10个字符',
-							url: universityLogo,
-							id: 14
-						},
-					]
-				],
+				topBanner: {}, // 顶部banner
+				buttonText: {}, // 按钮文案
+				collegeList: [], // 大学列表
+				hightScoolList: [], // 高中列表
+				scienceList: [], //学术老师
+				higherGradeTeacher: [], //升学老师
+				higherGradeInstitution: [], // 升学机构
+				foreignTeacher: [], //外教
 			}
 		},
 		components: {
-			RollEntry
+			RollEntry,
+			UseCase,
+			InstitutionCase,
+			ForeignCase
 		},
 		methods: {
-
+			async getData() {
+				let topBanner = {}, // 顶部banner
+					buttonText = {}, // 按钮文案
+					collegeList = [], // 大学列表
+					hightScoolList = [], // 高中列表
+					scienceList = [], //学术老师
+					higherGradeTeacher = [], //升学老师
+					higherGradeInstitution = [], // 升学机构
+					foreignTeacher = []; //外教
+				let Result = await Promise.all([
+					otherBannerApi({
+						type: 8,
+						limit: 1
+					}),
+					otherBannerApi({
+						type: 9,
+						limit: 50
+					}),
+					otherBannerApi({
+						type: 10,
+						limit: 50
+					}),
+					buttonConfigApi(),
+					teacherApi({
+						type: 1,
+						limit: 10
+					}),
+					teacherApi({
+						type: 2,
+						limit: 10
+					}),
+					teacherApi({
+						type: 3,
+						limit: 10
+					}),
+					teacherApi({
+						type: 4,
+						limit: 10
+					}),
+				])
+				Result.map((item, idx) => {
+					if (idx == 0) {
+						topBanner = item.data[0]
+					} else if (idx == 1) {
+						collegeList = this.resoveList(item.data)
+					} else if (idx == 2) {
+						hightScoolList = this.resoveList(item.data)
+					}else if (idx == 3) {
+						buttonText = item.data
+					}else if (idx==4){
+						scienceList = item.data
+					}else if (idx==5){
+						higherGradeTeacher = item.data
+					}else if (idx==6){
+						foreignTeacher = item.data
+					}else if (idx==7){
+						higherGradeInstitution = item.data
+					}
+				})
+				this.topBanner = topBanner;
+				this.collegeList = collegeList;
+				this.hightScoolList = hightScoolList;
+				this.buttonText = buttonText;
+				this.scienceList = scienceList;
+				this.higherGradeTeacher = higherGradeTeacher;
+				this.foreignTeacher = foreignTeacher;
+				this.higherGradeInstitution = higherGradeInstitution;
+			},
+			resoveList(list) {
+				let chunkSize = 8;
+				let result = [];
+				for (let i = 0; i < list.length; i += chunkSize) {
+					let chunk = list.slice(i, i + chunkSize);
+					result.push(chunk);
+				}
+				return result;
+			},
+			toDetail() {
+				uni.navigateTo({
+					url: "/pages/partners/joinUs/joinUs"
+				})
+			},
 		},
+		created() {
+			this.getData();
+		}
 	}
 </script>
 
@@ -150,45 +248,54 @@
 		height: 700px;
 
 		img {
-			object-fit: cover;
-			width: 100%;
-			height: 100%;
+			@include imgLayout;
 		}
 
 	}
 
-	.model2 {
+	.model7 {
 		@include modelPdOther;
 		@include ct1200;
-		.btn{
-			@include fj(flex-end);
-			.coolBeans{
-				cursor: pointer;
-				border-radius: 50px;
-				color: #fff;
-				background-color: #000;
-				font-size: 20px;
-				font-weight: 700;
-				overflow: hidden;
-				padding: 20px 80px;
-			
-			}
+	}
+
+	.model6 {
+		@include modelPdOther;
+		@include ct1200;
+	}
+
+	.entry3d {
+		@include modelPdOther;
+		@include ct1200;
+
+		.hr {
+			height: 40px;
 		}
-		.modelTitle{
-			color: $partnerTitle;
-			font-size: 26px;
-			font-weight: 700;
-			@include mb(20px);
-		}
+	}
+
+	.modelTitle {
+		color: $partnerTitle;
+		font-size: 26px;
+		font-weight: 700;
+		@include mb(20px);
+	}
+
+	.swiperWrap {
+		@include modelPdOther;
+		@include ct1200;
+
+
+
 		.collegeItem {
 			@include mb(20px);
 			@include fj(center);
 			flex-direction: column;
-				align-items: center;
-			.collegeName{
+			align-items: center;
+
+			.collegeName {
 				@include mt(16px);
 				width: 162px;
 				@include ellipsis;
+				text-align: center;
 			}
 		}
 
@@ -198,6 +305,22 @@
 			img {
 				@include imgLayout;
 			}
+		}
+	}
+
+	.btn {
+		@include fj(flex-end);
+
+		.coolBeans {
+			cursor: pointer;
+			border-radius: 50px;
+			color: #fff;
+			background-color: #000;
+			font-size: 20px;
+			font-weight: 700;
+			overflow: hidden;
+			padding: 14px 70px;
+
 		}
 	}
 

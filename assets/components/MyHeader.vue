@@ -7,7 +7,7 @@
 					<view class="menusInner">
 						<view class="ulEle" @mouseover="mouseIn" @mouseleave="mouseOut">
 							<view class="ulWrap ulWrapL">
-								<view @click="toList(item)" v-for="(item) in homeMenus.slice(0,3)" :key="item.id" :data-idx="1"
+								<view @click="toDetail(item)" v-for="(item) in homeMenus.slice(0,3)" :key="item.id" :data-idx="1"
 									:class="item.id == currentId ? 'active' : ''" class="liEle" :data-id="item.id">
 									<span>{{ item.nickname }}</span>
 								</view>
@@ -16,7 +16,7 @@
 								<img :src="logoImg" alt="" />
 							</view>
 							<view class="ulWrap ulWrapR">
-								<view @click="toList(item)" v-for="(item) in homeMenus.slice(3,7)" :key="item.id" :data-idx="2"
+								<view @click="toDetail(item)" v-for="(item) in homeMenus.slice(3,7)" :key="item.id" :data-idx="2"
 									:class="item.id == currentId ? 'active' : ''" class="liEle" :data-id="item.id">
 									<span>{{ item.nickname }}</span>
 								</view>
@@ -31,17 +31,28 @@
 								</view>
 							</el-collapse-transition>
 						</view>
-						<view class="loginBtn" @click="loginBtn">login</view>
+						<view class="userInfo" v-if="isLogin">
+							<el-dropdown @command="handleCommand">
+								<el-avatar :src="userInfo.avatar" size="medium"></el-avatar>
+								<el-dropdown-menu slot="dropdown">
+									<el-dropdown-item icon="el-icon-setting">个人设置</el-dropdown-item>
+									<el-dropdown-item icon="el-icon-message">站内信</el-dropdown-item>
+									<el-dropdown-item icon="el-icon-chat-dot-square">联系助手</el-dropdown-item>
+									<el-dropdown-item command="logout" icon="el-icon-switch-button" divided>登出</el-dropdown-item>
+								</el-dropdown-menu>
+							</el-dropdown>
+						</view>
+						<view class="loginBtn" @click="loginBtn" v-else>login</view>
 					</view>
 				</view>
 				<view class="menus secondRow">
 					<view class="menusInner">
 						<view class="ulEle">
-							<view @click="toList(item)" v-for="(item) in homeMenus.slice(7,10)" :key="item.id" class="liEle">
+							<view @click="toDetail(item)" v-for="(item) in homeMenus.slice(7,10)" :key="item.id" class="liEle">
 								<span>{{ item.name }}</span>
 							</view>
 							<view class="placehold"></view>
-							<view @click="toList(item)" v-for="(item) in homeMenus.slice(10,13)" :key="item.id" class="liEle">
+							<view @click="toDetail(item)" v-for="(item) in homeMenus.slice(10,13)" :key="item.id" class="liEle">
 								<span>{{ item.name }}</span>
 							</view>
 						</view>
@@ -55,19 +66,25 @@
 </template>
 
 <script>
+	import eventBus from '@utils/eventBus.js'
 	import {
 		menuApi
 	} from '@api/homeApi.js'
 	import {
-		Session
+		Session,
+		Local
 	} from '@utils/storage.js'
-
-	// import homeMenus from './menuList.js';
+	import {
+		ACCOUNT_INFO,
+		MENU_LIST
+	} from '@assets/constant/cacheKey.js';
 	import logoImg from '@image/logo.png'
 	export default {
 		name: "MyHeader",
 		data() {
 			return {
+				isLogin: false,
+				userInfo: {},
 				logoImg,
 				isPriming: false,
 				subList: [],
@@ -82,9 +99,20 @@
 		// 	}
 		// },
 		methods: {
-			loginBtn(){
+			handleCommand(command){
+				Local.remove(ACCOUNT_INFO);
+				this.isLogin =false;
 				uni.navigateTo({
-					url:"/pages/login/login?type=register"
+					url:"/"
+				})
+				this.$notify.success({
+					title:'成功',
+					message:'退出登录'
+				})
+			},
+			loginBtn() {
+				uni.navigateTo({
+					url: "/pages/login/login?type=register"
 				})
 			},
 			mouseIn(e) {
@@ -120,11 +148,20 @@
 				this.currentId = 0
 				// this.getCurrentId()
 			},
-			toList(item) {
+			toDetail(item) {
 				if (item.isOut) {
-					window.open(item.path)
+					window.open(item.url)
 				} else {
-					this.$router.push(item.path);
+					uni.navigateTo({
+						url: item.url
+					})
+				}
+			},
+			checkLog(){
+				let accountInfo = Local.get(ACCOUNT_INFO);
+				if (accountInfo) {
+					this.isLogin = true;
+					this.userInfo = accountInfo.user;
 				}
 			},
 			// getCurrentId() {
@@ -144,8 +181,10 @@
 			// 	}
 			// }
 		},
+		
 		created() {
-			let menuList = Session.get('menuList');
+			eventBus.on('loginEvent',this.checkLog);
+			let menuList = Session.get(MENU_LIST);
 			if (menuList) {
 				this.homeMenus = menuList;
 			} else {
@@ -155,12 +194,8 @@
 					this.homeMenus = menuListRes;
 				})
 			}
-
+			this.checkLog();
 		},
-		mounted() {
-
-
-		}
 	};
 </script>
 
