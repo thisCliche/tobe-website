@@ -435,7 +435,7 @@
 				.left-img {
 					width: 520px;
 					height: 480px;
-					background-color: red;
+					background-color: #C4C4C4;
 
 					img {
 						width: 100%;
