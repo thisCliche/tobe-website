@@ -8,9 +8,9 @@
 			</el-carousel>
 		</view>
 		<view class="model1">
-			<view class="slogan fadeIn animated">基于人工智留学网站基于人工智能的留学网站基于人工智能的留学网站</view>
-			<view class="pictureCom">
-				<view class="pictureComWrap animated fadeInUp-20" :class="'list'+idx" v-for="(item,idx) in model1ComImg"
+			<view class="slogan animate__animated animate__fadeIn">基于人工智留学网站基于人工智能的留学网站基于人工智能的留学网站</view>
+			<view class="pictureCom wow animate__animated animate__fadeInUp" data-wow-duration="2s">
+				<view class="pictureComWrap" :class="'list'+idx" v-for="(item,idx) in model1ComImg"
 					:key="idx">
 					<template v-if="idx==2">
 						<img class="img1" :src="item.img1" alt="" />
@@ -25,10 +25,10 @@
 		<view class="model2">
 			<view class="model2Wrap">
 				<view class="model2L">
-					<view class="slogan">{{aboutUs.text}}</view>
-					<view class="coolBeans">关于TOBE，了解更多</view>
+					<view class="slogan wow animate__animated animate__fadeInUp" data-wow-duration="2s">{{aboutUs.about_us_title}}</view>
+					<view class="coolBeans" @click="toDetail('/pages/aboutUs/aboutUs')">关于TOBE，了解更多</view>
 				</view>
-				<view class="model2R">
+				<view class="model2R wow animate__animated animate__fadeIn" data-wow-duration="2s">
 					<img :src="aboutUs.image" alt="" />
 				</view>
 			</view>
@@ -40,17 +40,27 @@
 		</view>
 		<view class="model4">
 			<view class="model4Wrap">
-				<view class="slogan1">大大小小的留学团队都依赖TOBE</view>
-				<view class="slogan2">tobe可以安全扩展，支持学生的DIY操作</view>
+				<view class="slogan1 wow animate__animated animate__fadeInUp" data-wow-duration="2s">大大小小的留学团队都依赖TOBE</view>
+				<view class="slogan2 wow animate__animated animate__fadeInUp" data-wow-duration="2s">tobe可以安全扩展，支持学生的DIY操作</view>
 				<view class="btns">
-					<view class="btn deepColor">注册成为TOBE的合作伙伴</view>
+					<view class="btn deepColor" @click="">注册成为TOBE的合作伙伴</view>
 					<view class="btn lightColor">欢迎加入TOBE大家庭</view>
 				</view>
 				<view class="countNumWrap">
-					<view class="countNum" v-for="(item,idx) in textconfigObj" :key="idx">
-						<view class="num">{{item.num}}</view>
-						<view class="des">{{item.name}}</view>
-					</view>
+					<template v-if="textconfigObj.length">
+						<view class="countNum" v-for="(item,idx) in textconfigObj" :key="idx">
+							<view class="num">
+								<CountTo
+								  :startVal="0"
+								  :endVal="item.num"
+								  :duration="3000"
+									class="num"
+								/><span>%</span>
+							</view>
+							<view class="des">{{item.name}}</view>
+						</view>
+					</template>
+					
 				</view>
 				<view class="littleTag">
 					<view class="tagMono" :class="'icon'+idx" v-for="(item,idx) in tagIcon" :key="idx">
@@ -81,7 +91,7 @@
 			<template v-if="usecase.length">
 				<use-case :usecase="usecase"></use-case>
 			</template>
-			<view class="slogan2">
+			<view class="slogan2 wow animate__animated animate__fadeInUp" data-wow-duration="2s">
 				<span>TOBE正成为最具创造力和责任心的留学公司，</span><span
 					class="grayColor">致力于以创意方式助学生实现梦想。我们聚集最优秀的年轻人，恪守严格的道德准则，以几近苛刻的要求和最卓越的专业水平，为客户提供一流的留学咨询和能力培养服务。</span>
 			</view>
@@ -91,6 +101,7 @@
 </template>
 
 <script>
+	import CountTo from 'vue-count-to'
 	import {
 		tagIcon,
 	} from './export.js'
@@ -109,7 +120,8 @@
 		components: {
 			HomeCase,
 			UseCase,
-			VideoProfile
+			VideoProfile,
+			CountTo
 		},
 		data() {
 			return {
@@ -117,7 +129,6 @@
 				usecase: [], // 
 				homecase: [], // 
 				model1ComImg: [],
-				// model1Comtext: {},
 				tagIcon,
 				middleBanner: '', // 
 				bottomBanner: '', // 
@@ -126,10 +137,18 @@
 				videoInfo: [],
 			}
 		},
-		onLoad() {
+		mounted() {
+			new this.$wow.WOW().init();
+		},
+		created() {
 			this.getData();
 		},
 		methods: {
+			toDetail(path){
+				uni.navigateTo({
+					url:path
+				})
+			},
 			async getData() {
 				let resDataList = await Promise.all([videoApi({
 					type: 1,
@@ -211,6 +230,9 @@
 					} else if (idx == 6) {
 						aboutUs = res.data
 					} else if(idx==7){
+						res.data.forEach(item=>{
+							item.num = Number(item.num);
+						})
 						this.textconfigObj = res.data;
 					}else if (idx == 8) {
 						res.data.map(item => {
@@ -280,6 +302,7 @@
 			.slogan1 {
 				font-size: 34px;
 				font-weight: 700;
+				@include mb(40px);
 			}
 
 			.slogan2 {
@@ -327,6 +350,7 @@
 			.slogan {
 				font-size: 34px;
 				text-align: center;
+				@include mb(70px);
 			}
 		}
 
@@ -567,19 +591,6 @@
 				}
 			}
 
-			.fadeInUp-20 {
-				animation-name: fadeInUp-20;
-			}
-
-			.fadeIn {
-				animation-name: fadeIn;
-			}
-
-			.animated {
-				animation-duration: 2.4s;
-				animation-fill-mode: both;
-			}
-
 			.slogan {
 				width: 400px;
 				font-size: 24px;
@@ -590,37 +601,4 @@
 		}
 	}
 
-	@keyframes fadeInUp-20 {
-		0% {
-			opacity: 0;
-			transform: translate3d(0, 20px, 0);
-		}
-
-		100% {
-			opacity: 1;
-			transform: none;
-		}
-	}
-
-	@keyframes fadeInUp {
-		0% {
-			opacity: 0;
-			transform: translate3d(0, 100%, 0);
-		}
-
-		100% {
-			opacity: 1;
-			transform: none;
-		}
-	}
-
-	@keyframes fadeIn {
-		0% {
-			opacity: 0;
-		}
-
-		100% {
-			opacity: 1;
-		}
-	}
 </style>

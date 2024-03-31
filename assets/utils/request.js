@@ -14,9 +14,9 @@ let service = axios.create(config)
 
 service.interceptors.request.use(config => {
   let user = Local.get(ACCOUNT_INFO);
-  if (user) {
-    config.headers['X-Access-Token'] = user.token
-  }
+  // if (user) {
+  //   config.headers['X-Access-Token'] = user.token
+  // }
   return config
 }, error => {
   Promise.reject(error)
@@ -29,7 +29,7 @@ service.interceptors.response.use(
     if (data.code == 200) {
       return data;
     } else {
-      Notification.error({title:'错误',message:data.msg})
+      Notification.error({title:'错误',message:data.error})
       return Promise.reject(data);
     }
   },

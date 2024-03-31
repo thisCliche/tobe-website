@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<div class="tagcloud-all" ref="tagcloudall">
-		    <span class="item" v-for="item in tagList" :style="'color:' + item.color + ';'">{{item.name}}</span>
+		    <span class="item" v-for="item in tagList" :key="item.id" :style="'background:' + item.color + ';'">{{item.name}}</span>
 		  </div>
 	</view>
 </template>
@@ -12,15 +12,15 @@
 	  data() {
 	    return {
 	      tagList: [],
-	      radius: 190,
-	      dtr: Math.PI / 180,
+	      radius: 200,
+	      dtr: Math.PI / 320,
 	      d: 300,
 	      mcList: [],
 	      active: false,
 	      lasta: 1,
 	      lastb: 1,
 	      distr: true,
-	      tspeed: 10,
+	      tspeed: 1,
 	      size: 300,
 	      mouseX: 0,
 	      mouseY: 0,
@@ -167,36 +167,22 @@
 	    query() {
 	      // 假装从接口拿回来的数据
 	      let tagListOrg = [
-	        { name: '标签1', url: 'www.baidu.com' },
-	        { name: '标签2', url: 'www.baidu.com' },
-	        { name: '标签3', url: 'www.baidu.com' },
-	        { name: '标签4', url: 'www.baidu.com' },
-	        { name: '标签5', url: 'www.baidu.com' },
-	        { name: '标签6', url: 'www.baidu.com' },
-	        { name: '标签7', url: 'www.baidu.com' },
-	        { name: '标签8', url: 'www.baidu.com' },
-	        { name: '标签9', url: 'www.baidu.com' },
-	        { name: '标签10', url: 'www.baidu.com' },
-	        { name: '标签11', url: 'www.baidu.com' },
-	        { name: '标签12', url: 'www.baidu.com' },
-	        { name: '标签13', url: 'www.baidu.com' },
-	        { name: '标签14', url: 'www.baidu.com' },
-	        { name: '标签15', url: 'www.baidu.com' },
-	        { name: '标签16', url: 'www.baidu.com' },
-	        { name: '标签16', url: 'www.baidu.com' },
-	        { name: '标签16', url: 'www.baidu.com' },
-	        { name: '标签16', url: 'www.baidu.com' },
-	        { name: '标签16', url: 'www.baidu.com' },
-	        { name: '标签16', url: 'www.baidu.com' },
-	        { name: '标签16', url: 'www.baidu.com' },
-	        { name: '标签16', url: 'www.baidu.com' },
-	        { name: '标签16', url: 'www.baidu.com' },
-	        { name: '标签16', url: 'www.baidu.com' },
-	        { name: '标签16', url: 'www.baidu.com' },
-	        { name: '标签16', url: 'www.baidu.com' },
-	        { name: '标签16', url: 'www.baidu.com' },
-	        { name: '标签16', url: 'www.baidu.com' },
-	        { name: '标签17', url: 'www.baidu.com' }
+	        { name: 'AP', id:1},
+	        { name: 'AL', id:2 },
+	        { name: 'DSE', id:3 },
+	        { name: 'PET', id:4 },
+	        { name: 'SAT', id:5 },
+	        { name: 'ACT', id:6 },
+	        { name: 'GRE', id:7 },
+	        { name: 'Gmart', id:8 },
+	        { name: 'IB', id:9 },
+	        { name: '其它考试',id:10 },
+	        { name: '竞赛', id:11 },
+	        { name: 'KET', id:12 },
+	        { name: 'PET', id:13 },
+	        { name: 'IELTS', id:14 },
+	        { name: 'TOEFL', id:15 },
+	        { name: 'Duolingo', id:16 },
 	      ];
 	      // 给tagList添加随机颜色
 	      tagListOrg.forEach(item => {
@@ -234,7 +220,7 @@
 	        }
 	        setInterval(() => {
 	          this.update()
-	        }, 30);            // 定时器执行 不能写setInterval(this.update(), 30)
+	        }, 10);            // 定时器执行 不能写setInterval(this.update(), 30)
 	      })
 	    }
 	  },
@@ -258,11 +244,12 @@
     left: 0px;
     color: #fff;
     font-weight: bold;
-		background: #FF0000;
-    padding: 3px 6px;
+    padding: 12px 16px;
 		top: 0;left: 0;filter:none;
+		border-radius:8px;
     &:hover {
-      color: #FF0000;
+      // color: #FF0000;
+			transform: scale(1.06);
       letter-spacing: 2px;
     }
   }

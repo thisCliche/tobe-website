@@ -3,7 +3,7 @@
  */
 
 // 管理员资料
-export const ADMIN_INFO = 'adminInfo'
+export const MENU_LIST = 'menuList'
 export const ACCOUNT_INFO = 'accountInfo'
 // WEB端布局配置
 export const STORE_CONFIG = 'storeConfig_v2'

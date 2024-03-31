@@ -20,18 +20,18 @@
 					<view class="formWrap">
 						<view class="row1">登录</view>
 						<view class="row2">免费登录到您的TOBE留学账号</view>
-						<el-form :model="loginForm" :rules="rulesLogin" ref="loginFormRef">
-							<el-form-item label="手机号" prop="phone">
-								<el-input v-model="loginForm.phone"></el-input>
+						<el-form size="small" :model="loginForm" :rules="rulesLogin" ref="loginFormRef">
+							<el-form-item label="手机号" prop="mobile">
+								<el-input v-model="loginForm.mobile"></el-input>
 							</el-form-item>
-							<el-form-item label="验证码" prop="validCode"  v-if="isValidCodeLogin">
+							<el-form-item key="22" label="验证码" prop="captcha" v-if="isValidCodeLogin">
 								<view class="validCodeWrap">
-									<el-input class="validCode" v-model="loginForm.validCode"></el-input>
-									<el-button key="1" @click="getCode" v-if="codeDisRegister">发送</el-button>
+									<el-input class="validCode" v-model="loginForm.captcha"></el-input>
+									<el-button key="1" @click="getCode('loginFormRef')" v-if="codeDisRegister">发送</el-button>
 									<el-button key="2" v-else disabled>重新发送{{ codeInfoRegister }}s</el-button>
 								</view>
 							</el-form-item>
-							<el-form-item label="密码" prop="password" v-else>
+							<el-form-item key="23" label="密码" prop="password" v-else>
 								<el-input type="password" v-model="loginForm.password"></el-input>
 							</el-form-item>
 							<el-form-item>
@@ -53,20 +53,20 @@
 					<view class="formWrap">
 						<view class="row1">忘记密码</view>
 						<view class="row2">找回您的TOBE留学账号密码</view>
-						<el-form :model="forgetForm" :rules="rulesForget" ref="forgetFormRef">
-							<el-form-item label="手机号码" prop="phone">
-								<el-input v-model="forgetForm.phone"></el-input>
+						<el-form size="small" :model="forgetForm" :rules="rulesForget" ref="forgetFormRef">
+							<el-form-item label="手机号码" prop="mobile">
+								<el-input v-model="forgetForm.mobile"></el-input>
 							</el-form-item>
-							<el-form-item label="密码" prop="password">
+							<el-form-item label="新密码" prop="password">
 								<el-input type="password" v-model="forgetForm.password"></el-input>
 							</el-form-item>
-							<el-form-item label="重复密码" prop="rePassword">
-								<el-input v-model="forgetForm.rePassword" placeholder="请重复输入" type="password"></el-input>
+							<el-form-item label="重复新密码" prop="password_confirmation">
+								<el-input v-model="forgetForm.password_confirmation" placeholder="请重复输入" type="password"></el-input>
 							</el-form-item>
-							<el-form-item label="验证码" prop="validCode">
+							<el-form-item label="验证码" prop="captcha">
 								<view class="validCodeWrap">
-									<el-input class="validCode" v-model="forgetForm.validCode"></el-input>
-									<el-button key="1" @click="getCode" v-if="codeDisRegister">发送</el-button>
+									<el-input class="validCode" v-model="forgetForm.captcha"></el-input>
+									<el-button key="1" @click="getCode('forgetFormRef')" v-if="codeDisRegister">发送</el-button>
 									<el-button key="2" v-else disabled>重新发送{{ codeInfoRegister }}s</el-button>
 								</view>
 							</el-form-item>
@@ -83,21 +83,24 @@
 					<view class="formWrap">
 						<view class="row1">创建账户</view>
 						<view class="row2">创建您的TOBE留学账号</view>
-						<el-form :model="registerForm" :rules="rulesRegister" ref="registerFormRef">
+						<el-form size="small" :model="registerForm" :rules="rulesRegister" ref="registerFormRef">
 							<el-row type="flex" justify="space-between">
 								<el-col :span="11">
-									<el-form-item label="昵称" prop="nickName">
-										<el-input v-model="registerForm.nickName"></el-input>
+									<el-form-item label="昵称" prop="nickname">
+										<el-input v-model="registerForm.nickname"></el-input>
 									</el-form-item>
 								</el-col>
 								<el-col :span="11">
-									<el-form-item label="姓名" prop="name">
-										<el-input v-model="registerForm.name"></el-input>
+									<el-form-item label="姓名" prop="username">
+										<el-input v-model="registerForm.username"></el-input>
 									</el-form-item>
 								</el-col>
 							</el-row>
-							<el-form-item label="手机号码" prop="phone">
-								<el-input v-model="registerForm.phone"></el-input>
+							<el-form-item label="手机号码" prop="mobile">
+								<el-input v-model="registerForm.mobile"></el-input>
+							</el-form-item>
+							<el-form-item label="邮箱" prop="email">
+								<el-input v-model="registerForm.email"></el-input>
 							</el-form-item>
 							<el-form-item label="密码" prop="password">
 								<el-input type="password" v-model="registerForm.password"></el-input>
@@ -105,16 +108,15 @@
 							<el-form-item label="重复密码" prop="rePassword">
 								<el-input v-model="registerForm.rePassword" placeholder="请重复输入" type="password"></el-input>
 							</el-form-item>
-
-							<el-form-item label="验证码" prop="validCode">
+							<el-form-item label="验证码" prop="captcha">
 								<view class="validCodeWrap">
-									<el-input class="validCode" v-model="registerForm.validCode"></el-input>
-									<el-button key="1" @click="getCode" v-if="codeDisRegister">发送</el-button>
+									<el-input class="validCode" v-model="registerForm.captcha"></el-input>
+									<el-button key="1" @click="getCode('registerFormRef')" v-if="codeDisRegister">发送</el-button>
 									<el-button key="2" v-else disabled>重新发送{{ codeInfoRegister }}s</el-button>
 								</view>
 							</el-form-item>
 							<el-form-item label="邀请码">
-								<el-input v-model="registerForm.inviteCode"></el-input>
+								<el-input v-model="registerForm.invitation_code"></el-input>
 							</el-form-item>
 							<el-form-item>
 								<view class="loginBtn" @click="submitForm('registerFormRef')">注册</view>
@@ -131,7 +133,15 @@
 </template>
 
 <script>
+	import eventBus from '@utils/eventBus.js'
 	import loginBg from '@image/loginBg.png'
+	import {Local} from '@utils/storage.js'
+	import {
+		smsSendRequset,
+		loginRequset,
+		registerRequset,
+		resetPwdRequset
+	} from '@api/loginApi.js'
 	export default {
 		name: 'login',
 		data() {
@@ -161,7 +171,7 @@
 			};
 
 			return {
-				isValidCodeLogin:false,
+				isValidCodeLogin: false,
 				displayFlag: 1, //1登录 2 忘记密码 3 注册 4 验证码登录
 				phoneregisRight: false, // 标记手机号是否正确
 				codeInfoRegister: 60,
@@ -169,27 +179,29 @@
 				codeDisRegister: true,
 				loginBg,
 				loginForm: {
-					phone: '',
+					mobile: '',
 					password: '',
-					validCode:'',
+					captcha: '',
+					type: 1,
 				},
 				forgetForm: {
-					phone: '',
+					mobile: '',
 					password: '',
-					rePassword: '',
-					validCode: '',
+					password_confirmation: '',
+					captcha: '',
 				},
 				registerForm: {
-					nickName: '',
-					name: '',
-					phone: '',
+					nickname: '',
+					username: '',
+					mobile: '',
+					email: '',
 					password: '',
 					rePassword: '',
-					validCode: '',
-					inviteCode: '',
+					captcha: '',
+					invitation_code: '',
 				},
 				rulesForget: {
-					phone: [{
+					mobile: [{
 						required: true,
 						message: '请输入手机号码',
 						trigger: 'blur'
@@ -208,7 +220,7 @@
 							trigger: "blur"
 						},
 					],
-					rePassword: [{
+					password_confirmation: [{
 							validator: validatePassForget,
 							trigger: "blur"
 						},
@@ -223,24 +235,29 @@
 							trigger: "blur"
 						},
 					],
-					validCode: [{
+					captcha: [{
 						required: true,
 						message: '请输入验证码',
 						trigger: 'blur'
 					}, ]
 				},
 				rulesRegister: {
-					nickName: [{
+					nickname: [{
 						required: true,
 						message: '请输入昵称',
 						trigger: 'blur'
 					}, ],
-					name: [{
+					username: [{
 						required: true,
 						message: '请输入姓名',
 						trigger: 'blur'
 					}, ],
-					phone: [{
+					email: [{
+						required: true,
+						message: '请输入邮箱',
+						trigger: 'blur'
+					}, ],
+					mobile: [{
 						required: true,
 						message: '请输入手机号码',
 						trigger: 'blur'
@@ -274,38 +291,42 @@
 							trigger: "blur"
 						},
 					],
-					validCode: [{
+					captcha: [{
 						required: true,
 						message: '请输入验证码',
 						trigger: 'blur'
 					}, ]
 				},
 				rulesLogin: {
-					phone: [{
+					mobile: [{
 						required: true,
 						message: '请输入手机号码',
 						trigger: 'blur'
+					}, {
+						validator: validatePhone,
+						trigger: "blur"
 					}, ],
 					password: [{
 						required: true,
 						message: '请输入密码',
 						trigger: 'blur'
 					}, ],
-					validCode: [{
+					captcha: [{
 						required: true,
 						message: '请输入验证码',
 						trigger: 'blur'
-					},],
+					}, ],
 				},
 			}
 		},
 		methods: {
-			async getCode() {
+			async getCode(formName) {
 				if (!this.phoneregisRight) return;
 				const TimeCount = 59;
 				if (!this.timerRegister) {
 					this.codeDisRegister = false;
 					this.codeInfoRegister = TimeCount;
+					let prepa = this.refList(formName);
 					this.timerRegister = setInterval(() => {
 						if (this.codeInfoRegister > 0 && this.codeInfoRegister <= TimeCount) {
 							this.codeInfoRegister--;
@@ -315,10 +336,10 @@
 							this.timerRegister = null;
 						}
 					}, 1000);
-					// await this.$axios.post(this.$httpUrl.smsCode, {
-					// 	phone: this.addForm.name,
-					// 	smsType: 1,
-					// });
+					await smsSendRequset({
+						mobile: this[prepa.formName].mobile,
+						event: prepa.event,
+					});
 					this.$notify({
 						title: '成功',
 						message: '短信发送成功',
@@ -335,21 +356,71 @@
 					this.$refs.forgetFormRef.resetFields();
 				} else if (nowType == 3) {
 					this.$refs.registerFormRef.resetFields();
-				} 
+				}
 				this.phoneregisRight = false;
 				this.$nextTick(() => {
-					if(type==4){
-						this.isValidCodeLogin = !this.isValidCodeLogin;
-					}else{
-					this.displayFlag = type;
+					if (type == 4) {
+						if (this.isValidCodeLogin) {
+							this.loginForm.type = 1
+							this.isValidCodeLogin = false;
+						} else {
+							this.loginForm.type = 2
+							this.isValidCodeLogin = true;
+						}
+					} else {
+						this.displayFlag = type;
 					}
 				})
-
+			},
+			refList(val) {
+				let list = [{
+						message: '账户注册成功',
+						toFlag: '1',
+						refName: 'registerFormRef',
+						formName: 'registerForm',
+						request: registerRequset,
+						event: 'register'
+					},
+					{
+						message: '密码重置成功',
+						toFlag: '1',
+						refName: 'forgetFormRef',
+						formName: 'forgetForm',
+						request: resetPwdRequset,
+						event: 'resetpwd'
+					},
+					{
+						message: '登录成功',
+						toFlag: '/',
+						refName: 'loginFormRef',
+						formName: 'loginForm',
+						request: loginRequset,
+						event: 'login'
+					}
+				]
+				let res = list.find(item => item.refName == val)
+				return res
 			},
 			submitForm(formName) {
-				this.$refs[formName].validate((valid) => {
+				this.$refs[formName].validate(async (valid) => {
 					if (valid) {
-
+						let prepa = this.refList(formName);
+						let res = await prepa.request(this[prepa.formName]);
+						if (res.code == 200) {
+							this.$notify.success({
+								title: '成功',
+								message: prepa.message,
+							});
+							if (prepa.toFlag == '1') {
+								this.displayFlag = 1;
+							}else{
+								Local.set('accountInfo',res.data)
+								eventBus.emit('loginEvent')
+								uni.navigateTo({
+									url:"/"
+								})
+							}
+						}
 					} else {
 						console.log('error submit!!');
 						return false;
@@ -357,6 +428,7 @@
 				});
 			}
 		}
+
 	}
 </script>
 
@@ -368,6 +440,7 @@
 			@include fj();
 			height: calc(100vh - 92px);
 			min-width: 1400px;
+			min-height: 750px;
 
 			.el-form-item {
 				@include mb(6px);
@@ -418,6 +491,7 @@
 							text-align: center;
 							@include mt(20px);
 							cursor: pointer;
+							line-height: 40px;
 						}
 
 						width: 400px;

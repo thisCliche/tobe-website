@@ -74,23 +74,27 @@
 
 	.item {
 		outline: none;
-		
+
 		.imgWrap {
 			@include wh(260px, 320px);
 			overflow: hidden;
 			margin: 0 auto;
 			background: $bc;
+			// backdrop-filter: blur(15px);
+			// background-color: rgba(0, 0, 0, .5);
 			border-radius: 10px;
 			padding: 30px 24px;
 			box-sizing: border-box;
-			.des{
+
+			.des {
 				color: $themeColor;
 				line-height: 26px;
 				@include mt(20px);
 				@include multi-ellipsis--l(6);
 				height: 156px;
 			}
-			.name{
+
+			.name {
 				@include mt(20px);
 				text-align: right;
 			}
