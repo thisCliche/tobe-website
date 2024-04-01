@@ -9,9 +9,19 @@
 			<view class="slogan fadeIn animated">{{PlanningConfigInfo.planning_title}}</view>
 			<view class="ftitle">{{PlanningConfigInfo.planning_subtitle}}</view>
 			<view class="pictureCom">
-				<view class="pictureComWrap animated  list0" v-for="(item,idx) in model1ComImg" :key="idx">
+				<view class="pictureComWrap fadeIn animated  list0" v-for="(item,idx) in model1ComImg" :key="idx">
+					<view class="wapIcon">
+						<img :src="tagIcon.iconList[idx]" alt="" srcset="" />
 
-					<img :src="item" alt="" />
+					</view>
+					<view class="wapTitle">
+						{{item.subname}}
+					</view>
+					<view class="wapText">
+						{{item.text}}
+
+					</view>
+
 
 				</view>
 			</view>
@@ -102,9 +112,9 @@
 					<view class="content content3">
 						<view class="lunbo-img">
 							<el-carousel trigger="click" :interval="5000" height="320px" indicator-position="none">
-								<el-carousel-item v-for="item in bannerList" :key="item.id">
+								<el-carousel-item v-for="item in banner13" :key="item.id">
 
-									<img :src="item.bannerUrl" alt="" class="bannerImg" />
+									<img :src="item.imageUrl" alt="" class="bannerImg" />
 								</el-carousel-item>
 							</el-carousel>
 
@@ -118,7 +128,7 @@
 							</view>
 							<view class="content3-btn">
 								<img :src="tagIcon.icon2" alt="" class="btn3" />
-								<text class="btn3-text">职业规划</text>
+								<text class="btn3-text">Ai简化规划</text>
 
 							</view>
 
@@ -245,7 +255,7 @@
 		userSide,
 		textConfig,
 		suanFa1,
-		teatcha
+		teatcha1
 	} from '@api/study.js'
 	export default {
 		name: 'PagesIndex',
@@ -260,17 +270,17 @@
 				kaiqiVideo: [],
 				guiHuavideo: {},
 				PlanningConfigInfo: {},
-				tPlanningClassConfigInfo:{},
-				liuChenegBanner:'',
-				daoshiBanImg:'',
+				tPlanningClassConfigInfo: {},
+				liuChenegBanner: '',
+				daoshiBanImg: '',
 				tagIcon,
-				bannerList:[],
-				suanfaList:[],
-				model1ComImg:[],
-				
-				
-			
-			
+				suanfaList: [],
+				model1ComImg: [],
+				banner13: []
+
+
+
+
 			}
 		},
 		onLoad() {
@@ -299,8 +309,8 @@
 						type: 8,
 						limit: 1
 					}),
-					configApi({}),textConfig({}),
-					 userSide({
+					configApi({}), textConfig({}),
+					userSide({
 						type: 1,
 						limit: 5
 					}),
@@ -313,9 +323,17 @@
 						limit: 1
 					}),
 					suanFa1({
-						
+
 					}),
-					
+					bannerApi({
+						type: 13,
+					}),
+					teatcha1({
+						type: 6,
+						limit: 3
+
+					})
+
 				]);
 				let topVideo = [],
 					cePinginfo = [],
@@ -323,12 +341,15 @@
 					kaiqiVideo = [],
 					guiHuavideo = [],
 					PlanningConfigInfo = {},
-					tPlanningClassConfigInfo={},
-					suanFaList=[],
-					teatcha,
-					
+					tPlanningClassConfigInfo = {},
+					suanFaList = [],
+					teatcha = [],
+					banner13 = [],
+					model1ComImg = [],
+
 					usecase = [];
 				resDataList.map((res, idx) => {
+					console.log(res, idx)
 					if (idx == 0) {
 						res.data.map(item => {
 							topVideo.push({
@@ -395,7 +416,7 @@
 					} else if (idx == 5) {
 						PlanningConfigInfo = res.data
 					} else if (idx == 6) {
-						tPlanningClassConfigInfo=res.data
+						tPlanningClassConfigInfo = res.data
 					} else if (idx == 7) {
 						res.data.map(item => {
 							usecase.push({
@@ -405,39 +426,49 @@
 								name: item.name
 							})
 						})
-					}
-					else if (idx == 8) {
-					let data=res.data
+					} else if (idx == 8) {
+						let data = res.data
 
-					this.liuChenegBanner=data[0].image_text
-					}
-					else if (idx == 9) {
-					let data=res.data
-					
-					this.daoshiBanImg=data[0].image_text
-					}
-					else if (idx == 10) {
-					res.data.map(item=>{
-						suanFaList.push({
-							code: item.code,
-							title:item.title,
-							name: item.name
+						this.liuChenegBanner = data[0].image_text
+					} else if (idx == 9) {
+						let data = res.data
+
+						this.daoshiBanImg = data[0].image_text
+					} else if (idx == 10) {
+						res.data.map(item => {
+							suanFaList.push({
+								code: item.code,
+								title: item.title,
+								name: item.name
+							})
+
 						})
-						
-					})
-						
-					}
-					else if (idx == 11) {
-					res.data.map(item=>{
-						teatcha.push({
-							code: item.code,
-							title:item.title,
-							name: item.name
+
+					} else if (idx == 11) {
+
+						res.data.map(item => {
+							banner13.push({
+								imageUrl: item.image_text,
+								desc: item.text,
+								id: item.id,
+								name: item.name
+							})
+
 						})
-						
-					})
-						
+
+					} else if (idx == 12) {
+
+						res.data.map(item => {
+							teatcha.push({
+		
+								text: item.text,
+								name: item.name,
+								subname: item.subname
+							})
+						})
+
 					}
+
 				})
 
 				this.introduction = topVideo[0]
@@ -457,17 +488,21 @@
 
 					}
 				}
-			
+
 
 				this.howVideoInfo = howVideoInfo;
 				this.kaiqiVideo = kaiqiVideo;
 				this.guiHuavideo = guiHuavideo[0];
 				this.PlanningConfigInfo = PlanningConfigInfo;
-				this.tPlanningClassConfigInfo=tPlanningClassConfigInfo;
+				this.tPlanningClassConfigInfo = tPlanningClassConfigInfo;
 				this.usecase = usecase;
 				// this.homecase = homecase;
-				this.suanFaList=suanFaList
-			
+				this.suanFaList = suanFaList;
+				this.model1ComImg = teatcha;
+				this.banner13 = banner13;
+
+				
+
 			},
 
 		}
@@ -855,8 +890,8 @@
 								box-sizing: border-box;
 								border: 2px solid rgb(29, 121, 242);
 								border-radius: 50px;
-								background: rgb(255, 255, 255);
-								color: rgb(0, 0, 0);
+								background: rgb(29, 121, 242);
+								color: #fff;
 								font-family: 思源黑体;
 								font-size: 18px;
 								font-weight: 500;
@@ -1111,14 +1146,48 @@
 			.pictureCom {
 				display: flex;
 				justify-content: space-between;
+				width: 100%;
+				height: 420px;
+				box-sizing: border-box;
 
 
 				.pictureComWrap {
-					width: 100%;
-					height: 420px;
+					width: 350px;
+					height: 100%;
 					margin-right: 20px;
 					border-radius: 20px;
-					background: rgb(196, 196, 196);
+					display: flex;
+					flex-direction: column;
+					padding: 5px 20px 0 10px;
+
+					.wapIcon {
+						width: 60px;
+						height: 60px;
+
+						img {
+							width: 100%;
+							height: 100%;
+							object-fit: cover;
+
+						}
+
+					}
+
+					.wapTitle {
+						margin: 40px 0;
+						font-size: 20px;
+						font-weight: 500;
+					}
+
+					.wapText {
+						@include multi-ellipsis--l(12) width: 100%;
+						font-size: 16px;
+						word-wrap: break-word;
+						overflow-wrap: break-word;
+
+
+					}
+
 
 				}
 

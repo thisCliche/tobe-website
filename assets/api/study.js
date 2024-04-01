@@ -61,7 +61,7 @@ export function suanFa1(params) {
 	})
 }
 
-export function teatcha(params) {
+export function teatcha1(params) {
 	return axios({
 		url: routeUrl.teatcha,
 		method: 'get',
