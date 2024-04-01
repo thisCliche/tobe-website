@@ -6,11 +6,11 @@
 
 			</view>
 			<view class="bannerTitle">
-				Ai 职场工具，<text class="title2">提升您的工作效率</text>
+				AI 职场工具，<text class="title2">提升您的工作效率</text>
 
 			</view>
 			<view class="bannerText">
-				Ai 职场工具为我们提升工作效率，脱离烦杂的信息搜索，筛选,Ai 职场工具为我们提升工作效率，脱离烦杂的信息搜索，筛选,Ai 职场工具为我们提升工作效率，脱离烦杂的信息搜索，筛选, Ai 职场工具为我们,
+				AI 职场工具为我们提升工作效率，脱离烦杂的信息搜索，筛选,Ai 职场工具为我们提升工作效率，脱离烦杂的信息搜索，筛选,Ai 职场工具为我们提升工作效率，脱离烦杂的信息搜索，筛选, Ai 职场工具为我们,
 
 			</view>
 			<view class="AiBtn">
@@ -30,8 +30,8 @@
 					<img :src="item.url" alt="" srcset="" />
 
 				</view>
-				<view class="item-name" :class="`bg${index}`">
-					<view>{{item.name}}</view>
+				<view class="item-name" :class="`bg${index}`" >
+				{{item.name}}
 
 				</view>
 
@@ -409,7 +409,8 @@
 			}
 
 			.bannerTitle {
-				font-size: 32px;
+				font-size: 36px;
+				font-weight: 700;
 				margin-top: 40px;
 				display: flex;
 				justify-content: center;
@@ -429,13 +430,14 @@
 			}
 
 			.bannerText {
-				font-size: 30px;
+				font-size: 22px;
 				margin-top: 20px;
 				/* 让文本超出一行时自动换行 */
 				overflow-wrap: break-word;
 				text-align: center;
-				padding: 0 100px;
+				padding: 0 220px;
 				line-height: 40px;
+				color: rgba(0,0,0,0.8);
 
 
 			}
@@ -444,7 +446,7 @@
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				margin-top: 60px;
+				margin-top: 140px;
 				width: 100%;
 				height: 60px;
 				cursor: pointer;
@@ -483,25 +485,25 @@
 
 				&.icon2 {
 					top: 30%;
-					left: 20%;
+					left: 10%;
 
 				}
 
 				&.icon3 {
 					top: 30%;
-					right: 20%;
+					right: 10%;
 
 				}
 
 				&.icon4 {
 					top: 70%;
-					left: 30%;
+					left: 25%;
 
 				}
 
 				&.icon5 {
 					top: 70%;
-					right: 30%;
+					right: 25%;
 
 				}
 
@@ -514,7 +516,28 @@
 					
 				}
 
-				.name {
+				.item-name {
+					color:#fff;
+					padding:  10px;
+					border-radius: 20px;
+					&.bg0{
+						background-color: #FCA999
+					}
+					&.bg1{
+						background-color:#3661FF
+					}
+					&.bg2{
+						background-color: #E45353
+					}
+					&.bg3{
+						background-color: #82ACFF
+					}
+					&.bg4{
+						background-color: #617AFF
+					}
+					&.bg5{
+						background-color: #FF7070
+					}
 					
 				}
 
