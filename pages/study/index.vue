@@ -75,20 +75,20 @@
 					</view>
 					<view class="content content2">
 						<view class="list">
-							<view class="list-item" v-for="item in 3" :key="item">
+							<view class="list-item" v-for="(item,index) in suanFaList" :key="index">
 								<view class="list-top">
 									<view class="light">
-										亮点一
+										{{item.code}}
 
 									</view>
 									<view class="light-title">
-										底层算法智能支撑
+										{{item.title}}
 
 									</view>
 
 								</view>
 								<view class="list-bottom">
-									基于职业规划，性格测评，AI测评，人才测评，用心呵护个人用户的留学生涯，倾力协助DIY效能
+									{{item.name}}
 
 								</view>
 
@@ -243,7 +243,8 @@
 		bannerApi,
 		configApi,
 		userSide,
-		textConfig
+		textConfig,
+		suanFa
 	} from '@api/study.js'
 	export default {
 		name: 'PagesIndex',
@@ -262,7 +263,8 @@
 				liuChenegBanner:'',
 				daoshiBanImg:'',
 				tagIcon,
-				bannerList:[]
+				bannerList:[],
+				suanfaList:[]
 			
 			
 			}
@@ -306,6 +308,9 @@
 						type: 14,
 						limit: 1
 					}),
+					suanfa({
+						
+					}),
 					
 				]);
 				let topVideo = [],
@@ -315,6 +320,7 @@
 					guiHuavideo = [],
 					PlanningConfigInfo = {},
 					tPlanningClassConfigInfo={},
+					suanFaList=[]
 					
 					usecase = [];
 				resDataList.map((res, idx) => {
@@ -405,6 +411,18 @@
 					
 					this.daoshiBanImg=data[0].image_text
 					}
+					else if (idx == 10) {
+					res.data.map(res=>{
+						suanFaList.push({
+							code: item.code,
+							title:item.title,
+							name: item.name
+						})
+						
+					})
+					
+					this.daoshiBanImg=data[0].image_text
+					}
 				})
 
 				this.introduction = topVideo[0]
@@ -434,6 +452,7 @@
 				this.tPlanningClassConfigInfo=tPlanningClassConfigInfo;
 				this.usecase = usecase;
 				this.homecase = homecase;
+				this.suanFaList=suanFaList
 			
 			},
 

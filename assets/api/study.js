@@ -6,6 +6,7 @@ let routeUrl = {
 	textConfig: "/index/index/getPlanningClassConfig",
 	menu: "/index/index/getMenu",
 	userSide: "/index/index/getUserSide",
+	suanFa: "/index/index/getPlanningStepTextConfig",
 }
 
 export function videoApi(params) {
@@ -47,6 +48,13 @@ export function textConfig(params) {
 export function userSide(params) {
 	return axios({
 		url: routeUrl.userSide,
+		method: 'get',
+		params,
+	})
+}
+export function suanFa(params) {
+	return axios({
+		url: routeUrl.suanFa,
 		method: 'get',
 		params,
 	})
