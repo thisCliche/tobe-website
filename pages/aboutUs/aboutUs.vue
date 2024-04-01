@@ -3,17 +3,17 @@
 		<view class="mainWrap">
 			<view class="main">
 				<view class="mainL">
-					<view class="title">OUR VISION</view>
-					<view class="slogan">
+					<view class="title animate__animated animate__fadeInUp">OUR VISION</view>
+					<view class="slogan animate__animated animate__fadeInUp">
 						<text>{{aboutUsInfo.about_us_title}}</text>
 						<text class="grayColor">{{aboutUsInfo.about_us_subtitle}}</text>
 					</view>
 				</view>
-				<view class="mainR">
+				<view class="mainR animate__animated animate__fadeIn">
 					<img :src="aboutUsInfo.image" alt="" />
 				</view>
 			</view>
-			<view class="info">
+			<view class="info animate__animated animate__fadeInUp">
 				<view class="row" v-html="aboutUsInfo.text">
 				</view>
 				

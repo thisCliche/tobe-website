@@ -13,7 +13,7 @@
     left: 0;
     right: 0;
     z-index: 999;
-    box-shadow: 0px 1px 2px 0px rgb(224, 224, 224);
+		@include defaultShadow;
 
 
     .content{
@@ -44,7 +44,7 @@
 			            cursor: pointer;
 			            color: #fff;
 			            font-weight: 500;
-									 box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+									// @include defaultShadow;
 			        &:hover{
 			          background: $themeColor;
 			        }

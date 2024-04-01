@@ -5,7 +5,7 @@
 		</view>
 		<view class="mainWrap">
 			<view class="main">
-				<view class="mainL">
+				<view class="mainL animate__animated animate__fadeInUp">
 					<view class="row1">
 						扫描二维码
 					</view>
@@ -21,11 +21,11 @@
 						通过小助手的材料真实性审核后，小助手会帮您把个人信息发布在平台上，开启您的合作之旅
 					</view>
 				</view>
-				<view class="mainR">
+				<view class="mainR animate__animated animate__fadeIn">
 					<img :src="aboutUsCode" alt="" />
 				</view>
 			</view>
-			<view class="bottomSlogan">
+			<view class="bottomSlogan animate__animated animate__fadeInUp">
 				<view class="row1">
 					TOBE正成为最具创造力和责任心的留学平台
 				</view>

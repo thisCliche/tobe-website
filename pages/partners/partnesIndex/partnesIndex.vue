@@ -9,7 +9,7 @@
 					{{buttonText.partners_text}}
 				</view>
 			</view>
-			<view class="slogan">
+			<view class="slogan animate__animated animate__fadeInUp">
 				{{buttonText.partners_subtitle}}
 			</view>
 		</view>
@@ -76,7 +76,9 @@
 			</view>
 			<roll-entry></roll-entry>
 			<view class="hr"></view>
-			<use-case :usecase="scienceList"></use-case>
+			<template v-if="scienceList.length">
+				<use-case :usecase="scienceList"></use-case>
+			</template>
 			<view class="btn">
 				<view class="coolBeans" @click="toDetail">立即加入</view>
 			</view>
@@ -89,7 +91,9 @@
 			</view>
 			<roll-entry></roll-entry>
 			<view class="hr"></view>
-			<use-case :usecase="higherGradeTeacher"></use-case>
+			<template v-if="higherGradeTeacher.length">
+				<use-case :usecase="higherGradeTeacher"></use-case>
+			</template>
 			<view class="btn">
 				<view class="coolBeans" @click="toDetail">立即加入</view>
 			</view>
@@ -100,7 +104,9 @@
 					升学指导机构
 				</view>
 			</view>
-			<institution-case :usecase="higherGradeInstitution"></institution-case>
+			<template v-if="higherGradeInstitution.length">
+				<institution-case :usecase="higherGradeInstitution"></institution-case>
+			</template>
 			<view class="btn">
 				<view class="coolBeans" @click="toDetail">立即加入</view>
 			</view>
@@ -111,7 +117,9 @@
 					外教导师
 				</view>
 			</view>
-			<foreign-case :usecase="foreignTeacher"></foreign-case>
+			<template v-if="foreignTeacher.length">
+				<foreign-case :usecase="foreignTeacher"></foreign-case>
+			</template>
 			<view class="btn">
 				<view class="coolBeans" @click="toDetail">JOIN NOW</view>
 			</view>
@@ -199,15 +207,15 @@
 						collegeList = this.resoveList(item.data)
 					} else if (idx == 2) {
 						hightScoolList = this.resoveList(item.data)
-					}else if (idx == 3) {
+					} else if (idx == 3) {
 						buttonText = item.data
-					}else if (idx==4){
+					} else if (idx == 4) {
 						scienceList = item.data
-					}else if (idx==5){
+					} else if (idx == 5) {
 						higherGradeTeacher = item.data
-					}else if (idx==6){
+					} else if (idx == 6) {
 						foreignTeacher = item.data
-					}else if (idx==7){
+					} else if (idx == 7) {
 						higherGradeInstitution = item.data
 					}
 				})
@@ -320,7 +328,10 @@
 			font-weight: 700;
 			overflow: hidden;
 			padding: 14px 70px;
-
+			transition: 0.3s all ease-in;
+			&:hover{
+				@include defaultShadow;
+			}
 		}
 	}
 
@@ -351,7 +362,7 @@
 			transition: 0.3s all ease-in;
 
 			&:hover {
-				box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+				@include defaultShadow;
 			}
 		}
 	}

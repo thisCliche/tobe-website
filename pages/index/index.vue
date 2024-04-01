@@ -374,7 +374,7 @@
 						transition: 0.3s all ease-in-out;
 
 						&:hover {
-							box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+							@include defaultShadow;
 							transform: translate3d(0, -3px, 0px);
 						}
 
@@ -474,7 +474,7 @@
 						transition: 0.3s all ease-in-out;
 
 						&:hover {
-							box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+							@include defaultShadow;
 							transform: translate3d(0, -3px, 0px);
 						}
 					}
