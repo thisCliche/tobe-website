@@ -7,6 +7,7 @@ let routeUrl = {
 	menu: "/index/index/getMenu",
 	userSide: "/index/index/getUserSide",
 	suanFa: "/index/index/getPlanningStepTextConfig",
+	teatcha:'/index/index/teacherList'
 }
 
 export function videoApi(params) {
@@ -52,9 +53,17 @@ export function userSide(params) {
 		params,
 	})
 }
-export function suanFa(params) {
+export function suanFa1(params) {
 	return axios({
 		url: routeUrl.suanFa,
+		method: 'get',
+		params,
+	})
+}
+
+export function teatcha(params) {
+	return axios({
+		url: routeUrl.teatcha,
 		method: 'get',
 		params,
 	})

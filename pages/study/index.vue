@@ -244,7 +244,8 @@
 		configApi,
 		userSide,
 		textConfig,
-		suanFa
+		suanFa1,
+		teatcha
 	} from '@api/study.js'
 	export default {
 		name: 'PagesIndex',
@@ -264,7 +265,10 @@
 				daoshiBanImg:'',
 				tagIcon,
 				bannerList:[],
-				suanfaList:[]
+				suanfaList:[],
+				model1ComImg:[],
+				
+				
 			
 			
 			}
@@ -308,7 +312,7 @@
 						type: 14,
 						limit: 1
 					}),
-					suanfa({
+					suanFa1({
 						
 					}),
 					
@@ -320,7 +324,8 @@
 					guiHuavideo = [],
 					PlanningConfigInfo = {},
 					tPlanningClassConfigInfo={},
-					suanFaList=[]
+					suanFaList=[],
+					teatcha,
 					
 					usecase = [];
 				resDataList.map((res, idx) => {
@@ -412,7 +417,7 @@
 					this.daoshiBanImg=data[0].image_text
 					}
 					else if (idx == 10) {
-					res.data.map(res=>{
+					res.data.map(item=>{
 						suanFaList.push({
 							code: item.code,
 							title:item.title,
@@ -420,8 +425,18 @@
 						})
 						
 					})
-					
-					this.daoshiBanImg=data[0].image_text
+						
+					}
+					else if (idx == 11) {
+					res.data.map(item=>{
+						teatcha.push({
+							code: item.code,
+							title:item.title,
+							name: item.name
+						})
+						
+					})
+						
 					}
 				})
 
@@ -442,16 +457,15 @@
 
 					}
 				}
-				console.log(cePinginfo)
-				console.log(this.cePinginfo)
+			
 
 				this.howVideoInfo = howVideoInfo;
 				this.kaiqiVideo = kaiqiVideo;
-				this.guiHuavideo = guiHuavideo[0]
+				this.guiHuavideo = guiHuavideo[0];
 				this.PlanningConfigInfo = PlanningConfigInfo;
 				this.tPlanningClassConfigInfo=tPlanningClassConfigInfo;
 				this.usecase = usecase;
-				this.homecase = homecase;
+				// this.homecase = homecase;
 				this.suanFaList=suanFaList
 			
 			},
