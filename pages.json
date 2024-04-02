@@ -44,6 +44,13 @@
 			}
 		},
 		{
+			"path": "pages/resource/main/index",
+			"style": {
+				"navigationBarTitleText": "资源",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
 			"path": "pages/partners/joinUs/joinUs",
 			"style": {
 				"navigationBarTitleText": "加入我们",
