@@ -41,7 +41,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/styles/minix.scss";
 
 .video-profile {
   @include wh(100%,100%);

@@ -1,4 +1,4 @@
-@import "minix.scss";
+@use "/assets/styles/minix.scss" as *;
 .myHeader {
   .sitting{
     height: 92px;

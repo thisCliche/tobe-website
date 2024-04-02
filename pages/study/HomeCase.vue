@@ -41,7 +41,6 @@
 </script>
 
 <style lang="scss" scoped>
-	@import "../../assets/styles/minix.scss";
 
 	.home-case {
 		@include mt(16px);

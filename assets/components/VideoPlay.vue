@@ -25,7 +25,6 @@
 </script>
 
 <style lang="scss" scoped>
-	@import "../styles/minix.scss";
 
 	html {
 		overflow: hidden;

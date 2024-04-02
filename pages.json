@@ -57,6 +57,13 @@
 				"enablePullDownRefresh": false
 
 			}
+		},
+		{
+			"path": "pages/study/growthCourse/index/index",
+			"style": {
+				"navigationBarTitleText": "成长课",
+				"enablePullDownRefresh": false
+			}
 		}
 	],
 	"globalStyle": {
