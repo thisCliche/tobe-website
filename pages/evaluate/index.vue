@@ -1,51 +1,76 @@
 <template>
 	<view class="IndexPage">
 		<view class="banner">
-			<img :src="tagIcon.banner" alt="" srcset="" />
+			<view class="bannerAI">
+				AI
+
+			</view>
+			<view class="bannerTitle">
+				AI 职场工具，<text class="title2">提升您的工作效率</text>
+
+			</view>
+			<view class="bannerText">
+				AI 职场工具为我们提升工作效率，脱离烦杂的信息搜索，筛选,Ai 职场工具为我们提升工作效率，脱离烦杂的信息搜索，筛选,Ai 职场工具为我们提升工作效率，脱离烦杂的信息搜索，筛选, Ai 职场工具为我们,
+
+			</view>
+			<view class="AiBtn">
+
+				<view class="btnText">让Ai助力职场腾飞</view>
+
+
+			</view>
+
+
+			<view class="AiImgItem" v-for="(item,index) in tagIcon.bannerList " :key="index" :class="`icon${index}`">
+				<view class="item-item">
+
+				</view>
+
+				<view class="item-icon"  :class="`bgIcon${index}`">
+					<img :src="item.url" alt="" srcset="" />
+
+				</view>
+				<view class="item-name" :class="`bg${index}`" >
+				{{item.name}}
+
+				</view>
+
+
+
+
+			</view>
+
+
+
+
+
+
 
 		</view>
 		<view class="model1">
-			<view class="model1-des">
-				你了解自己吗？<br />
+			<view class="model1-des" v-html="textConfigInfo.aicontent">
 
-				知道适合自己的专业和国家是哪些吗？<br />
-
-				选择对的路比埋头努力更重要！<br />
-
-				AI智能测评，根据上百位老师的经验组成<br />
-
-				可以帮助你，了解真正适合自己的专业申请方向，<br />
-				或者自己都没有意识到的国家偏好。
 
 
 			</view>
 			<view class="model1-img">
-				我们的流程
+				<img :src="banner17.bannerUrl" alt="" />
 			</view>
 
 
 		</view>
 
 		<view class="model2">
-			<view class="slogan fadeIn animated">利用AI测评 收获 规划报告/规划时间线</view>
-			<view class="ftitle">选择大于努力是共识，选定一个合适的，能发挥自身价值的塞到，是提升人生成功概率的最优方法论</view>
+			<view class="slogan fadeIn animated">{{textConfigInfo.ai_base}}</view>
+			<view class="ftitle">{{textConfigInfo.ai_base_desc}}</view>
 			<view class="top">
 				<view class="video">
-					<view class="img-list" v-for="(item,index) in tagIcon.imageList" :key="index"
-						:class="`img${index}`">
-						<img :src="item" alt="" />
-
-
+					<view class="img-list">
+						<img :src="banner18.bannerUrl" alt="" />
 					</view>
 
-
-
-
 				</view>
-				<view class="textDiscipt">
-					完整详细<br />
-					全面的<br />
-					规划报告
+				<view class="textDiscipt" v-html="banner18.text">
 
 
 				</view>
@@ -54,14 +79,12 @@
 			</view>
 
 			<view class="bottom">
-				<view class="textDiscipt">
-					标化活动<br />
-					清晰的<br />
-					时间线
+				<view class="textDiscipt" v-html="banner19.text">
+
 				</view>
 				<view class="video">
-					<view class="img-list" v-for="(item,index) in 3" :key="item" :class="`img${index}`">
-						<img :src="tagIcon.image10" alt="" srcset="" />
+					<view class="img-list">
+						<img :src="banner19.bannerUrl" alt="" />
 
 
 					</view>
@@ -79,15 +102,15 @@
 				<view class="slogan fadeIn animated">还可以梦幻联动</view>
 
 				<view class="model4Body">
-					<view class="model4-left">
-						<view class="video-mode4-list">
+					<!-- <view class="model4-left">
+						 <view class="video-mode4-list">
 							<view class="video-mode4-list-item" v-for="(item,index) in 3" :key="index"
 								:class="`list${index}`">
 								<VideoProfile :introduction='introduction2' />
 
 							</view>
 
-						</view>
+						</view> 
 						<view class="video-mode4-des">
 							<view class="des-title">
 								人生成长课
@@ -99,21 +122,21 @@
 							</view>
 
 						</view>
+						
 
-					</view>
-					<view class="model4-right">
+					</view> -->
+					<view class="model4-right" v-for="item in banner20" :key="item.id">
 						<view class="right-img">
-							<img :src="tagIcon.jiang" alt="" />
+							<img :src="item.bannerUrl" alt="" />
 
 						</view>
 						<view class="video-mode4-des">
 							<view class="des-title">
-								AI规划老师
+								{{item.name}}
 
 							</view>
 							<view class="des-des">
-								测评后的信息可以同步给AI规划老师，
-								学生有任何针对于报告或者专业不懂的问题都可以跟老师沟通得到实时的解答
+								{{item.text}}
 
 							</view>
 
@@ -128,15 +151,7 @@
 			</view>
 		</view>
 		<view class="model5">
-			<view class="model5Wrap">
-				价值几万的规划服务只需要几百块开启！<br /><br />
-
-				适合还在观望机构的你<br />
-				适合刚决定国际路线迷茫的家长<br />
-				适合刚刚开始了解国际的你<br />
-				适合找不到方向的你<br />
-				适合所有走国际体系的你！
-
+			<view class="model5Wrap" v-html="textConfigInfo.service_desc">
 
 			</view>
 
@@ -168,9 +183,9 @@
 				<view class="model6Wrap-bottom">
 					<view class="model6Wrap-btn">
 						立即测试
-						
+
 					</view>
-					
+
 
 				</view>
 
@@ -198,8 +213,9 @@
 		videoApi,
 		bannerApi,
 		configApi,
+		textConfig,
 		userSide
-	} from '@api/homeApi.js'
+	} from '@api/cePing.js'
 	export default {
 		name: 'PagesIndex',
 		components: {
@@ -209,6 +225,11 @@
 		},
 		data() {
 			return {
+				textConfigInfo: {},
+				banner20: [],
+				banner19: {},
+				banner18: {},
+				banner17: {},
 				usecase: [], // 1
 				homecase: [], // 1
 				model1ComImg: [],
@@ -249,21 +270,18 @@
 		},
 		methods: {
 			async getData() {
-				let resDataList = await Promise.all([videoApi({
-					type: 1,
+				let resDataList = await Promise.all([textConfig({}), bannerApi({
+					type: 20,
 					limit: 2
 				}), bannerApi({
-					type: 1,
-					limit: 3
-				}), bannerApi({
-					type: 2,
-					limit: 6
-				}), bannerApi({
-					type: 3,
+					type: 19,
 					limit: 1
 				}), bannerApi({
-					type: 4,
-					limit: 5
+					type: 18,
+					limit: 1
+				}), bannerApi({
+					type: 17,
+					limit: 1
 				}), bannerApi({
 					type: 5,
 					limit: 1
@@ -272,6 +290,10 @@
 					limit: 5
 				})]);
 				let videoInfo = [],
+					banner20 = [],
+					banner19 = [],
+					banner18 = [],
+					banner17 = [],
 					banner = [],
 					model1ComImg = [],
 					middleBanner = '',
@@ -281,16 +303,11 @@
 					usecase = [];
 				resDataList.map((res, idx) => {
 					if (idx == 0) {
-						res.data.map(item => {
-							videoInfo.push({
-								imageUrl: item.image_text,
-								videoUrl: item.video_text,
-								id: item.id
-							})
-						})
+
+						this.textConfigInfo = res.data
 					} else if (idx == 1) {
 						res.data.map(item => {
-							banner.push({
+							banner20.push({
 								bannerUrl: item.image_text,
 								id: item.id,
 								name: item.name,
@@ -298,27 +315,30 @@
 							})
 						})
 					} else if (idx == 2) {
-						let siger = res.data.slice(0, 1);
-						let other = res.data.slice(1);
-						other.map((item, index) => {
-							if (index == 2) {
-								model1ComImg.push({
-									img1: siger[0].image_text,
-									img2: item.image_text
-								})
-							} else {
-								model1ComImg.push(item.image_text)
-							}
+						res.data.map(item => {
+							banner19.push({
+								bannerUrl: item.image_text,
+								id: item.id,
+								name: item.name,
+								text: item.text
+							})
 						})
 					} else if (idx == 3) {
 						res.data.map(item => {
-							middleBanner = item.image_text
+							banner18.push({
+								bannerUrl: item.image_text,
+								id: item.id,
+								name: item.name,
+								text: item.text
+							})
 						})
 					} else if (idx == 4) {
 						res.data.map(item => {
-							homecase.push({
-								engineerUrl: item.image_text,
-								contentId: item.id
+							banner17.push({
+								bannerUrl: item.image_text,
+								id: item.id,
+								name: item.name,
+								text: item.text
 							})
 						})
 					} else if (idx == 5) {
@@ -339,6 +359,10 @@
 					}
 				})
 				usecase.push(usecase[0])
+				this.banner20 = banner20;
+				this.banner19 = banner19[0];
+				this.banner18 = banner18[0];
+				this.banner17 = banner17[0];
 				this.usecase = usecase
 				this.homecase = homecase;
 				this.model1ComImg = [1, 2, 4];
@@ -360,21 +384,176 @@
 		width: 100%;
 
 		.banner {
-			@include fj(center);
+
 			width: 100%;
 			height: 867px;
-			border-radius: 20px;
-			background: rgb(196, 196, 196);
+			background: linear-gradient(180.00deg, rgb(220, 244, 254) 0%, rgb(190, 190, 190) 135.033%);
+			position: relative;
+			display: flex;
+			flex-direction: column;
 
-			.bannerImg {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
+			.bannerAI {
+				font-size: 200px;
+				margin-top: 50px;
+				background: linear-gradient(to right, #398AE2, #38D4F8);
+				/* 定义从左到右的渐变色 */
+				-webkit-background-clip: text;
+				/* 应用文字 */
+				-webkit-text-fill-color: transparent;
+				/* 隐藏文字的实际颜色 */
+				font-weight: bold;
+				/* 设置文字加粗 */
+				display: flex;
+				justify-content: center;
+
 			}
+
+			.bannerTitle {
+				font-size: 36px;
+				font-weight: 700;
+				margin-top: 40px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+				.title2 {
+					background: linear-gradient(to right, #F41CFE, #38D4F8);
+					-webkit-background-clip: text;
+					/* 应用文字 */
+					-webkit-text-fill-color: transparent;
+					/* 隐藏文字的实际颜色 */
+
+
+				}
+
+
+			}
+
+			.bannerText {
+				font-size: 22px;
+				margin-top: 20px;
+				/* 让文本超出一行时自动换行 */
+				overflow-wrap: break-word;
+				text-align: center;
+				padding: 0 220px;
+				line-height: 40px;
+				color: rgba(0,0,0,0.8);
+
+
+			}
+
+			.AiBtn {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				margin-top: 140px;
+				width: 100%;
+				height: 60px;
+				cursor: pointer;
+
+				.btnText {
+					padding: 15px 40px;
+					height: 40px;
+					background-color: #4E7FE1;
+					border-radius: 40px;
+					font-size: 30px;
+					color: #fff
+				}
+
+			}
+
+
+
+			.AiImgItem {
+				position: absolute;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+
+				&.icon0 {
+					top: 10%;
+					left: 30%;
+
+				}
+
+				&.icon1 {
+					top: 10%;
+					right: 30%;
+
+				}
+
+				&.icon2 {
+					top: 30%;
+					left: 10%;
+
+				}
+
+				&.icon3 {
+					top: 30%;
+					right: 10%;
+
+				}
+
+				&.icon4 {
+					top: 70%;
+					left: 25%;
+
+				}
+
+				&.icon5 {
+					top: 70%;
+					right: 25%;
+
+				}
+
+				.item-icon {
+					display: inline-block; /* 让元素表现为块级元素 */
+					  padding: 0.5em 1em; /* 添加内边距 */
+					  border-radius: 50%; /* 将边框设置为圆形 */
+					  color: #ffffff; /* 设置文字颜色 */
+					
+					
+				}
+
+				.item-name {
+					color:#fff;
+					padding:  10px;
+					border-radius: 20px;
+					&.bg0{
+						background-color: #FCA999
+					}
+					&.bg1{
+						background-color:#3661FF
+					}
+					&.bg2{
+						background-color: #E45353
+					}
+					&.bg3{
+						background-color: #82ACFF
+					}
+					&.bg4{
+						background-color: #617AFF
+					}
+					&.bg5{
+						background-color: #FF7070
+					}
+					
+				}
+
+			}
+
+
+
+
+
+
+
+
 		}
 
 		.model8 {
-			@include ct1600;
+			@include ct1400;
 			@include modelPd;
 
 			.slogan1 {
@@ -387,7 +566,7 @@
 		}
 
 		.model6 {
-			@include ct1600;
+			@include ct1400;
 			padding: 0 100px;
 
 			.model6Wrap {
@@ -487,11 +666,12 @@
 				}
 
 				.model6Wrap-bottom {
-					@include wh(100%,80px);
+					@include wh(100%, 80px);
 					@include fj(center);
 					align-items: center;
 					margin: 80px 0;
-					.model6Wrap-btn{
+
+					.model6Wrap-btn {
 						@include fj(center);
 						align-items: center;
 						width: 460px;
@@ -504,10 +684,10 @@
 						color: #fff;
 
 					}
-					
-					
-					
-					
+
+
+
+
 				}
 
 
@@ -529,13 +709,16 @@
 		}
 
 		.model5 {
-			@include ct1600;
+			@include ct1400;
 			@include modelPd;
 
 			.model5Wrap {
-				font-size: 32px;
-				color: #000;
-				font-weight: 500;
+				color: rgb(10, 10, 10);
+				font-family: 旁门正道标题体;
+				font-size: 36px;
+				font-weight: 400;
+				line-height: 55px;
+				letter-spacing: 0px;
 				padding-left: 18%;
 			}
 
@@ -543,7 +726,7 @@
 
 		.model4 {
 			@include modelPd;
-			@include ct1600;
+			@include ct1400;
 
 			.model4Wrap {
 
@@ -714,7 +897,7 @@
 		}
 
 		.model3 {
-			@include ct1600;
+			@include ct1400;
 			@include modelPd;
 
 			.adsense {
@@ -732,7 +915,7 @@
 		}
 
 		.model2 {
-			@include ct1600;
+			@include ct1400;
 			padding: 40px 0;
 
 			.slogan {
@@ -767,62 +950,27 @@
 					font-family: 思源黑体;
 					font-size: 30px;
 					font-weight: 700;
+					text-align: center;
 
 				}
 
 				.video {
-					width: 700px;
-					height: 420px;
+					width: 650px;
+					height: 428px;
 					position: relative;
 					display: flex;
 
 					.img-list {
 						@include wh(100%, 100%);
 
-						&.img0 {
-							position: absolute;
-							top: 0;
-							left: 0;
-							z-index: 10;
-						}
-
-						&.img1 {
-							position: absolute;
-							top: 8%;
-							left: 163px;
-							z-index: 20;
-						}
-
-						&.img2 {
-							position: absolute;
-							top: 5%;
-							left: 325px;
-							z-index: 30;
-						}
-
-						&.img3 {
-							position: absolute;
-							top: 5%;
-							left: 475px;
-							z-index: 40;
-						}
-
-						&.img4 {
-							position: absolute;
-							top: 5%;
-							left: 650px;
-							z-index: 50;
-						}
-
 						img {
-							width: 286px;
-							height: 407px;
-
+							width: 100%;
+							height: 100%;
+							object-fit: cover
 						}
 
 
 					}
-
 
 
 
@@ -845,42 +993,22 @@
 					font-family: 思源黑体;
 					font-size: 30px;
 					font-weight: 700;
+					text-align: center;
 				}
 
 				.video {
-					width: 800px;
-					height: 420px;
+					width: 650px;
+					height: 428px;
 					position: relative;
 					display: flex;
 
 					.img-list {
 						@include wh(100%, 100%);
 
-						&.img0 {
-							position: absolute;
-							top: 0;
-							left: 0;
-							z-index: 10;
-						}
-
-						&.img1 {
-							position: absolute;
-							top: 16%;
-							right: 163px;
-							z-index: 20;
-						}
-
-						&.img2 {
-							position: absolute;
-							top: 32%;
-							right: 325px;
-							z-index: 30;
-						}
-
 						img {
-							width: 578px;
-							height: 328px;
-
+							width: 100%;
+							height: 100%;
+							object-fit: cover
 						}
 
 
@@ -898,7 +1026,7 @@
 		}
 
 		.model1 {
-			@include ct1600;
+			@include ct1400;
 			@include modelPd;
 			@include fj(flex-start);
 			flex-direction: column;
@@ -921,14 +1049,12 @@
 				@include wh(100%, 560px);
 				@include fj(center);
 				align-items: center;
-				background: rgb(196, 196, 196);
-				font-size: 48px;
-				color: rgb(10, 10, 10);
-				// img {
-				// 	width: 100%;
-				// 	height: 100%;
-				// 	object-fit: cover;
-				// }
+
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+				}
 
 			}
 

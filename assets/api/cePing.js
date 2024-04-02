@@ -3,11 +3,9 @@ let routeUrl = {
 	video: "/index/index/getOtherVideoList",
 	banner: "/index/index/getOtherBannerList",
 	config: "/index/index/getPlanningConfig",
-	textConfig: "/index/index/getPlanningClassConfig",
+	textConfig: "/index/index/getAiAboutConfig",
 	menu: "/index/index/getMenu",
 	userSide: "/index/index/getUserSide",
-	suanFa: "/index/index/getPlanningStepTextConfig",
-	teatcha:'/index/index/teacherList'
 }
 
 export function videoApi(params) {
@@ -49,21 +47,6 @@ export function textConfig(params) {
 export function userSide(params) {
 	return axios({
 		url: routeUrl.userSide,
-		method: 'get',
-		params,
-	})
-}
-export function suanFa1(params) {
-	return axios({
-		url: routeUrl.suanFa,
-		method: 'get',
-		params,
-	})
-}
-
-export function teatcha1(params) {
-	return axios({
-		url: routeUrl.teatcha,
 		method: 'get',
 		params,
 	})
