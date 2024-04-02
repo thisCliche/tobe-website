@@ -52,7 +52,6 @@
 </script>
 
 <style lang="scss" scoped>
-	@import "../styles/minix.scss";
 
 	.myFoot {
 		background: $footBg;

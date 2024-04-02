@@ -378,7 +378,6 @@
 </script>
 
 <style lang="scss" scoped>
-	@import "../../assets/styles/minix.scss";
 
 	.IndexPage {
 		width: 100%;

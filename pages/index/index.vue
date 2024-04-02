@@ -38,7 +38,7 @@
 				<img :src="middleBanner" alt="" />
 			</view>
 		</view>
-		<view class="model4">
+		<view class="model4" id="anchorPoint">
 			<view class="model4Wrap">
 				<view class="slogan1 wow animate__animated animate__fadeInUp" data-wow-duration="2s">大大小小的留学团队都依赖TOBE</view>
 				<view class="slogan2 wow animate__animated animate__fadeInUp" data-wow-duration="2s">tobe可以安全扩展，支持学生的DIY操作</view>
@@ -51,9 +51,11 @@
 						<view class="countNum" v-for="(item,idx) in textconfigObj" :key="idx">
 							<view class="num">
 								<CountTo
-								  :startVal="0"
-								  :endVal="item.num"
-								  :duration="3000"
+									:startVal="0"
+									:endVal="item.num"
+									:duration="3000"
+									ref="counToRef"
+									:autoplay="false"
 									class="num"
 								/><span>%</span>
 							</view>
@@ -102,12 +104,13 @@
 
 <script>
 	import CountTo from 'vue-count-to'
+
 	import {
 		tagIcon,
 	} from './export.js'
 	import HomeCase from './HomeCase.vue';
 	import UseCase from './UseCase.vue';
-	import VideoProfile from './VideoProfile.vue';
+	import VideoProfile from '@components/VideoProfile.vue';
 	import {
 		videoApi,
 		bannerApi,
@@ -139,11 +142,25 @@
 		},
 		mounted() {
 			new this.$wow.WOW().init();
+			document.addEventListener("scroll", this.numberLazyLoad);
 		},
 		created() {
 			this.getData();
 		},
+		destroyed(){
+			document.removeEventListener("scroll", this.numberLazyLoad);
+		},
 		methods: {
+			 numberLazyLoad() {
+			      let rect = document.getElementById("anchorPoint").getBoundingClientRect();
+			      if (rect.top < 300) {
+			        this.$refs.counToRef[0].start();
+			        this.$refs.counToRef[1].start();
+			        this.$refs.counToRef[2].start();
+			        document.removeEventListener("scroll", this.numberLazyLoad);
+			      }
+			    },
+
 			toDetail(path){
 				uni.navigateTo({
 					url:path
@@ -264,7 +281,6 @@
 </script>
 
 <style lang="scss" scoped>
-	@import "../../assets/styles/minix.scss";
 
 	.IndexPage {
 		width: 100%;
@@ -374,7 +390,7 @@
 						transition: 0.3s all ease-in-out;
 
 						&:hover {
-							box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+							@include defaultShadow;
 							transform: translate3d(0, -3px, 0px);
 						}
 
@@ -474,7 +490,7 @@
 						transition: 0.3s all ease-in-out;
 
 						&:hover {
-							box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+							@include defaultShadow;
 							transform: translate3d(0, -3px, 0px);
 						}
 					}

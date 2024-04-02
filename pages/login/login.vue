@@ -433,7 +433,6 @@
 </script>
 
 <style lang="scss" scoped>
-	@import "../../assets/styles/minix.scss";
 
 	.login {
 		.loginWrap {
