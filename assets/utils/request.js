@@ -3,7 +3,7 @@ import { Notification } from 'element-ui'
 import { Local } from "@utils/storage";
 import { ACCOUNT_INFO } from '@assets/constant/cacheKey'
 import baseURL from '../constant/requestUrl.js'
-console.log(process.env)
+
 let config = {
   baseURL,
   timeout: 5000,
