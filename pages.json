@@ -71,6 +71,14 @@
 				"navigationBarTitleText": "成长课",
 				"enablePullDownRefresh": false
 			}
+		},
+		{
+			"path" : "pages/study/growthCourse/detail/detail",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"enablePullDownRefresh" : false
+			}
 		}
 	],
 	"globalStyle": {

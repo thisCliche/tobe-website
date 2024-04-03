@@ -76,7 +76,7 @@
 			@include wh(200px, 70px);
 			overflow: hidden;
 			margin: 0 auto;
-
+			border-radius: 6px;
 			img {
 				transition: transform 400ms ease-in;
 				@include wh(100%, 100%);

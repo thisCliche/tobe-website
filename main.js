@@ -1,6 +1,6 @@
 import App from './App'
 import ElementUI from 'element-ui';
-import "element-ui/lib/theme-chalk/index.css";
+import './assets/styles/element-variables.scss'
 import MyFoot from '@assets/components/MyFoot.vue';
 import 'animate.css';
 import wow from 'wowjs'
