@@ -37,7 +37,7 @@ $locationBg:#404058;
   margin: 0 auto;
 }
 @mixin defaultShadow{
-	box-shadow: 0 4px 8px 0 rgba(204, 204, 204,0.8);
+	box-shadow: 0 2px 8px 0 rgba(150,155,178,.43);
 }
 @mixin mb($value){
   margin-bottom: $value;

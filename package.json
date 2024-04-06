@@ -3,9 +3,11 @@
 		"animate.css": "^4.1.1",
 		"axios": "^1.6.8",
 		"element-ui": "^2.15.14",
+		"typed.js": "^2.1.0",
 		"vue-count-to": "^1.0.13",
 		"vue-slick-carousel": "^1.0.6",
 		"vue-video-player": "^4.0.6",
+		"vue-waves-effect": "^1.0.0",
 		"wowjs": "^1.1.3"
 	}
 }

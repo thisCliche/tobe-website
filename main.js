@@ -5,6 +5,8 @@ import MyFoot from '@assets/components/MyFoot.vue';
 import 'animate.css';
 import wow from 'wowjs'
 import "wowjs/css/libs/animate.css"
+import Waves from 'vue-waves-effect';
+import 'vue-waves-effect/dist/vueWavesEffect.css';
 
 // #ifndef VUE3
 import Vue from 'vue'
@@ -12,7 +14,7 @@ import './uni.promisify.adaptor'
 Vue.config.productionTip = false
 App.mpType = 'app'
 Vue.prototype.$wow = wow;
-Vue.use(ElementUI);
+Vue.use(ElementUI).use(Waves);
 Vue.component('MyFoot',MyFoot);
 
 const app = new Vue({

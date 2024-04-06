@@ -31,18 +31,20 @@
 								</view>
 							</el-collapse-transition>
 						</view>
-						<view class="userInfo" v-if="isLogin">
-							<el-dropdown @command="handleCommand">
-								<el-avatar :src="userInfo.avatar" size="medium"></el-avatar>
-								<el-dropdown-menu slot="dropdown">
-									<el-dropdown-item icon="el-icon-setting">个人设置</el-dropdown-item>
-									<el-dropdown-item icon="el-icon-message">站内信</el-dropdown-item>
-									<el-dropdown-item icon="el-icon-chat-dot-square">联系助手</el-dropdown-item>
-									<el-dropdown-item command="logout" icon="el-icon-switch-button" divided>登出</el-dropdown-item>
-								</el-dropdown-menu>
-							</el-dropdown>
+						<view class="suspend">
+							<view class="userInfo" v-if="isLogin">
+								<el-dropdown @command="handleCommand">
+									<el-avatar :src="userInfo.avatar" size="medium"></el-avatar>
+									<el-dropdown-menu slot="dropdown">
+										<el-dropdown-item icon="el-icon-setting">个人设置</el-dropdown-item>
+										<el-dropdown-item icon="el-icon-message">站内信</el-dropdown-item>
+										<el-dropdown-item icon="el-icon-chat-dot-square">联系助手</el-dropdown-item>
+										<el-dropdown-item command="logout" icon="el-icon-switch-button" divided>登出</el-dropdown-item>
+									</el-dropdown-menu>
+								</el-dropdown>
+							</view>
+							<view class="loginBtn" @click="loginBtn" v-else>login</view>
 						</view>
-						<view class="loginBtn" @click="loginBtn" v-else>login</view>
 					</view>
 				</view>
 				<view class="menus secondRow">
@@ -99,15 +101,15 @@
 		// 	}
 		// },
 		methods: {
-			handleCommand(command){
+			handleCommand(command) {
 				Local.remove(ACCOUNT_INFO);
-				this.isLogin =false;
+				this.isLogin = false;
 				uni.navigateTo({
-					url:"/"
+					url: "/"
 				})
 				this.$notify.success({
-					title:'成功',
-					message:'退出登录'
+					title: '成功',
+					message: '退出登录'
 				})
 			},
 			loginBtn() {
@@ -157,7 +159,7 @@
 					})
 				}
 			},
-			checkLog(){
+			checkLog() {
 				let accountInfo = Local.get(ACCOUNT_INFO);
 				if (accountInfo) {
 					this.isLogin = true;
@@ -181,9 +183,9 @@
 			// 	}
 			// }
 		},
-		
+
 		created() {
-			eventBus.on('loginEvent',this.checkLog);
+			eventBus.on('loginEvent', this.checkLog);
 			let menuList = Session.get(MENU_LIST);
 			if (menuList) {
 				this.homeMenus = menuList;

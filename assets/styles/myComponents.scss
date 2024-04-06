@@ -32,11 +32,15 @@
 					@include mt(2px);
 					cursor: pointer;
 				}
+				.suspend{
+					position: absolute;  
+					right: -100px;
+				}
 			  .loginBtn{
 			   
-									@include mt(3px);
-									height: 34px;
-									line-height: 34px;
+									@include mt(5px);
+									height: 30px;
+									line-height: 30px;
 			            padding: 0px 20px;
 			            background: #000;
 			            border-radius: 50px;

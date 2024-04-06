@@ -1,5 +1,5 @@
 <template>
-	<view class="video-profile">
+	<view class="video-profile" :style="{width:withValue,height:heightValue}">
 		<view class="cover" @click="play">
 			<view class="leggings">
 				<img :src="introduction.imageUrl" alt="" />
@@ -15,9 +15,19 @@
 	import VideoPlay from '@components/VideoPlay.vue'
 	export default {
 		name: 'VideoProfile',
-		props: ['introduction'],
 		components: {
 			VideoPlay
+		},
+		props:{
+			introduction:null,
+			withValue:{
+				type:String,
+				default:'560px',
+			},
+			heightValue:{
+				type:String,
+				default:'420px',
+			}
 		},
 		data() {
 			return {
@@ -40,7 +50,7 @@
 
 <style lang="scss" scoped>
 	.video-profile {
-		@include wh(560px, 420px);
+		// @include wh(560px, 420px);
 		border-radius: 20px;
 		overflow: hidden;
 

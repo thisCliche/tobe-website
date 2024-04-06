@@ -181,7 +181,7 @@
 
 				</view>
 				<view class="model6Wrap-bottom">
-					<view class="model6Wrap-btn">
+					<view class="model6Wrap-btn" @click="toDetail">
 						立即测试
 
 					</view>
@@ -269,6 +269,11 @@
 			this.getData();
 		},
 		methods: {
+			toDetail(){
+				uni.navigateTo({
+					url:"/pages/evaluate/evaluating/evaluating"
+				})
+			},
 			async getData() {
 				let resDataList = await Promise.all([textConfig({}), bannerApi({
 					type: 20,

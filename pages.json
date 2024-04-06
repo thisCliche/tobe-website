@@ -76,7 +76,31 @@
 			"path" : "pages/study/growthCourse/detail/detail",
 			"style" : 
 			{
-				"navigationBarTitleText" : "",
+				"navigationBarTitleText" : "成长课",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/evaluate/evaluating/evaluating",
+			"style" : 
+			{
+				"navigationBarTitleText" : "AI评测",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/study/aiTutor/index",
+			"style" : 
+			{
+				"navigationBarTitleText" : "AI导师",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/study/aiTutor/detail",
+			"style" : 
+			{
+				"navigationBarTitleText" : "AI导师",
 				"enablePullDownRefresh" : false
 			}
 		}

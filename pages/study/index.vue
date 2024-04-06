@@ -105,7 +105,7 @@
 							</view>
 
 						</view>
-						<view class="tiyan">
+						<view class="tiyan" @click="toDetail">
 							立即体验，领取测评报告
 						</view>
 					</view>
@@ -232,7 +232,6 @@
 		<view class="model8">
 			<view class="slogan1">学生反馈</view>
 			<use-case :usecase="usecase"></use-case>
-
 		</view>
 		<my-foot></my-foot>
 	</view>
@@ -287,6 +286,11 @@
 			this.getData();
 		},
 		methods: {
+			toDetail(){
+				uni.navigateTo({
+					url:"/pages/study/aiTutor/index"
+				})
+			},
 			async getData() {
 				let resDataList = await Promise.all([videoApi({
 						type: 4,
