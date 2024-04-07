@@ -4,6 +4,7 @@
 		"axios": "^1.6.8",
 		"element-ui": "^2.15.14",
 		"typed.js": "^2.1.0",
+		"vue-carousel-3d": "^1.0.1",
 		"vue-count-to": "^1.0.13",
 		"vue-slick-carousel": "^1.0.6",
 		"vue-video-player": "^4.0.6",

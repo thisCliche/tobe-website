@@ -51,6 +51,27 @@
 			}
 		},
 		{
+			"path": "pages/resource/practice/index",
+			"style": {
+				"navigationBarTitleText": "实习",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/resource/research/index",
+			"style": {
+				"navigationBarTitleText": "科研",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/resource/school/index",
+			"style": {
+				"navigationBarTitleText": "夏校",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
 			"path": "pages/partners/joinUs/joinUs",
 			"style": {
 				"navigationBarTitleText": "加入我们",
