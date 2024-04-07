@@ -7,10 +7,10 @@
 						<view class="btnItem active" @click="start">
 							<img :src="speak" alt="" />
 						</view>
-						<view class="btnItem" @click="pause">
+						<view class="btnItem" @click="overHandle">
 							<img :src="over" alt="" />
 						</view>
-						<view class="btnItem">
+						<view class="btnItem" @click="pause">
 							<img :src="next" alt="" />
 						</view>
 					</view>
@@ -22,37 +22,31 @@
 			<view class="wrapR">
 				<view class="record">
 					<view class="paragraph" v-for="item in sessionList" :key="item.id">{{item.content}}</view>
-					 <span id="typed" style="white-space: pre-wrap;line-height: 30px;"></span>
-
+					<vue-typed-js v-if="isTyping" ref="typedjs" :strings="strings" @onComplete="typeComplete">
+						<span class="typing"></span>
+					</vue-typed-js>
 				</view>
 
 			</view>
 		</view>
+		<my-foot></my-foot>
 	</view>
 </template>
 
 <script>
-	import Typed from 'typed.js';
 	import three from '@image/three.png'
 	import next from '@image/interview-next.png'
 	import over from '@image/interview-over.png'
 	import speak from '@image/interview-speak.png'
-	import guangbiao from '@image/guangbiao.png'
 	export default {
 		data() {
 			return {
+				isTyping:false,
 				three,
 				next,
 				over,
 				speak,
-				cursorImg: guangbiao, // 光标图片的 URL
-				speed: 150, // 打字速度，单位：毫秒
-				textStyle: {
-					color: 'black',
-					fontWeight: 'bold',
-					fontSize: '16px',
-				}, // 文字样式对象
-				typed: null,
+				
 				strings: ['我说：给我说个笑话如何？'],
 				sessionList: [{
 					id: 1,
@@ -64,39 +58,24 @@
 			}
 		},
 		methods: {
+			typeComplete() {
+				this.sessionList.push({
+					id: 3,
+					content: '我说：给我说个笑话如何？'
+				})
+				this.isTyping = false;
+			},
+			overHandle(){},
 			pause() {
-				console.log(1);
-				this.typed.stop();
+				console.log('暂停')
 			},
 			start() {
 				// 点一下更新更新文本，
-
+				this.isTyping = true;
 			},
 		},
 		mounted() {
-			// 明天研究vue-typed-js
-			this.typed = new Typed("#typed", {
-				strings: this.strings,
-				typeSpeed: 100, //打字的速度
-				smartBackspace: true, // 开启智能退格 默认false
-				backSpeed: 50, //后退速度
-				backDelay: 500, //后退延迟
-				loop: false, //是否循环.,,
-				startDelay: 1000, //起始时间
-				fadeOut: true, //淡出效果
-				fadeOutClass: 'typed-fade-out', //fadeOutClass 用于淡入淡出动画的css类
-				fadeOutDelay: 500, //以毫秒为单位淡出延迟
-				smartBackspace: true, //智能后间距,
-				onComplete: function(self) {
-					self.destroy();
-					this.sessionList.push({
-						id: 3,
-						content: 'AI导师：今天合肥的天气多云转阴，温度9℃-19℃，气候凉爽。'
-					})
-				},
-
-			});
-
+			
 		}
 	}
 </script>
