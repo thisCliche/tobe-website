@@ -72,6 +72,13 @@
 			}
 		},
 		{
+			"path": "pages/resource/detail/index",
+			"style": {
+				"navigationBarTitleText": "详情",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
 			"path": "pages/partners/joinUs/joinUs",
 			"style": {
 				"navigationBarTitleText": "加入我们",
