@@ -8,11 +8,11 @@
 		<view class="container1">
 			<view class="containerWap">
 				<view class="wap1">
-					<VideoProfile :introduction='container1Wap1' />
+					<VideoProfile :introduction='container1Info.introduction' />
 
 				</view>
 				<view class="wap2">
-					文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字
+					{{container1Info.content}}
 
 				</view>
 
@@ -108,13 +108,13 @@
 				<view class="top">
 					<view class="textDiscipt">
 						<view class="textTitle">
-							科研的重要性，什么是科研
+							{{model2Info.item1.name}}
 						</view>
 
 
 					</view>
 					<view class="video">
-						<VideoProfile :introduction='cePinginfo.one.introduction' />
+						<VideoProfile :introduction='model2Info.item1.introduction' />
 					</view>
 
 				</view>
@@ -122,13 +122,17 @@
 				<view class="bottom">
 
 					<view class="video">
-						<VideoProfile :introduction='cePinginfo.one.introduction' />
+						<VideoProfile :introduction='model2Info.item2.introduction' />
 					</view>
 					<view class="textDiscipt">
 						<view class="textTitle">
-							科研的重要性，什么是科研
+							{{model2Info.item2.name}}
 						</view>
 
+						<view class="textBody">
+							{{model2Info.item2.text}}
+
+						</view>
 
 					</view>
 
@@ -137,13 +141,13 @@
 				<view class="top">
 					<view class="textDiscipt">
 						<view class="textTitle">
-							科研的重要性，什么是科研
+							{{model2Info.item3.name}}
 						</view>
 
 
 					</view>
 					<view class="video">
-						<VideoProfile :introduction='cePinginfo.one.introduction' />
+						<VideoProfile :introduction='model2Info.item3.introduction' />
 					</view>
 
 				</view>
@@ -188,13 +192,9 @@
 
 <script>
 	import {
-		KeepAlive
-	} from "vue";
-	import {
 		tagIcon,
 	} from '../export.js'
 
-	import UseCase from '../UseCase.vue';
 	import VideoProfile from '../VideoProfile.vue';
 	import HomeCase from '../HomeCase.vue';
 	import {
@@ -209,13 +209,35 @@
 	export default {
 		name: 'PagesIndex',
 		components: {
-			UseCase,
 			VideoProfile,
 			HomeCase,
 		},
 		data() {
 			return {
-				cePinginfo: {}, // 1
+				introduction: {},
+				container1Info: {
+					introduction: {},
+					content: ""
+				}, // 1
+				cePinginfo: {
+					one: {
+						introduction: {}
+					}
+				},
+				model2Info: {
+					item1: {
+						name: '',
+						introduction: {}
+					},
+					item2: {
+						name: '',
+						introduction: {}
+					},
+					item3: {
+						name: '',
+						introduction: {}
+					},
+				},
 				howVideoInfo: [],
 				kaiqiVideo: [],
 				guiHuavideo: {},
@@ -246,11 +268,6 @@
 					id: 6,
 					bannerUrl: 'https://website.tobeapp.cn/uploads/20240331/740fb8593dfc73876747bc5511cb6eca.jpg'
 				}],
-				container1Wap1: {
-					imageUrl: '1111111',
-					videoUrl: '222222222',
-					discript: '33333333'
-				}
 
 
 
@@ -262,24 +279,24 @@
 		methods: {
 			async getData() {
 				let resDataList = await Promise.all([videoApi({
-						type: 4,
+						type: 16,
 						limit: 1
 					}),
 					videoApi({
-						type: 5,
-						limit: 2
+						type: 16,
+						limit: 1
 					}),
 
 					videoApi({
-						type: 6,
-						limit: 2
+						type: 17,
+						limit: 1
 					}),
 					videoApi({
-						type: 7,
+						type: 18,
 						limit: 4
 					}),
 					videoApi({
-						type: 8,
+						type: 19,
 						limit: 1
 					}),
 					configApi({}), textConfig({}),
@@ -309,7 +326,10 @@
 
 				]);
 				let topVideo = [],
-					cePinginfo = [],
+					container1Info = [],
+					model2Item1 = [],
+					model2Item2 = [],
+					model2Item3 = [],
 					howVideoInfo = [],
 					kaiqiVideo = [],
 					guiHuavideo = [],
@@ -333,7 +353,7 @@
 						})
 					} else if (idx == 1) {
 						res.data.map(item => {
-							cePinginfo.push({
+							container1Info.push({
 								imageUrl: item.image_text,
 								id: item.id,
 								videoUrl: item.video_text,
@@ -343,13 +363,11 @@
 						})
 					} else if (idx == 2) {
 						res.data.map(item => {
-							howVideoInfo.push({
+							model2Item1.push({
 								id: item.id,
 								name: item.name,
-								introduction: {
-									imageUrl: item.image_text,
-									videoUrl: item.video_text
-								}
+								imageUrl: item.image_text,
+								videoUrl: item.video_text
 
 
 							})
@@ -359,13 +377,12 @@
 
 					} else if (idx == 3) {
 						res.data.map(item => {
-							kaiqiVideo.push({
+							model2Item2.push({
 								id: item.id,
 								name: item.name,
-								introduction: {
-									imageUrl: item.image_text,
-									videoUrl: item.video_text
-								}
+								text: item.text,
+							imageUrl: item.image_text,
+							videoUrl: item.video_text
 
 
 							})
@@ -374,14 +391,12 @@
 
 					} else if (idx == 4) {
 						res.data.map(item => {
-							guiHuavideo.push({
+							model2Item3.push({
 								id: item.id,
 								name: item.name,
 								text: item.text,
-								introduction: {
-									imageUrl: item.image_text,
-									videoUrl: item.video_text
-								}
+								imageUrl: item.image_text,
+								videoUrl: item.video_text
 							})
 						})
 					} else if (idx == 5) {
@@ -444,22 +459,48 @@
 
 				this.introduction = topVideo[0]
 
-				this.cePinginfo = {
-					one: {
-						textcontent: {
-							title: cePinginfo[0].name,
-							text: cePinginfo[0].text,
-						},
+				this.container1Info = {
+					introduction: {
+						discript: container1Info[0].name,
+						videoUrl: container1Info[0].videoUrl
+
+					},
+					content: container1Info[0].text
+
+				};
+
+
+				this.model2Info = {
+					item1: {
+						name: model2Item1[0].name,
 						introduction: {
-							imageUrl: cePinginfo[0].imageUrl,
-							videoUrl: cePinginfo[0].imageUrl,
-							id: cePinginfo[0].id
+							imageUrl: model2Item1[0].imageUrl,
+							videoUrl: model2Item1[0].videoUrl
 
 						}
+					},
 
-					}
-				}
+					item2: {
+						name: model2Item2[0].name,
+						text: model2Item2[0].text,
+						introduction: {
+							imageUrl: model2Item2[0].imageUrl,
+							videoUrl: model2Item2[0].videoUrl
 
+						}
+					},
+					item3: {
+						name: model2Item3[0].name,
+						introduction: {
+							imageUrl: model2Item2[0].imageUrl,
+							videoUrl: model2Item2[0].videoUrl
+
+						}
+					},
+
+
+
+				};
 
 				this.howVideoInfo = howVideoInfo;
 				this.kaiqiVideo = kaiqiVideo;

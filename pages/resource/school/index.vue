@@ -29,6 +29,9 @@
 						<view class="textTitle">
 							科研的重要性，什么是科研
 						</view>
+						<view class="textContent">
+							文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字
+						</view>
 
 
 					</view>
@@ -47,22 +50,11 @@
 						<view class="textTitle">
 							科研的重要性，什么是科研
 						</view>
-
-
-					</view>
-
-				</view>
-
-				<view class="top">
-					<view class="textDiscipt">
-						<view class="textTitle">
-							科研的重要性，什么是科研
+						<view class="textContent">
+							文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字
 						</view>
 
 
-					</view>
-					<view class="video">
-						<VideoProfile :introduction='cePinginfo.one.introduction' />
 					</view>
 
 				</view>
@@ -96,6 +88,88 @@
 
 
 		</view>
+		
+		<view class="container5">
+		  <view class="wap1">
+		    <el-select v-model="value1" placeholder="线上/线下" class="nselect">
+		      <el-option
+		        v-for="item in options"
+		        :key="item.value"
+		        :label="item.label"
+		        :value="item.value"
+		      >
+		      </el-option>
+		    </el-select>
+		
+		    <el-select v-model="value2" placeholder="暑假/寒假">
+		      <el-option
+		        v-for="item in options2"
+		        :key="item.value"
+		        :label="item.label"
+		        :value="item.value"
+		      >
+		      </el-option>
+		    </el-select>
+		
+		    <el-select v-model="value1" placeholder="线上/线下" class="nselect">
+		      <el-option
+		        v-for="item in options"
+		        :key="item.value"
+		        :label="item.label"
+		        :value="item.value"
+		      >
+		      </el-option>
+		    </el-select>
+		
+		    <el-select v-model="value2" placeholder="暑假/寒假">
+		      <el-option
+		        v-for="item in options2"
+		        :key="item.value"
+		        :label="item.label"
+		        :value="item.value"
+		      >
+		      </el-option>
+		    </el-select>
+		    <view class="footer">
+		      <view class="foot-img">
+		        <img src="" alt="" srcset="" />
+		      </view>
+		      <view class="foot-text"> 入学申请咨询 </view>
+		    </view>
+		  </view>
+		  <view class="wap2">
+		    <view class="wapItem" v-for="(item, index) in 12" :key="index">
+		      <view class="item-img">
+		        <img src="" alt="" srcset="" />
+		      </view>
+		      <view class="item-logo">
+		        <img src="" alt="" srcset="" />
+		      </view>
+		      <view class="title"> 北京鼎石学校 </view>
+		      <view class="subtitle"> Keystone Academy </view>
+		      <view class="item-wap">
+				  <view class="item-item">
+					  站点 ：北京
+				  	
+				  </view>
+				  <view class="item-item">
+				  					  类型 ：公办
+				  	
+				  </view>
+				  <view class="item-item">
+				  					  课程 ：IBM
+				  	
+				  </view>
+				  <view class="item-item">
+				  					  学费 ：100$
+				  	
+				  </view>
+		        
+		      </view>
+		    </view>
+		  </view>
+		</view>
+		
 
 		<my-foot></my-foot>
 	</view>
@@ -130,6 +204,30 @@
 		},
 		data() {
 			return {
+				introduction:{},
+				value1: "",
+				options1: [
+				  {
+				    value: "1",
+				    label: "线上",
+				  },
+				  {
+				    value: "2",
+				    label: "线下",
+				  },
+				],
+				
+				value2: "",
+				options2: [
+				  {
+				    value: "1",
+				    label: "线上",
+				  },
+				  {
+				    value: "2",
+				    label: "线下",
+				  },
+				],
 				cePinginfo: {}, // 1
 				howVideoInfo: [],
 				kaiqiVideo: [],
@@ -453,14 +551,15 @@
 			.container4content {
 				display: flex;
 				flex-wrap: wrap;
+				justify-content: center;
 
 				.wapItem {
 					@include fj(flex-start);
 					flex-direction: column;
 					position: relative;
-					margin: 10 px;
-					width: 260px;
-					height: 430px;
+					margin: 10px;
+					width: 275px;
+					height: 420px;
 					box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 					box-sizing: border-box;
 
@@ -477,10 +576,10 @@
 
 					.item-logo {
 						position: absolute;
-						top: 20%;
+						top: 25%;
 						left: 5%;
-						width: 100px;
-						height: 100px;
+						width: 120px;
+						height: 80px;
 						border-radius: 20px;
 
 						img {
@@ -524,6 +623,7 @@
 						line-height: 24px;
 						letter-spacing: 0px;
 						padding: 0 10px;
+						box-sizing: border-box;
 					}
 				}
 
@@ -531,6 +631,136 @@
 
 			}
 
+		}
+		
+		
+		.container5 {
+		  @include ct1200;
+		  @include modelPd;
+		  display: flex;
+		
+		  .wap1 {
+		    display: flex;
+		    width: 200px;
+		    flex-direction: column;
+		    gap: 5px 0;
+		
+		    .footer {
+		      margin-top: 50px;
+		      display: flex;
+		      flex-direction: column;
+		      align-items: center;
+		      justify-content: center;
+		      width: 100%;
+		
+		      .foot-img {
+		        width: 120px;
+		        height: 120px;
+		
+		        img {
+		          width: 100%;
+		          height: 100%;
+		          object-fit: cover;
+		        }
+		      }
+		
+		      .foot-text {
+		        color: rgb(0, 0, 0);
+		        margin-top: 10px;
+		
+		        font-size: 22px;
+		        font-weight: 700;
+		        line-height: 30px;
+		        letter-spacing: 0px;
+		      }
+		    }
+		  }
+		
+		  .wap2 {
+		    display: flex;
+		    flex-wrap: wrap;
+		    margin-left: 40px;
+		
+		    .wapItem {
+		      @include fj(flex-start);
+		      flex-direction: column;
+		      position: relative;
+		      margin: 10px;
+		      width: 324px;
+		      height: 280px;
+		      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+		      box-sizing: border-box;
+		
+		      .item-img {
+		        width: 100%;
+		        height: 150px;
+		
+		        img {
+		          width: 100%;
+		          height: 100%;
+		          object-fit: cover;
+		        }
+		      }
+		
+		      .item-logo {
+		        position: absolute;
+		        top: 15%;
+		        left: 5%;
+		        width: 120px;
+		        height: 80px;
+		        border-radius: 20px;
+		
+		        img {
+		          width: 100%;
+		          height: 100%;
+		          object-fit: cover;
+		        }
+		      }
+		
+		      .title {
+		        color: rgb(0, 0, 0);
+		        margin-top: 20px;
+		        font-size: 22;
+		        font-weight: 700;
+		        line-height: 28px;
+		        padding-right: 10px;
+		
+		        display: flex;
+		        justify-content: flex-end;
+		        box-sizing: border-box;
+		      }
+		
+		      .subtitle {
+		        color: rgb(0, 0, 0);
+		        margin-bottom: 10px;
+		        font-size: 14px;
+		        font-weight: 700;
+		        line-height: 20px;
+		        display: flex;
+		        justify-content: flex-end;
+		        padding-right: 10px;
+		        box-sizing: border-box;
+		      }
+		
+		      .item-wap {
+		        width: 100%;
+				display: flex;
+				flex-direction: column;
+				box-sizing: border-box;
+				padding-left: 20px;
+				margin-top: 10px;
+				padding-bottom: 10px;
+				.item-item{
+					overflow-wrap: break-word;
+					color: rgb(0, 0, 0);
+					font-size: 16px;
+					font-weight: 700;
+					line-height: 24px;
+					
+				}
+		      }
+		    }
+		  }
 		}
 
 
@@ -558,7 +788,6 @@
 						display: flex;
 						flex-direction: column;
 						justify-content: center;
-						align-items: center;
 						padding: 0 20px;
 						margin-right: 20px;
 						flex: 1;
@@ -569,10 +798,22 @@
 							font-weight: 700;
 							line-height: -1px;
 							letter-spacing: 0px;
-							text-align: left;
+							text-align: left
+						}
 
+						.textContent {
+
+							font-size: 24px;
+							font-weight: 700;
+							line-height: 36px;
+							color: rgb(0, 0, 0);
+							font-family: Gothic A1;
+							font-weight: 700;
+							padding: 0 20px;
+							box-sizing: border-box;
 
 						}
+
 
 
 					}
@@ -613,11 +854,20 @@
 
 						}
 
-						.textBody {
-							@include multi-ellipsis--l(4);
-							font-family: 思源黑体;
-							font-size: 30px;
+						.textContent {
+
+						font-size: 24px;
+						font-weight: 700;
+						line-height: 36px;
+						color: rgb(0, 0, 0);
+						font-family: Gothic A1;
+						font-weight: 700;
+						padding: 0 20px;
+						box-sizing: border-box;
+
 						}
+
+
 					}
 
 					.video {
@@ -636,39 +886,5 @@
 
 		}
 
-	}
-
-	@keyframes fadeInUp-20 {
-		0% {
-			opacity: 0;
-			transform: translate3d(0, 20px, 0);
-		}
-
-		100% {
-			opacity: 1;
-			transform: none;
-		}
-	}
-
-	@keyframes fadeInUp {
-		0% {
-			opacity: 0;
-			transform: translate3d(0, 100%, 0);
-		}
-
-		100% {
-			opacity: 1;
-			transform: none;
-		}
-	}
-
-	@keyframes fadeIn {
-		0% {
-			opacity: 0;
-		}
-
-		100% {
-			opacity: 1;
-		}
 	}
 </style>
