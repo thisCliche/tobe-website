@@ -131,6 +131,7 @@ width: 132px;
 			}
 
 			.des {
+				text-align: center;
 				color: $themeColor;
 				line-height: 26px;
 				@include mt(20px);

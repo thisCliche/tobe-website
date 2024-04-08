@@ -34,6 +34,12 @@
 							<el-form-item key="23" label="密码" prop="password" v-else>
 								<el-input type="password" v-model="loginForm.password"></el-input>
 							</el-form-item>
+							<el-form-item label="图片验证码" prop="vialidCode">
+								<view class="validCodeWrap">
+									<el-input class="validCode" v-model="loginForm.vialidCode"></el-input>
+									<img @click="changeUrl" :src="vialidImgUrl" alt="" />
+								</view>
+							</el-form-item>
 							<el-form-item>
 								<view class="forgetPas">
 									<span @click="toggle(2)">忘记密码</span>
@@ -178,10 +184,12 @@
 				timerRegister: null,
 				codeDisRegister: true,
 				loginBg,
+				vialidImgUrl:'https://oaapitest.wuxunkj.com/v1/sys/login/getCaptcha?5',
 				loginForm: {
 					mobile: '',
 					password: '',
 					captcha: '',
+					vialidCode:'',
 					type: 1,
 				},
 				forgetForm: {
@@ -316,10 +324,19 @@
 						message: '请输入验证码',
 						trigger: 'blur'
 					}, ],
+					vialidCode: [{
+						required: true,
+						message: '请输入验证码',
+						trigger: 'blur'
+					}, ],
 				},
 			}
 		},
 		methods: {
+			changeUrl(){
+				let random = parseInt(Math.random()*10);
+				this.vialidImgUrl = `https://oaapitest.wuxunkj.com/v1/sys/login/getCaptcha?${random}`
+			},
 			async getCode(formName) {
 				if (!this.phoneregisRight) return;
 				const TimeCount = 59;
@@ -427,8 +444,13 @@
 					}
 				});
 			}
-		}
+		},
 
+		created() {
+			if(this.$route.query.hasOwnProperty('type')){
+				this.displayFlag = 3;
+			}
+		}
 	}
 </script>
 
@@ -465,7 +487,9 @@
 						.validCodeWrap {
 							@include fj();
 							width: 100%;
-
+							img{
+								height: 32px;
+							}
 							.validCode {
 								width: 80%;
 								@include mr(10px);
@@ -519,6 +543,7 @@
 				overflow: hidden;
 
 				.slogan {
+					width: 433px;
 					@include center;
 					font-size: 34px;
 					font-weight: 700;

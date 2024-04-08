@@ -574,7 +574,7 @@
 				position: relative;
 
 				.pictureComWrap {
-					width: 204px;
+					width: 220px;
 					height: 346px;
 					border-radius: 10px;
 					overflow: hidden;
@@ -595,7 +595,7 @@
 					flex-direction: column;
 
 					.img1 {
-						height: 80px;
+						height: 120px;
 						border-radius: 10px;
 					}
 

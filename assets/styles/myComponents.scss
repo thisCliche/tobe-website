@@ -21,7 +21,7 @@
 		  .logo {
 		    cursor: pointer;
 		    img {
-		      width: 350px;
+		      width: 300px;
 		    }
 		  }
 		  .menusInner{
@@ -34,7 +34,7 @@
 				}
 				.suspend{
 					position: absolute;  
-					right: -100px;
+					right: -42px;
 				}
 			  .loginBtn{
 			   
@@ -71,7 +71,7 @@
 			
 			.liEle {
 			  list-style:none;
-			  padding: 0 20px;
+			  padding: 0 18px;
 			  height: 52px;
 			  line-height: 52px;
 			  span{
@@ -171,47 +171,54 @@
   
   
 }
-.myFoot{
-  background: #f2f2f2;
-  -webkit-user-select:none;
-  user-select: none;
-  @include pt(64px);
-  color: #555;
-  cursor: default;
-  .menusRow{
-    @include ct1200;
-    @include fj();
-    @include mb(22px);
-    .menusL{
-      flex: 1;
-      @include fj(space-between);
-      margin-right:40px;
-      .menusList{
-        .menusTitle{font-size: 18px;font-weight: 700;@include mb(26px);}
-        .menuItem{@include sc(14px,#6b6b6b);line-height: 30px;cursor: pointer;transition: color .3s ease-in-out;
-          &:hover{color: #005BAC;}
-        }
-        
-      }
-    }
-    .menusR{
-      img{width: 134px;}
-      .tip{
-        @include sc(14px,#acacb1);
-        text-align: center;
-        @include mt(6px);
-      }
-    }
-  }
-  .divier{
-    background: rgb(223, 223, 223);
-    height: 1px;
-  }
-  .copyRight{
-    height: 60px;
-    line-height: 60px;
-    text-align: center;
-    font-size: 14px;
-    a{color: #555;}
-  }
-}
+.myFoot {
+		background: $footBg;
+		color: #fff;
+		padding: 30px 0;
+
+		.footWrap {
+			@include ct1200;
+
+			.row1 {
+				font-size: 30px;
+				font-weight: 700;
+				@include mb(20px);
+				cursor:pointer;
+				transition: 0.6s ease;
+				&:hover{
+					color:$themeColor;
+				}
+			}
+
+			.row2 {
+				@include mb(20px);
+			}
+
+			.row3 {
+				@include wh(346px, 58px) background: #fff;
+				border-radius: 46rpx;
+				color: #333;
+				line-height: 58px;
+				text-align: center;
+				font-size: 28px;
+				font-weight: 700;
+				cursor: pointer;
+			}
+			.row4{
+				@include fj();
+				@include mt(40px);
+				.row4L{
+					width: 600px;
+					@include fj();
+					font-size: 24px;
+					.item{
+						cursor:pointer;
+						transition: 0.6s ease;
+						&:hover{
+							color:$themeColor;
+						}
+					}
+				}
+			}
+		}
+	}

@@ -71,13 +71,13 @@
 	        for (let i = 1; i < max + 1; i++) {
 	          if (this.distr) {
 	            phi = Math.acos(-1 + (2 * i - 1) / max);
-	            theta = Math.sqrt(max * Math.PI) * phi;
+	            theta = Math.sqrt(max * Math.PI*0.9) * phi;
 	          } else {
 	            phi = Math.random() * (Math.PI);
 	            theta = Math.random() * (2 * Math.PI);
 	          }
 	          // 坐标变换
-	          this.mcList[i - 1].cx = this.radius * Math.cos(theta) * Math.sin(phi);
+	          this.mcList[i - 1].cx = this.radius * Math.cos(theta) * Math.sin(phi)*2;
 	          this.mcList[i - 1].cy = this.radius * Math.sin(theta) * Math.sin(phi);
 	          this.mcList[i - 1].cz = this.radius * Math.cos(phi);
 	          this.oA[i - 1].style.left = this.mcList[i - 1].cx + this.oList.offsetWidth / 2 - this.mcList[i - 1].offsetWidth / 2 + 'px';
@@ -183,6 +183,22 @@
 	        { name: 'IELTS', id:14 },
 	        { name: 'TOEFL', id:15 },
 	        { name: 'Duolingo', id:16 },
+					{ name: 'AP', id:17},
+					{ name: 'AL', id:18 },
+					{ name: 'DSE', id:3 },
+					{ name: 'PET', id:4 },
+					{ name: 'SAT', id:5 },
+					{ name: 'ACT', id:6 },
+					{ name: 'GRE', id:7 },
+					{ name: 'Gmart', id:8 },
+					{ name: 'IB', id:9 },
+					{ name: '其它考试',id:10 },
+					{ name: '竞赛', id:11 },
+					{ name: 'KET', id:12 },
+					{ name: 'PET', id:13 },
+					{ name: 'IELTS', id:14 },
+					{ name: 'TOEFL', id:15 },
+					{ name: 'Duolingo', id:16 },
 	      ];
 	      // 给tagList添加随机颜色
 	      tagListOrg.forEach(item => {
@@ -244,7 +260,7 @@
     left: 0px;
     color: #fff;
     font-weight: bold;
-    padding: 12px 16px;
+    padding: 16px 24px;
 		top: 0;left: 0;filter:none;
 		border-radius:8px;
     &:hover {

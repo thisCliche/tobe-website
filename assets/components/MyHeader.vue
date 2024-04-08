@@ -114,7 +114,7 @@
 			},
 			loginBtn() {
 				uni.navigateTo({
-					url: "/pages/login/login?type=register"
+					url: "/pages/login/login"
 				})
 			},
 			mouseIn(e) {

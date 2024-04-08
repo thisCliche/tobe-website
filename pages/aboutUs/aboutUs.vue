@@ -85,7 +85,7 @@
 
 	.aboutUs {
 		.location {
-			height: 120px;
+			height: 82px;
 			background: $locationBg;
 
 			.locationWrap {
