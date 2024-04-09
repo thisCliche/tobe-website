@@ -2,8 +2,9 @@
 	<view class="IndexPage">
 		<view class="banner">
 
-			<VideoProfile :introduction='introduction' />
-
+			<view class="mask"></view>
+			<video class="myVideo" :src="introduction.videoUrl" object-fit="cover" autoplay loop muted
+				:controls="false"></video>
 		</view>
 		<view class="model1">
 			<view class="slogan fadeIn animated">{{PlanningConfigInfo.planning_title}}</view>
@@ -40,7 +41,7 @@
 
 				</view>
 				<view class="video">
-					<VideoProfile :introduction='cePinginfo.one.introduction' />
+					<VideoProfile :introduction='cePinginfo.one.introduction' withValue="510px" heightValue="300px" />
 				</view>
 
 			</view>
@@ -48,7 +49,7 @@
 			<view class="bottom">
 
 				<view class="video">
-					<VideoProfile :introduction='cePinginfo.one.introduction' />
+					<VideoProfile :introduction='cePinginfo.one.introduction' withValue="510px" heightValue="300px" />
 				</view>
 				<view class="textDiscipt">
 					<view class="textTitle">
@@ -105,7 +106,7 @@
 							</view>
 
 						</view>
-						<view class="tiyan" @click="toDetail">
+						<view class="tiyan" @click="toDetail('/pages/study/aiTutor/index')">
 							立即体验，领取测评报告
 						</view>
 					</view>
@@ -146,7 +147,7 @@
 			<view class="model5Wrap">
 				<view class="model5WrapTop">
 					<view class="top-left">
-						<text class="leftTitle">规划课</text>
+						<text class="leftTitle" @click="toDetail('/pages/study/growthCourse/index/index')">规划课</text>
 						<text
 							class="leftDes">详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详
 						</text>
@@ -165,7 +166,7 @@
 						<view class="video-list">
 							<view class="video-item" v-for="(item,index) in howVideoInfo" :key="item.id">
 								<view class="video-item-video">
-									<VideoProfile :introduction='item.introduction' />
+									<VideoProfile :introduction='item.introduction' withValue="300px" heightValue="180px" />
 
 								</view>
 								<text class="video-item-des">{{item.name}}</text>
@@ -188,7 +189,7 @@
 					<view class="warp-video-list">
 						<view class="video-item" v-for="item in kaiqiVideo" :key="item.id">
 							<view class="video-video">
-								<VideoProfile :introduction='item.introduction' />
+								<VideoProfile :introduction='item.introduction' withValue="260px" heightValue="160px" />
 
 							</view>
 							<view class="video-name">
@@ -246,7 +247,7 @@
 	} from './export.js'
 
 	import UseCase from './UseCase.vue';
-	import VideoProfile from './VideoProfile.vue';
+	import VideoProfile from '@components/VideoProfile.vue';
 	import {
 		videoApi,
 		bannerApi,
@@ -275,8 +276,8 @@
 				tagIcon,
 				suanfaList: [],
 				model1ComImg: [],
-				banner13: []
-
+				banner13: [],
+				introduction: {}
 
 
 
@@ -286,9 +287,9 @@
 			this.getData();
 		},
 		methods: {
-			toDetail(){
+			toDetail(path) {
 				uni.navigateTo({
-					url:"/pages/study/aiTutor/index"
+					url: path
 				})
 			},
 			async getData() {
@@ -464,7 +465,7 @@
 
 						res.data.map(item => {
 							teatcha.push({
-		
+
 								text: item.text,
 								name: item.name,
 								subname: item.subname
@@ -485,7 +486,7 @@
 						},
 						introduction: {
 							imageUrl: cePinginfo[0].imageUrl,
-							videoUrl: cePinginfo[0].imageUrl,
+							videoUrl: cePinginfo[0].videoUrl,
 							id: cePinginfo[0].id
 
 						}
@@ -505,7 +506,7 @@
 				this.model1ComImg = teatcha;
 				this.banner13 = banner13;
 
-				
+
 
 			},
 
@@ -514,29 +515,29 @@
 </script>
 
 <style lang="scss" scoped>
-
 	.IndexPage {
 		width: 100%;
 
 		.banner {
-			@include fj(center);
-			width: 100%;
-			height: 570px;
-			border-radius: 20px;
-			background: rgb(196, 196, 196);
 
-			.name {
-				@include center;
-				font-size: 60px;
-				color: #fff;
-				font-weight: 700;
+			@include wh(100%, 680px);
+			position: relative;
+
+			.mask {
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				background-color: rgba(0, 0, 0, 0.6);
+				z-index: 99;
 			}
 
-			.bannerImg {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
+			.myVideo {
+				@include wh(100%, 100%);
+
 			}
+
 		}
 
 		.model8 {

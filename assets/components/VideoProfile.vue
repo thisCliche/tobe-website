@@ -1,12 +1,13 @@
 <template>
 	<view class="video-profile" :style="{width:withValue,height:heightValue}">
-		<view class="cover" @click="play">
+		<video class="video-player" :autoplay="false" :poster="introduction.imageUrl" :src="introduction.videoUrl" controls :style="{width:withValue,height:heightValue}"></video>
+		<!-- <view class="cover" @click="play">
 			<view class="leggings">
 				<img :src="introduction.imageUrl" alt="" />
 			</view>
 			<img :src="playImg" alt="">
 		</view>
-		<video-play :url="introduction.videoUrl" :visble="visble" @closeVideo="closeVideo" />
+		<video-play :url="introduction.videoUrl" :visble="visble" @closeVideo="closeVideo" /> -->
 	</view>
 </template>
 
