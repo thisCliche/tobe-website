@@ -34,7 +34,7 @@
 							<el-form-item key="23" label="密码" prop="password" v-else>
 								<el-input type="password" v-model="loginForm.password"></el-input>
 							</el-form-item>
-							<el-form-item label="图片验证码" prop="vialidCode">
+							<el-form-item label="图片验证码" prop="vialidCode" v-if="!isValidCodeLogin">
 								<view class="validCodeWrap">
 									<el-input class="validCode" v-model="loginForm.vialidCode"></el-input>
 									<img @click="changeUrl" :src="vialidImgUrl" alt="" />
@@ -489,6 +489,7 @@
 							width: 100%;
 							img{
 								height: 32px;
+								cursor: pointer;
 							}
 							.validCode {
 								width: 80%;
