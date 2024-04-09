@@ -2,14 +2,14 @@
 	<view class="IndexPage">
 		<view class="banner">
 
-			<VideoProfile :introduction='introduction' />
+			<VideoProfile :introduction='introduction'  withValue="100%" heightValue="700px" />
 
 		</view>
 
 		<view class="container3">
-			<view class="containerWapItme" v-for="(item,index) in 3 " :key="index">
+			<view class="containerWapItme" v-for="(item,index) in container3Banner " :key="index">
 
-				<img src="" alt="" srcset="" />
+				<img :src=item.imageUrl alt="" srcset="" />
 
 
 			</view>
@@ -27,16 +27,16 @@
 				<view class="top">
 					<view class="textDiscipt">
 						<view class="textTitle">
-							科研的重要性，什么是科研
+							{{cePinginfo.one.title}}
 						</view>
 						<view class="textContent">
-							文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字
+						{{cePinginfo.one.text}}
 						</view>
 
 
 					</view>
 					<view class="video">
-						<VideoProfile :introduction='cePinginfo.one.introduction' />
+						<VideoProfile :introduction='cePinginfo.one.introduction' withValue="510px" heightValue="300px" />
 					</view>
 
 				</view>
@@ -44,14 +44,14 @@
 				<view class="bottom">
 
 					<view class="video">
-						<VideoProfile :introduction='cePinginfo.one.introduction' />
+						<VideoProfile :introduction='cePinginfo.two.introduction' withValue="510px" heightValue="300px" />
 					</view>
 					<view class="textDiscipt">
 						<view class="textTitle">
-							科研的重要性，什么是科研
+							{{cePinginfo.two.title}}
 						</view>
 						<view class="textContent">
-							文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字
+							{{cePinginfo.two.text}}
 						</view>
 
 
@@ -183,8 +183,8 @@
 		tagIcon,
 	} from '../export.js'
 
-	import UseCase from '../UseCase.vue';
-	import VideoProfile from '../VideoProfile.vue';
+	
+	import VideoProfile from '@/assets/components/VideoProfile.vue';
 	import HomeCase from '../HomeCase.vue';
 	import {
 		videoApi,
@@ -198,13 +198,13 @@
 	export default {
 		name: 'PagesIndex',
 		components: {
-			UseCase,
 			VideoProfile,
 			HomeCase,
 		},
 		data() {
 			return {
 				introduction:{},
+				container3Banner:[],
 				value1: "",
 				options1: [
 				  {
@@ -275,11 +275,11 @@
 		methods: {
 			async getData() {
 				let resDataList = await Promise.all([videoApi({
-						type: 4,
+						type: 23,
 						limit: 1
 					}),
 					videoApi({
-						type: 5,
+						type:24,
 						limit: 2
 					}),
 
@@ -459,10 +459,8 @@
 
 				this.cePinginfo = {
 					one: {
-						textcontent: {
-							title: cePinginfo[0].name,
-							text: cePinginfo[0].text,
-						},
+						title: cePinginfo[0].name,
+						text: cePinginfo[0].text,
 						introduction: {
 							imageUrl: cePinginfo[0].imageUrl,
 							videoUrl: cePinginfo[0].imageUrl,
@@ -470,6 +468,17 @@
 
 						}
 
+					},
+					two: {
+						title: cePinginfo[1].name,
+						text: cePinginfo[1].text,
+						introduction: {
+							imageUrl: cePinginfo[1].imageUrl,
+							videoUrl: cePinginfo[1].imageUrl,
+							id: cePinginfo[1].id
+					
+						}
+					
 					}
 				}
 
@@ -479,11 +488,8 @@
 				this.guiHuavideo = guiHuavideo[0];
 				this.PlanningConfigInfo = PlanningConfigInfo;
 				this.tPlanningClassConfigInfo = tPlanningClassConfigInfo;
-				this.usecase = usecase;
-				// this.homecase = homecase;
-				this.suanFaList = suanFaList;
-				this.model1ComImg = teatcha;
-				this.banner13 = banner13;
+			
+
 
 
 

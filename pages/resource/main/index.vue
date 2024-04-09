@@ -2,13 +2,13 @@
 	<view class="IndexPage">
 		<view class="banner">
 
-			<VideoProfile :introduction='introduction' />
+			<VideoProfile :introduction='introduction' withValue="100%" heightValue="700px" />
 
 		</view>
 		<view class="container1">
 			<view class="containerWap">
 				<view class="wap1">
-					<VideoProfile :introduction='container1Info.introduction' />
+					<VideoProfile :introduction='container1Info.introduction' withValue="550px" heightValue="460px" />
 
 				</view>
 				<view class="wap2">
@@ -92,9 +92,9 @@
 		</view>
 
 		<view class="container3">
-			<view class="containerWapItme" v-for="(item,index) in 3 " :key="index">
+			<view class="containerWapItme" v-for="(item,index) in container3Banner " :key="index">
 
-				<img src="" alt="" srcset="" />
+				<img :src="item.imageUrl" alt="" srcset="" />
 
 
 			</view>
@@ -114,7 +114,8 @@
 
 					</view>
 					<view class="video">
-						<VideoProfile :introduction='model2Info.item1.introduction' />
+						<VideoProfile :introduction='model2Info.item1.introduction' withValue="510px"
+							heightValue="300px" />
 					</view>
 
 				</view>
@@ -122,7 +123,8 @@
 				<view class="bottom">
 
 					<view class="video">
-						<VideoProfile :introduction='model2Info.item2.introduction' />
+						<VideoProfile :introduction='model2Info.item2.introduction' withValue="510px"
+							heightValue="300px" />
 					</view>
 					<view class="textDiscipt">
 						<view class="textTitle">
@@ -147,7 +149,8 @@
 
 					</view>
 					<view class="video">
-						<VideoProfile :introduction='model2Info.item3.introduction' />
+						<VideoProfile :introduction='model2Info.item3.introduction' withValue="510px"
+							heightValue="300px" />
 					</view>
 
 				</view>
@@ -195,7 +198,7 @@
 		tagIcon,
 	} from '../export.js'
 
-	import VideoProfile from '../VideoProfile.vue';
+	import VideoProfile from '@/assets/components/VideoProfile.vue';
 	import HomeCase from '../HomeCase.vue';
 	import {
 		videoApi,
@@ -203,9 +206,7 @@
 		configApi,
 		userSide,
 		textConfig,
-		suanFa1,
-		teatcha1
-	} from '@api/study.js'
+	} from '@api/resource.js'
 	export default {
 		name: 'PagesIndex',
 		components: {
@@ -219,11 +220,7 @@
 					introduction: {},
 					content: ""
 				}, // 1
-				cePinginfo: {
-					one: {
-						introduction: {}
-					}
-				},
+				container3Banner: [],
 				model2Info: {
 					item1: {
 						name: '',
@@ -238,36 +235,8 @@
 						introduction: {}
 					},
 				},
-				howVideoInfo: [],
-				kaiqiVideo: [],
-				guiHuavideo: {},
-				PlanningConfigInfo: {},
-				tPlanningClassConfigInfo: {},
-				liuChenegBanner: '',
-				daoshiBanImg: '',
+
 				tagIcon,
-				suanfaList: [],
-				model1ComImg: [],
-				banner13: [],
-				banner: [{
-					id: 1,
-					bannerUrl: 'https://website.tobeapp.cn/uploads/20240331/740fb8593dfc73876747bc5511cb6eca.jpg'
-				}, {
-					id: 2,
-					bannerUrl: 'https://website.tobeapp.cn/uploads/20240331/740fb8593dfc73876747bc5511cb6eca.jpg'
-				}, {
-					id: 3,
-					bannerUrl: 'https://website.tobeapp.cn/uploads/20240331/740fb8593dfc73876747bc5511cb6eca.jpg'
-				}, {
-					id: 4,
-					bannerUrl: 'https://website.tobeapp.cn/uploads/20240331/740fb8593dfc73876747bc5511cb6eca.jpg'
-				}, {
-					id: 5,
-					bannerUrl: 'https://website.tobeapp.cn/uploads/20240331/740fb8593dfc73876747bc5511cb6eca.jpg'
-				}, {
-					id: 6,
-					bannerUrl: 'https://website.tobeapp.cn/uploads/20240331/740fb8593dfc73876747bc5511cb6eca.jpg'
-				}],
 
 
 
@@ -279,7 +248,7 @@
 		methods: {
 			async getData() {
 				let resDataList = await Promise.all([videoApi({
-						type: 16,
+						type: 21,
 						limit: 1
 					}),
 					videoApi({
@@ -299,30 +268,17 @@
 						type: 19,
 						limit: 1
 					}),
-					configApi({}), textConfig({}),
-					userSide({
-						type: 1,
-						limit: 5
-					}),
 					bannerApi({
-						type: 15,
+						type: 26,
+						limit: 1
+					}), bannerApi({
+						type: 32,
+						limit: 1
+					}), bannerApi({
+						type: 31,
 						limit: 1
 					}),
-					bannerApi({
-						type: 14,
-						limit: 1
-					}),
-					suanFa1({
 
-					}),
-					bannerApi({
-						type: 13,
-					}),
-					teatcha1({
-						type: 6,
-						limit: 3
-
-					})
 
 				]);
 				let topVideo = [],
@@ -330,15 +286,9 @@
 					model2Item1 = [],
 					model2Item2 = [],
 					model2Item3 = [],
-					howVideoInfo = [],
-					kaiqiVideo = [],
-					guiHuavideo = [],
-					PlanningConfigInfo = {},
-					tPlanningClassConfigInfo = {},
-					suanFaList = [],
-					teatcha = [],
-					banner13 = [],
-					model1ComImg = [],
+					container3BannerItem1 = [],
+					container3BannerItem2 = [],
+					container3BannerItem3 = [],
 
 					usecase = [];
 				resDataList.map((res, idx) => {
@@ -381,8 +331,8 @@
 								id: item.id,
 								name: item.name,
 								text: item.text,
-							imageUrl: item.image_text,
-							videoUrl: item.video_text
+								imageUrl: item.image_text,
+								videoUrl: item.video_text
 
 
 							})
@@ -400,75 +350,53 @@
 							})
 						})
 					} else if (idx == 5) {
-						PlanningConfigInfo = res.data
+						res.data.map(item => {
+							container3BannerItem1.push({
+								id: item.id,
+								name: item.name,
+								imageUrl: item.image_text,
+
+							})
+						})
+						this.container3Banner.push(container3BannerItem1[0])
+
 					} else if (idx == 6) {
-						tPlanningClassConfigInfo = res.data
+						res.data.map(item => {
+							container3BannerItem2.push({
+								id: item.id,
+								name: item.name,
+								imageUrl: item.image_text,
+
+							})
+						})
+						this.container3Banner.push(container3BannerItem2[0])
 					} else if (idx == 7) {
 						res.data.map(item => {
-							usecase.push({
-								engineerUrl: item.image_text,
-								desc: item.text,
+							container3BannerItem3.push({
 								id: item.id,
-								name: item.name
-							})
-						})
-					} else if (idx == 8) {
-						let data = res.data
-
-						this.liuChenegBanner = data[0].image_text
-					} else if (idx == 9) {
-						let data = res.data
-
-						this.daoshiBanImg = data[0].image_text
-					} else if (idx == 10) {
-						res.data.map(item => {
-							suanFaList.push({
-								code: item.code,
-								title: item.title,
-								name: item.name
-							})
-
-						})
-
-					} else if (idx == 11) {
-
-						res.data.map(item => {
-							banner13.push({
-								imageUrl: item.image_text,
-								desc: item.text,
-								id: item.id,
-								name: item.name
-							})
-
-						})
-
-					} else if (idx == 12) {
-
-						res.data.map(item => {
-							teatcha.push({
-
-								text: item.text,
 								name: item.name,
-								subname: item.subname
+								imageUrl: item.image_text,
+
 							})
 						})
-
+						this.container3Banner.push(container3BannerItem3[0])
 					}
 
 				})
 
 				this.introduction = topVideo[0]
 
+
 				this.container1Info = {
 					introduction: {
-						discript: container1Info[0].name,
+						imageUrl: container1Info[0].imageUrl,
 						videoUrl: container1Info[0].videoUrl
 
 					},
 					content: container1Info[0].text
 
 				};
-
+				console.log(this.container1Info, 'container1Info')
 
 				this.model2Info = {
 					item1: {
@@ -502,16 +430,7 @@
 
 				};
 
-				this.howVideoInfo = howVideoInfo;
-				this.kaiqiVideo = kaiqiVideo;
-				this.guiHuavideo = guiHuavideo[0];
-				this.PlanningConfigInfo = PlanningConfigInfo;
-				this.tPlanningClassConfigInfo = tPlanningClassConfigInfo;
-				this.usecase = usecase;
-				// this.homecase = homecase;
-				this.suanFaList = suanFaList;
-				this.model1ComImg = teatcha;
-				this.banner13 = banner13;
+
 
 
 

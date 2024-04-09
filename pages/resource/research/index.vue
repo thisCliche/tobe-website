@@ -1,7 +1,7 @@
 <template>
   <view class="IndexPage">
     <view class="banner">
-      <VideoProfile :introduction="introduction" />
+      <VideoProfile :introduction="introduction"  withValue="100%" heightValue="700px"/>
     </view>
     <view class="container1">
       <view class="title"> 最受欢迎 </view>
@@ -86,11 +86,9 @@
 </template>
 
 <script>
-import { KeepAlive } from "vue";
 import { tagIcon } from "../export.js";
 
-import UseCase from "../UseCase.vue";
-import VideoProfile from "../VideoProfile.vue";
+import VideoProfile from '@/assets/components/VideoProfile.vue';
 import HomeCase from "../HomeCase.vue";
 import {
   videoApi,
@@ -100,11 +98,10 @@ import {
   textConfig,
   suanFa1,
   teatcha1,
-} from "@api/study.js";
+} from "@api/resource.js";
 export default {
   name: "PagesIndex",
   components: {
-    UseCase,
     VideoProfile,
     HomeCase,
   },
@@ -193,7 +190,7 @@ export default {
     async getData() {
       let resDataList = await Promise.all([
         videoApi({
-          type: 4,
+          type: 30,
           limit: 1,
         }),
         videoApi({
