@@ -1,4 +1,9 @@
-@use "/assets/styles/minix.scss" as *;
+
+@media screen and (max-width: 1366px) {
+  .suspend{
+		right: -42px !important;
+	}
+}
 .myHeader {
   .sitting{
     height: 92px;
@@ -34,7 +39,7 @@
 				}
 				.suspend{
 					position: absolute;  
-					right: -42px;
+					right: -82px;
 				}
 			  .loginBtn{
 			   

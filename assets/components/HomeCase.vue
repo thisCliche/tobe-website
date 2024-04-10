@@ -44,7 +44,7 @@
 
 	.home-case {
 		@include mt(16px);
-		height: 70px;
+		height: 80px;
 		overflow: hidden;
 
 		::v-deep .slick-next {
@@ -73,7 +73,7 @@
 		outline: none;
 
 		.imgWrap {
-			@include wh(200px, 70px);
+			@include wh(220px, 80px);
 			overflow: hidden;
 			margin: 0 auto;
 			border-radius: 6px;

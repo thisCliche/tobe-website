@@ -1,7 +1,7 @@
 <template>
 	<view class="IndexPage">
 		<view class="banner">
-			<VideoProfile :introduction="introduction" withValue="100%" heightValue="700px" />
+			<VideoProfile :introduction="introduction" withValue="100%" heightValue="700px" borderRidius="0px"/>
 		</view>
 		<view class="container1">
 			<view class="title"> 最受欢迎 </view>

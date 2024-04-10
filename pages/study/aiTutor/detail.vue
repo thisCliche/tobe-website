@@ -3,8 +3,22 @@
 		<view class="detailWrap">
 			<view class="wrapL">
 				<view class="interview">
+					<view class="tips">
+						<view class="" v-if="status==1">
+							点击左侧按钮开始说话
+						</view>
+						<view class="" v-else-if="status==2">
+							再次点击左侧按钮结束说话
+						</view>
+						<view class="" v-else-if="status==3">
+							正在思考
+						</view>
+						<view class="" v-else-if="status==4">
+							点击左侧按钮开始说话
+						</view>
+					</view>
 					<view class="btnList">
-						<view class="btnItem active" @click="start">
+						<view class="btnItem" :class="status==2?'active':''" @click="start">
 							<img :src="speak" alt="" />
 						</view>
 						<view class="btnItem" @click="overHandle">
@@ -21,8 +35,8 @@
 			</view>
 			<view class="wrapR">
 				<view class="record">
-					<view class="paragraph" v-for="item in sessionList" :key="item.id">{{item.content}}</view>
-					<vue-typed-js v-if="isTyping" ref="typedjs" :strings="strings" @onComplete="typeComplete">
+					<view class="paragraph" v-for="item in sessionList" :key="item.id">{{item.text}}</view>
+					<vue-typed-js v-if="isTyping" :strings="strings" @onComplete="typeComplete">
 						<span class="typing"></span>
 					</vue-typed-js>
 				</view>
@@ -37,45 +51,91 @@
 	import three from '@image/three.png'
 	import next from '@image/interview-next.png'
 	import over from '@image/interview-over.png'
-	import speak from '@image/interview-speak.png'
+	import speak from '@image/interview-speak.png';
+	import {
+		XfVoiceDictation
+	} from '@muguilin/xf-voice-dictation';
 	export default {
 		data() {
 			return {
-				isTyping:false,
+				status: 1, // 分为3个状态 1：默认状态 提示点击录音 2：录音状态 提示正在录音，录音时长小于60秒 再次点击结束录音 3：录音结束 提示等待回复 展示录入的文字 
+				isTyping: false,
+				xfVoice: null,
 				three,
 				next,
 				over,
 				speak,
-				
 				strings: ['我说：给我说个笑话如何？'],
 				sessionList: [{
 					id: 1,
-					content: '我说：今天天气怎么样？'
+					text: '我说：今天天气怎么样？'
 				}, {
 					id: 2,
-					content: 'AI导师：今天合肥的天气多云转阴，温度9℃-19℃，气候凉爽。'
+					text: 'AI导师：今天合肥的天气多云转阴，温度9℃-19℃，气候凉爽。'
 				}],
 			}
 		},
 		methods: {
+			//添加我的录音
+			pushMyRecord(text){
+				console.log(text);
+				let id = +new Date();
+				this.sessionList.push({
+					id,
+					text
+				})
+				this.resolveText();
+			},
 			typeComplete() {
 				this.sessionList.push({
-					id: 3,
-					content: '我说：给我说个笑话如何？'
+					id: +new Date(),
+					text: '我不明白你在说什么，我给你说个笑话如何？'
 				})
 				this.isTyping = false;
 			},
-			overHandle(){},
+			overHandle() {},
 			pause() {
 				console.log('暂停')
 			},
+			resolveText(){
+				// 清除计时器
+				setTimeout(()=>{
+					this.status = 1;
+					this.isTyping = true;
+				},1000)
+			},
 			start() {
-				// 点一下更新更新文本，
-				this.isTyping = true;
+				if (this.status == 1) {
+					this.xfVoice.start();
+					this.status = 2;
+				} else if (this.status == 2) {
+					// 清除计时器
+					setTimeout(()=>{
+						this.xfVoice.stop();
+						this.status = 3;
+					},1000)
+				}
 			},
 		},
 		mounted() {
-			
+			let that = this;
+			this.xfVoice = new XfVoiceDictation({
+				APPID: '3e168f84',
+				APISecret: 'ODRmMWEyZThiMjI2YTEyMGM3YTRkZjM0',
+				APIKey: '3efd1ae8550d1aecd182a06e0316543e',
+				onWillStatusChange: function(oldStatus, newStatus) {
+					console.log(oldStatus, newStatus);
+				},
+				onTextChange: function(text) {
+					if(this.status=='end'){
+						that.pushMyRecord(text);
+					}
+				},
+				onError: function(error) {
+					console.log('错误信息：', error)
+					alert('请开启麦克风权限后刷新页面再试')
+				}
+			});
 		}
 	}
 </script>
@@ -98,6 +158,12 @@
 			.interview {
 				position: relative;
 				@include wh(390px, 677px);
+
+				.tips {
+					position: absolute;
+					z-index: 9;
+					top: 0;
+				}
 
 				.btnList {
 					position: absolute;

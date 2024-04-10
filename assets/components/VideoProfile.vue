@@ -1,6 +1,6 @@
 <template>
-	<view class="video-profile" :style="{width:withValue,height:heightValue}">
-		<video class="video-player" :autoplay="false" :poster="introduction.imageUrl" :src="introduction.videoUrl" controls :style="{width:withValue,height:heightValue}"></video>
+	<view class="video-profile" :style="{width:withValue,height:heightValue,borderRadius:borderRidius}">
+		<video class="video-player" :autoplay="false" object-fit="cover" :poster="introduction.imageUrl" :src="introduction.videoUrl" controls :style="{width:withValue,height:heightValue}"></video>
 		<!-- <view class="cover" @click="play">
 			<view class="leggings">
 				<img :src="introduction.imageUrl" alt="" />
@@ -24,6 +24,10 @@
 			withValue:{
 				type:String,
 				default:'560px',
+			},
+			borderRidius:{
+				type:String,
+				default:'20px',
 			},
 			heightValue:{
 				type:String,
@@ -52,7 +56,7 @@
 <style lang="scss" scoped>
 	.video-profile {
 		// @include wh(560px, 420px);
-		border-radius: 20px;
+		// border-radius: 20px;
 		overflow: hidden;
 
 		.cover {
