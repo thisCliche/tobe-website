@@ -4,10 +4,10 @@ let routeUrl = {
 	banner: "/index/index/getOtherBannerList",
 	config: "/index/index/getPlanningConfig",
 	textConfig: "/index/index/getPlanningClassConfig",
-	menu: "/index/index/getMenu",
-	userSide: "/index/index/getUserSide",
-	suanFa: "/index/index/getPlanningStepTextConfig",
-	teatcha:'/index/index/teacherList'
+	schoolResourceSearch: "/index/school/getResourceSearchList",
+	schoolSearchList: "/index/school/getSchoolSearchList",
+	resourceList: "/index/resource/getResourceList",
+	schoolList:'/index/school/getSchoolList'
 }
 
 export function videoApi(params) {
@@ -46,25 +46,47 @@ export function textConfig(params) {
 	})
 }
 
-export function userSide(params) {
+
+//夏校筛选
+export function schoolResourceSearch(params) {
 	return axios({
-		url: routeUrl.userSide,
-		method: 'get',
-		params,
-	})
-}
-export function suanFa1(params) {
-	return axios({
-		url: routeUrl.suanFa,
+		url: routeUrl.schoolResourceSearch,
 		method: 'get',
 		params,
 	})
 }
 
-export function teatcha1(params) {
+//高中筛选
+
+export function schoolSchoolSearch(params) {
 	return axios({
-		url: routeUrl.teatcha,
+		url: routeUrl.schoolSearchList,
 		method: 'get',
 		params,
 	})
 }
+//资源列表
+
+export function resourceList(params) {
+	return axios({
+		url: routeUrl.resourceList,
+		method: 'get',
+		params,
+	})
+}
+//学校列表
+export function schoolList(params) {
+	return axios({
+		url: routeUrl.schoolList,
+		method: 'get',
+		params,
+	})
+}
+
+
+
+
+
+
+
+

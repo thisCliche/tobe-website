@@ -190,11 +190,8 @@
 		videoApi,
 		bannerApi,
 		configApi,
-		userSide,
-		textConfig,
-		suanFa1,
-		teatcha1
-	} from '@api/study.js'
+
+	} from '@api/resource.js'
 	export default {
 		name: 'PagesIndex',
 		components: {
