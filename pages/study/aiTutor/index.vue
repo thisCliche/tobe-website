@@ -106,9 +106,9 @@
 				aiImg,
 				introduction: {
 					imageUrl: zhubo,
-					videoUrl: 'https://www.runoob.com/try/demo_source/movie.mp4'
+					videoUrl: 'http://website.tobeapp.cn/uploads/20240326/14244fcd01825d54f112d872bcf69fb1.mp4'
 				},
-				videoUrl: 'https://www.runoob.com/try/demo_source/movie.mp4',
+				videoUrl: 'http://website.tobeapp.cn/uploads/20240326/14244fcd01825d54f112d872bcf69fb1.mp4',
 				sparkleList: [{
 					id: 1,
 					label: '亮点一',

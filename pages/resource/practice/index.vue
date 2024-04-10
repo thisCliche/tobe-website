@@ -5,6 +5,7 @@
         :introduction="introduction"
         withValue="100%"
         heightValue="700px"
+				 borderRidius="0px"
       />
     </view>
     <view class="container1">
