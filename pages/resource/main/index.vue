@@ -172,8 +172,7 @@
 					</view>
 					<view class="wap2">
 						<view class="wap2img">
-							<img src="" alt="" srcset="" />
-
+							<img :src="qrcode" alt="" srcset="" />
 						</view>
 						<view class="waptext">
 							入学申请咨询
@@ -237,6 +236,7 @@
 				},
 
 				tagIcon,
+				qrcode:''
 
 
 
@@ -278,6 +278,10 @@
 						type: 31,
 						limit: 1
 					}),
+					bannerApi({
+						type: 37,
+						limit: 1
+					}),
 
 
 				]);
@@ -288,9 +292,8 @@
 					model2Item3 = [],
 					container3BannerItem1 = [],
 					container3BannerItem2 = [],
-					container3BannerItem3 = [],
+					container3BannerItem3 = [];
 
-					usecase = [];
 				resDataList.map((res, idx) => {
 					console.log(res, idx)
 					if (idx == 0) {
@@ -381,6 +384,18 @@
 						})
 						this.container3Banner.push(container3BannerItem3[0])
 					}
+					else if(idx==8){
+						let data=[]
+						res.data.map(item => {
+							data.push({
+								imageUrl: item.image_text,
+						
+							})
+						})
+						this.qrcode=data[0].imageUrl
+						
+						
+					}
 
 				})
 
@@ -396,7 +411,7 @@
 					content: container1Info[0].text
 
 				};
-				console.log(this.container1Info, 'container1Info')
+				
 
 				this.model2Info = {
 					item1: {

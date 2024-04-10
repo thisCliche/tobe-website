@@ -292,11 +292,7 @@
 						type: 8,
 						limit: 1
 					}),
-					configApi({}), textConfig({}),
-					userSide({
-						type: 1,
-						limit: 5
-					}),
+					
 					bannerApi({
 						type: 15,
 						limit: 1
@@ -305,17 +301,11 @@
 						type: 14,
 						limit: 1
 					}),
-					suanFa1({
-
-					}),
+				
 					bannerApi({
 						type: 13,
 					}),
-					teatcha1({
-						type: 6,
-						limit: 3
-
-					})
+				
 
 				]);
 				let topVideo = [],
@@ -453,6 +443,9 @@
 				})
 
 				this.introduction = topVideo[0]
+				
+				console.log(cePinginfo,'cePinginfo')
+				
 
 				this.cePinginfo = {
 					one: {
@@ -513,7 +506,6 @@
 			@include ct1200;
 			@include modelPd;
 			@include fj();
-
 			.containerWapItme {
 
 				width: 32%;
