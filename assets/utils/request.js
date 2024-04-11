@@ -15,9 +15,9 @@ let service = axios.create(config)
 
 service.interceptors.request.use(config => {
   let user = Local.get(ACCOUNT_INFO);
-  // if (user) {
-  //   config.headers['X-Access-Token'] = user.token
-  // }
+  if (user) {
+    // config.headers['token'] = user.token
+  }
   return config
 }, error => {
   Promise.reject(error)

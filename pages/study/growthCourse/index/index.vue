@@ -79,6 +79,7 @@
 	import GrowthCourseUnit from '@components/GrowthCourseUnit.vue'
 	import VideoProfile from '@components/VideoProfile.vue';
 	import HomeCase from '@components/HomeCase.vue';
+	import {planningClassConfigApi} from '@api/growthCourseApi.js'
 	export default {
 		name: 'growthCourseIndex',
 		components: {
@@ -102,7 +103,12 @@
 			}
 		},
 		methods: {
-
+			async getData(){
+				let result = await Promise.all([planningClassConfigApi()])
+			},
+		},
+		created() {
+			this.getData()
 		}
 	}
 </script>

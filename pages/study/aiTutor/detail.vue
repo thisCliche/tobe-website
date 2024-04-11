@@ -11,11 +11,9 @@
 							再次点击左侧按钮结束说话
 						</view>
 						<view class="" v-else-if="status==3">
-							正在思考
+							正在思考...
 						</view>
-						<view class="" v-else-if="status==4">
-							点击左侧按钮开始说话
-						</view>
+					
 					</view>
 					<view class="btnList">
 						<view class="btnItem" :class="status==2?'active':''" @click="start">
@@ -48,6 +46,7 @@
 </template>
 
 <script>
+	import {FastGptRetApi} from '@api/aiTutorApi.js'
 	import three from '@image/three.png'
 	import next from '@image/interview-next.png'
 	import over from '@image/interview-over.png'
@@ -65,26 +64,19 @@
 				next,
 				over,
 				speak,
-				strings: ['我说：给我说个笑话如何？'],
-				sessionList: [{
-					id: 1,
-					text: '我说：今天天气怎么样？'
-				}, {
-					id: 2,
-					text: 'AI导师：今天合肥的天气多云转阴，温度9℃-19℃，气候凉爽。'
-				}],
+				strings: [],
+				sessionList: [],
 			}
 		},
 		methods: {
 			//添加我的录音
 			pushMyRecord(text){
-				console.log(text);
 				let id = +new Date();
 				this.sessionList.push({
 					id,
 					text
 				})
-				this.resolveText();
+				this.resolveText(text);
 			},
 			typeComplete() {
 				this.sessionList.push({
@@ -97,20 +89,24 @@
 			pause() {
 				console.log('暂停')
 			},
-			resolveText(){
-				// 清除计时器
-				setTimeout(()=>{
-					this.status = 1;
-					this.isTyping = true;
-				},1000)
+			async resolveText(content){
+				let reponse = await FastGptRetApi({content});
+				console.log(reponse.msg.choices.message.content)
+				// setTimeout(()=>{
+				// 	this.status = 1;
+				// 	this.isTyping = true;
+				// },1000)
 			},
 			start() {
+				// 需要一些机制来防止意外情况发生
 				if (this.status == 1) {
 					this.xfVoice.start();
 					this.status = 2;
 				} else if (this.status == 2) {
+					let timer = null;
+					clearTimeout(timer);
 					// 清除计时器
-					setTimeout(()=>{
+					timer = setTimeout(()=>{
 						this.xfVoice.stop();
 						this.status = 3;
 					},1000)

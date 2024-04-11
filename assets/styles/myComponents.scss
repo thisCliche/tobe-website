@@ -160,6 +160,7 @@
 		        height: 50px;
 		        z-index: 99;
 		        transition: all 0.2s ease-out;
+						cursor: pointer;
 		        @include fj(flex-start);
 		        .subItem {
 		          padding: 0 20px;

@@ -12,7 +12,7 @@
 									<span>{{ item.nickname }}</span>
 								</view>
 							</view>
-							<view class="logo" @click="$router.push('/')">
+							<view class="logo" @click="toDetail({isOut:false,url:'/'})">
 								<img :src="logoImg" alt="" />
 							</view>
 							<view class="ulWrap ulWrapR">
@@ -24,7 +24,7 @@
 							<el-collapse-transition>
 								<view class="priming" v-show="isPriming" :style="{ left: leftLength + 'px' }">
 									<view class="subMenus">
-										<view class="subItem" v-for="item in subList" :key="item.id" @click="$router.push(item.url)">
+										<view class="subItem" v-for="item in subList" :key="item.id" @click="toDetail(item)">
 											{{ item.name }}
 										</view>
 									</view>
@@ -154,6 +154,7 @@
 				if (item.isOut) {
 					window.open(item.url)
 				} else {
+					console.log(item)
 					uni.navigateTo({
 						url: item.url
 					})
