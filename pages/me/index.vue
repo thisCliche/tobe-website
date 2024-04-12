@@ -106,7 +106,8 @@
 								</view>
 								<view class="contentText">
 									To who it may concern,
-									1111111111111111111111111111111111111
+									1111111111111111111111111111111111111									1111111111111111111111111111111111111
+
 								</view>
 
 							</view>
@@ -135,23 +136,23 @@
 						我的收藏
 
 					</view>
-					
+
 
 
 				</view>
 				<view class="foloderWap">
-					 <view class="foloderItme" v-for="(item,index) in  folderList" :key="index">
-						 <view class="foloderImg">
-							 <img :src="folder" alt="" srcset="" />
-						 	
-						 </view>
-						 <view class="folderName">
-							 {{item}}
-						 	
-						 </view>
-					 	
-					 </view>
-					
+					<view class="foloderItme" v-for="(item,index) in  folderList" :key="index">
+						<view class="foloderImg">
+							<img :src="folder" alt="" srcset="" />
+
+						</view>
+						<view class="folderName">
+							{{item}}
+
+						</view>
+
+					</view>
+
 				</view>
 
 			</view>
@@ -174,7 +175,7 @@
 				notice,
 				heart,
 				folder,
-				folderList:['aaa','bbbb','cccc','dddddd'],
+				folderList: ['aaa', 'bbbb', 'cccc', 'dddddd'],
 
 			}
 		},
@@ -330,9 +331,9 @@
 				@include wh(100%, 100%);
 				@include fj(flex-start);
 				flex-direction: column;
-				flex:1;
+				flex: 1;
 				margin: 0 20px 4px 20px;
-			padding-right: 60px;
+				padding-right: 60px;
 
 
 
@@ -419,9 +420,9 @@
 
 								.title {
 									color: rgb(0, 0, 0);
-									font-size: 16px;
+									font-size: 20px;
 									font-weight: 600;
-									line-height: 18px;
+									line-height: 26px;
 									letter-spacing: 0%;
 									text-align: left;
 
@@ -429,7 +430,7 @@
 
 								.subtitle {
 									color: rgb(0, 0, 0);
-									font-size: 14px;
+									font-size: 16px;
 									line-height: 16px;
 
 								}
@@ -441,8 +442,8 @@
 									// 控制行数
 									-webkit-line-clamp: 2;
 									-webkit-box-orient: vertical;
-									width: 300px;
-									font-size: 12px;
+									width: 400px;
+									font-size: 14px;
 
 
 								}
@@ -472,7 +473,7 @@
 				@include fj(flex-start);
 				flex-direction: column;
 				width: 320px;
-				margin: 0 20px 4px 20px;
+				margin: 40px 20px 4px 20px;
 
 				.header {
 					@include fj(flex-start);
@@ -501,37 +502,40 @@
 
 
 				}
-				.foloderWap{
+
+				.foloderWap {
 					width: 100%;
 					display: flex;
 					justify-content: space-between;
 					flex-wrap: wrap;
 					margin-top: 20px;
-					.foloderItme{
+
+					.foloderItme {
 						width: 120px;
 						height: 120px;
 						margin: 25px 40px 10px 0;
-						
+
 						img {
 							width: 100%;
 							height: 100%;
 							object-fit: cover;
 						}
-						
+
 					}
-					.folderName{
+
+					.folderName {
 						font-size: 24px;
 						color: #000;
 						font-weight: 700;
 						display: flex;
 						justify-content: center;
 						align-items: center;
-						
+
 					}
-					
-					
-					
-					
+
+
+
+
 				}
 
 			}
