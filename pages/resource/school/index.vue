@@ -331,7 +331,15 @@
 						this.container3Banner.push(data[0])
 					}
 					else if (idx == 5) {
-					let data=res.data
+					const data=res.data 
+						  for (const item in data.country){
+							  console.log(item)
+							  this.countryList.push({
+								  label:data.country[item],
+								  value:item
+								  
+							  })
+						  }
 						
 					}
 
