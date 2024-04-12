@@ -57,9 +57,23 @@
 			}
 		},
 		{
+			"path": "pages/resource/practice/detail",
+			"style": {
+				"navigationBarTitleText": "详情",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
 			"path": "pages/resource/research/index",
 			"style": {
 				"navigationBarTitleText": "科研",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/resource/research/detail",
+			"style": {
+				"navigationBarTitleText": "详情",
 				"enablePullDownRefresh": false
 			}
 		},
@@ -71,9 +85,16 @@
 			}
 		},
 		{
-			"path": "pages/resource/detail/index",
+			"path": "pages/resource/school/detail",
 			"style": {
 				"navigationBarTitleText": "详情",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/me/index",
+			"style": {
+				"navigationBarTitleText": "个人中心",
 				"enablePullDownRefresh": false
 			}
 		},
