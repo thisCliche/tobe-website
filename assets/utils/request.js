@@ -6,7 +6,7 @@ import baseURL from '../constant/requestUrl.js'
 
 let config = {
   baseURL,
-  timeout: 5000,
+  timeout: 10000,
   headers: {
     "Content-Type": "application/json;charset=UTF-8"
   }
@@ -16,7 +16,7 @@ let service = axios.create(config)
 service.interceptors.request.use(config => {
   let user = Local.get(ACCOUNT_INFO);
   if (user) {
-    // config.headers['token'] = user.token
+    config.headers['token'] = user.token
   }
   return config
 }, error => {

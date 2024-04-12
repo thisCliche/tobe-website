@@ -8,6 +8,7 @@ import "wowjs/css/libs/animate.css"
 import Waves from 'vue-waves-effect';
 import 'vue-waves-effect/dist/vueWavesEffect.css';
 import VueTypedJs from 'vue-typed-js';
+import initApp from "@assets/router/routerDefend.js"
 
 // #ifndef VUE3
 import Vue from 'vue'
@@ -17,6 +18,8 @@ App.mpType = 'app'
 Vue.prototype.$wow = wow;
 Vue.use(ElementUI).use(Waves).use(VueTypedJs);
 Vue.component('MyFoot',MyFoot);
+console.log(initApp)
+initApp()  // 路由拦截
 
 const app = new Vue({
   ...App
