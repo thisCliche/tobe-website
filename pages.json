@@ -99,6 +99,13 @@
 			}
 		},
 		{
+			"path": "pages/me/myCollection",
+			"style": {
+				"navigationBarTitleText": "我的收藏",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
 			"path": "pages/partners/joinUs/joinUs",
 			"style": {
 				"navigationBarTitleText": "加入我们",
