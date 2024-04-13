@@ -18,7 +18,7 @@
 						个人签名：xxxxxxccccccccccccccccccccc
 
 					</view>
-					<view class="setting setting1">
+					<view class="setting setting1" @click="openSetting">
 						个人设置
 					</view>
 					<view class="setting setting2">
@@ -106,7 +106,7 @@
 								</view>
 								<view class="contentText">
 									To who it may concern,
-									1111111111111111111111111111111111111									1111111111111111111111111111111111111
+									1111111111111111111111111111111111111 1111111111111111111111111111111111111
 
 								</view>
 
@@ -159,6 +159,87 @@
 
 		</view>
 
+		<el-dialog title="修改个人信息" :visible.sync="dialogFormVisible" width='500px' class="myForm">
+			<el-form :model="form" label-width="80px" label-position="top" size="small">
+				<el-row type="flex" class="row-bg" justify="end">
+					<el-col :span="4">
+						<el-form-item label="">
+
+							<el-avatar v-model="form.acavr" :src="form.acavr"></el-avatar>
+
+						</el-form-item>
+
+					</el-col>
+				</el-row>
+
+				<el-row :gutter="20" class="row-bg">
+					<el-col :span="10">
+						<el-form-item label="昵称">
+							<el-input v-model="form.name" autocomplete="off"></el-input>
+						</el-form-item>
+
+					</el-col>
+					<el-col :span="10">
+						<el-form-item label="姓名">
+							<el-input v-model="form.name" autocomplete="off"></el-input>
+						</el-form-item>
+
+					</el-col>
+				</el-row>
+				<el-row class="row-bg">
+					<el-col>
+						<el-form-item label="个性签名">
+							<el-input v-model="form.name" autocomplete="off"></el-input>
+						</el-form-item>
+
+					</el-col>
+				</el-row>
+				<el-row class="row-bg">
+					<el-col>
+						<el-form-item label="密码">
+							<el-input v-model="form.name" autocomplete="off"></el-input>
+						</el-form-item>
+
+					</el-col>
+				</el-row>
+				<el-row class="row-bg">
+					<el-col>
+						<el-form-item label="再次确认密码">
+							<el-input v-model="form.name" autocomplete="off"></el-input>
+						</el-form-item>
+
+					</el-col>
+				</el-row>
+				<el-row class="row-bg">
+					<el-col>
+						<el-form-item label="个性签名">
+							<el-input v-model="form.name" autocomplete="off"></el-input>
+						</el-form-item>
+
+					</el-col>
+				</el-row>
+				<el-row type="flex" class="row-bg" justify="space-between" :gutter="20" align='center'>
+					<el-col>
+						<el-form-item label="更改请发送验证码">
+							<el-input v-model="form.name" autocomplete="off">
+								<div slot="append" style="cursor: pointer;" @click="startCountdown"
+									:disabled="countdown > 0">{{ countdown > 0 ? `${countdown}秒后重新获取` : '发送' }}</div>
+							</el-input>
+						</el-form-item>
+
+					</el-col>
+
+				</el-row>
+
+
+			</el-form>
+			<div slot="footer" style="margin-top: 40px; display:flex;justify-content: center; gap: 40px;">
+
+				<el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+				<el-button @click="dialogFormVisible = false">取 消</el-button>
+			</div>
+		</el-dialog>
+
 		<my-foot></my-foot>
 	</view>
 </template>
@@ -176,10 +257,39 @@
 				heart,
 				folder,
 				folderList: ['aaa', 'bbbb', 'cccc', 'dddddd'],
-
+				dialogFormVisible: false,
+				form: {
+					acavr: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
+					name: '',
+					nickName: '',
+					des: '',
+					password: '',
+				},
+				countdown: 0, // 倒计时秒数
+				timer: null, // 计时器
 			}
 		},
 		methods: {
+
+			openSetting() {
+
+				this.dialogFormVisible = true
+			},
+			startCountdown() {
+				if (this.countdown > 0) {
+					return;
+				}
+				this.countdown = 60; // 倒计时60秒
+				this.timer = setInterval(() => {
+					if (this.countdown > 0) {
+						this.countdown -= 1;
+					} else {
+						clearInterval(this.timer);
+					}
+				}, 1000);
+
+				// 这里执行获取验证码的逻辑...
+			},
 
 
 		}
@@ -546,6 +656,31 @@
 
 
 
+
+	}
+
+	::v-deep .myForm {
+		.el-dialog {
+			padding: 0 10px;
+		}
+
+		.el-form {
+			.el-form-item--small .el-form-item__label {
+				line-height: 2px;
+			}
+
+
+		}
+
+		.el-form-item--small .el-form-item__label {
+			margin-bottom: 10px;
+		}
+
+
+	}
+
+	::v-deep.row-bg {
+		height: 30px;
 
 	}
 </style>
