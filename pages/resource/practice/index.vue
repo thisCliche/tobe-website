@@ -2,7 +2,9 @@
 	<view class="IndexPage">
 		<view class="banner">
 
-			<VideoProfile :introduction='introduction' withValue="100%" heightValue="700px" />
+			<img :src="topBanner.imageUrl" alt="" srcset="" />
+
+
 
 		</view>
 
@@ -54,14 +56,14 @@
 		<view class="container4">
 
 			<view class="container4content">
-				<view class="wapItem" v-for="(item, index) in 8" :key="index">
+				<view class="wapItem" v-for="(item, index) in resourceList" :key="index" @click="getDtail(item.id)">
 					<view class="item-img">
-						<img src="" alt="" srcset="" />
+						<img :src="item.image" alt="" srcset="" />
 					</view>
 
-					<view class="title"> 人工智能 </view>
+					<view class="title"> {{item.name}} </view>
 					<view class="item-wap">
-						简介简介简介简介简介简介简介简介简介简介简介简介简介简介
+						{{item.introduction}}
 					</view>
 				</view>
 
@@ -86,6 +88,7 @@
 		videoApi,
 		bannerApi,
 		configApi,
+		resourceList
 
 	} from '@api/resource.js'
 	export default {
@@ -96,65 +99,9 @@
 		},
 		data() {
 			return {
-				introduction: {},
-				container3Banner: [],
-				value1: "",
-				options1: [{
-						value: "1",
-						label: "线上",
-					},
-					{
-						value: "2",
-						label: "线下",
-					},
-				],
+				topBanner: {},
+				resourceList: []
 
-				value2: "",
-				options2: [{
-						value: "1",
-						label: "线上",
-					},
-					{
-						value: "2",
-						label: "线下",
-					},
-				],
-				cePinginfo: {}, // 1
-				howVideoInfo: [],
-				kaiqiVideo: [],
-				guiHuavideo: {},
-				PlanningConfigInfo: {},
-				tPlanningClassConfigInfo: {},
-				liuChenegBanner: '',
-				daoshiBanImg: '',
-				tagIcon,
-				suanfaList: [],
-				model1ComImg: [],
-				banner13: [],
-				banner: [{
-					id: 1,
-					bannerUrl: 'https://website.tobeapp.cn/uploads/20240331/740fb8593dfc73876747bc5511cb6eca.jpg'
-				}, {
-					id: 2,
-					bannerUrl: 'https://website.tobeapp.cn/uploads/20240331/740fb8593dfc73876747bc5511cb6eca.jpg'
-				}, {
-					id: 3,
-					bannerUrl: 'https://website.tobeapp.cn/uploads/20240331/740fb8593dfc73876747bc5511cb6eca.jpg'
-				}, {
-					id: 4,
-					bannerUrl: 'https://website.tobeapp.cn/uploads/20240331/740fb8593dfc73876747bc5511cb6eca.jpg'
-				}, {
-					id: 5,
-					bannerUrl: 'https://website.tobeapp.cn/uploads/20240331/740fb8593dfc73876747bc5511cb6eca.jpg'
-				}, {
-					id: 6,
-					bannerUrl: 'https://website.tobeapp.cn/uploads/20240331/740fb8593dfc73876747bc5511cb6eca.jpg'
-				}],
-				container1Wap1: {
-					imageUrl: '1111111',
-					videoUrl: '222222222',
-					discript: '33333333'
-				}
 
 
 
@@ -165,219 +112,54 @@
 		},
 		methods: {
 			async getData() {
-				let resDataList = await Promise.all([videoApi({
-						type: 23,
+				let resDataList = await Promise.all([bannerApi({
+						type: 44,
 						limit: 1
 					}),
-					videoApi({
-						type: 24,
-						limit: 2
+					resourceList({
+						type: "实习",
+						limit: 9
 					}),
 
-					videoApi({
-						type: 6,
-						limit: 2
-					}),
-					videoApi({
-						type: 7,
-						limit: 4
-					}),
-					videoApi({
-						type: 8,
-						limit: 1
-					}),
-
-					bannerApi({
-						type: 15,
-						limit: 1
-					}),
-					bannerApi({
-						type: 14,
-						limit: 1
-					}),
-
-					bannerApi({
-						type: 13,
-					}),
 
 
 				]);
-				let topVideo = [],
-					cePinginfo = [],
-					howVideoInfo = [],
-					kaiqiVideo = [],
-					guiHuavideo = [],
-					PlanningConfigInfo = {},
-					tPlanningClassConfigInfo = {},
-					suanFaList = [],
-					teatcha = [],
-					banner13 = [],
-					model1ComImg = [],
+				let topBanner = [],
 
 					usecase = [];
 				resDataList.map((res, idx) => {
 					console.log(res, idx)
 					if (idx == 0) {
 						res.data.map(item => {
-							topVideo.push({
+							topBanner.push({
 								imageUrl: item.image_text,
-								videoUrl: item.video_text,
+								name: item.name,
 								id: item.id
 							})
 						})
 					} else if (idx == 1) {
 						res.data.map(item => {
-							cePinginfo.push({
-								imageUrl: item.image_text,
-								id: item.id,
-								videoUrl: item.video_text,
-								name: item.name,
-								text: item.text
-							})
-						})
-					} else if (idx == 2) {
-						res.data.map(item => {
-							howVideoInfo.push({
+							this.resourceList.push({
+								image: item.image,
 								id: item.id,
 								name: item.name,
-								introduction: {
-									imageUrl: item.image_text,
-									videoUrl: item.video_text
-								}
-
-
+								introduction: item.introduction
 							})
 						})
-
-
-
-					} else if (idx == 3) {
-						res.data.map(item => {
-							kaiqiVideo.push({
-								id: item.id,
-								name: item.name,
-								introduction: {
-									imageUrl: item.image_text,
-									videoUrl: item.video_text
-								}
-
-
-							})
-
-						})
-
-					} else if (idx == 4) {
-						res.data.map(item => {
-							guiHuavideo.push({
-								id: item.id,
-								name: item.name,
-								text: item.text,
-								introduction: {
-									imageUrl: item.image_text,
-									videoUrl: item.video_text
-								}
-							})
-						})
-					} else if (idx == 5) {
-						PlanningConfigInfo = res.data
-					} else if (idx == 6) {
-						tPlanningClassConfigInfo = res.data
-					} else if (idx == 7) {
-						res.data.map(item => {
-							usecase.push({
-								engineerUrl: item.image_text,
-								desc: item.text,
-								id: item.id,
-								name: item.name
-							})
-						})
-					} else if (idx == 8) {
-						let data = res.data
-
-						this.liuChenegBanner = data[0].image_text
-					} else if (idx == 9) {
-						let data = res.data
-
-						this.daoshiBanImg = data[0].image_text
-					} else if (idx == 10) {
-						res.data.map(item => {
-							suanFaList.push({
-								code: item.code,
-								title: item.title,
-								name: item.name
-							})
-
-						})
-
-					} else if (idx == 11) {
-
-						res.data.map(item => {
-							banner13.push({
-								imageUrl: item.image_text,
-								desc: item.text,
-								id: item.id,
-								name: item.name
-							})
-
-						})
-
-					} else if (idx == 12) {
-
-						res.data.map(item => {
-							teatcha.push({
-
-								text: item.text,
-								name: item.name,
-								subname: item.subname
-							})
-						})
-
 					}
 
 				})
 
-				this.introduction = topVideo[0]
-
-				console.log(cePinginfo, 'cePinginfo')
-
-
-				this.cePinginfo = {
-					one: {
-						title: cePinginfo[0].name,
-						text: cePinginfo[0].text,
-						introduction: {
-							imageUrl: cePinginfo[0].imageUrl,
-							videoUrl: cePinginfo[0].imageUrl,
-							id: cePinginfo[0].id
-
-						}
-
-					},
-					two: {
-						title: cePinginfo[1].name,
-						text: cePinginfo[1].text,
-						introduction: {
-							imageUrl: cePinginfo[1].imageUrl,
-							videoUrl: cePinginfo[1].imageUrl,
-							id: cePinginfo[1].id
-
-						}
-
-					}
-				}
-
-
-				this.howVideoInfo = howVideoInfo;
-				this.kaiqiVideo = kaiqiVideo;
-				this.guiHuavideo = guiHuavideo[0];
-				this.PlanningConfigInfo = PlanningConfigInfo;
-				this.tPlanningClassConfigInfo = tPlanningClassConfigInfo;
-
-
-
+				this.topBanner = topBanner[0]
 
 
 			},
+			getDtail(val) {
+				// 当前页面发起跳转
+				uni.navigateTo({
+					url: `/pages/resource/practice/detail?id=${val}&type=2`
+				});
+			}
 
 		}
 	}
@@ -394,6 +176,12 @@
 			width: 100%;
 			height: 700px;
 			background: rgb(196, 196, 196);
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover
+			}
 		}
 
 		.container2 {
@@ -507,7 +295,7 @@
 
 		.container4 {
 			@include ct1200;
-		
+
 			.container4content {
 				display: flex;
 				flex-wrap: wrap;
@@ -520,6 +308,8 @@
 					height: 420px;
 					box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 					box-sizing: border-box;
+					cursor: pointer;
+
 					.item-img {
 						width: 100%;
 						height: 150px;

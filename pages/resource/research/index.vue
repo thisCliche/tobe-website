@@ -1,7 +1,7 @@
 <template>
 	<view class="IndexPage">
 		<view class="banner">
-			<VideoProfile :introduction="introduction" withValue="100%" heightValue="700px" borderRidius="0px"/>
+			<VideoProfile :introduction="introduction" withValue="100%" heightValue="700px" borderRidius="0px" />
 		</view>
 		<view class="container1">
 			<view class="title"> 最受欢迎 </view>
@@ -18,25 +18,25 @@
 
 		<view class="container2">
 			<view class="wap1">
-				<el-select v-model="value1" placeholder="线上/线下" class="nselect">
-					<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-					</el-option>
-				</el-select>
+				<view class="nselect">
 
-				<el-select v-model="value2" placeholder="暑假/寒假">
-					<el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value">
-					</el-option>
-				</el-select>
+					<el-checkbox-group v-model="format" @change="getRecoce">
+						<el-checkbox :label="item.id"  v-for="(item,index) in formatList"
+							:key="index">{{item.value}}</el-checkbox>
+						</el-checkbox>
 
-				<el-select v-model="value1" placeholder="线上/线下" class="nselect">
-					<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-					</el-option>
-				</el-select>
+					</el-checkbox-group>
 
-				<el-select v-model="value2" placeholder="暑假/寒假">
-					<el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value">
-					</el-option>
-				</el-select>
+				</view>
+				<view class="nselect">
+
+					<el-select v-model="major" placeholder="请选择学科" @change="getRecoce">
+						<el-option v-for="item in majorList" :key="item.id" :label="item.value" :value="item.id">
+						</el-option>
+					</el-select>
+
+				</view>
+
 				<view class="footer">
 					<view class="foot-img">
 						<img :src="qrcode" alt="" srcset="" />
@@ -45,7 +45,7 @@
 				</view>
 			</view>
 			<view class="wap2">
-				<view class="wapItem" v-for="(item, index) in schollResourceList" :key="item.id">
+				<view class="wapItem" v-for="(item, index) in schollResourceList" :key="item.id" @click="getDtail(item.id)">
 					<view class="item-img">
 						<img :src="item.image" alt="" srcset="" />
 					</view>
@@ -77,7 +77,8 @@
 		bannerApi,
 		configApi,
 		textConfig,
-		resourceList
+		resourceList,
+		scientificSearch
 
 	} from "@api/resource.js";
 	export default {
@@ -90,28 +91,13 @@
 			return {
 				introduction: {},
 				qrcode: '',
-				schollResourceList:[],
-				value1: "",
-				options1: [{
-						value: "1",
-						label: "线上",
-					},
-					{
-						value: "2",
-						label: "线下",
-					},
-				],
+				schollResourceList: [],
+				format: [],
+				major: '',
+				formatList: [],
+				majorList: [],
 
-				value2: "",
-				options2: [{
-						value: "1",
-						label: "线上",
-					},
-					{
-						value: "2",
-						label: "线下",
-					},
-				]
+
 			};
 		},
 		onLoad() {
@@ -129,8 +115,9 @@
 						limit: 2,
 					}),
 					resourceList({
-						type:"科研"
-					})
+						type: "科研"
+					}),
+					scientificSearch({})
 
 
 
@@ -157,25 +144,65 @@
 							})
 						})
 						this.qrcode = data[0].imageUrl
-					}  else if (idx == 2) {
+					} else if (idx == 2) {
 						res.data.map((item) => {
 							this.schollResourceList.push({
-								id:item.id,
-								image:item.image,
-								avatar:item.avatar,
-								introduction:item.introduction,
-								overview:item.overview,
+								id: item.id,
+								image: item.image,
+								avatar: item.avatar,
+								introduction: item.introduction,
+								overview: item.overview,
 							})
-							
-							
+
+
 						});
+					} else if (idx == 3) {
+						const {
+							format,
+							major
+						} = res.data
+						this.formatList = format
+						this.majorList = major
 					}
+
 				});
 
 				this.introduction = topVideo[0];
 
 
 			},
+			getRecoce() {
+
+				resourceList({
+					type: "科研",
+					format: this.format,
+					major: this.major
+
+				}).then(res => {
+					let dataRes = [];
+					res.data.map(item => {
+
+						dataRes.push({
+							id: item.id,
+							image: item.image,
+							avatar: item.avatar,
+							introduction: item.introduction,
+							overview: item.overview,
+						})
+					})
+
+					this.schollResourceList = dataRes
+
+				})
+
+
+			},
+			getDtail(val) {
+				// 当前页面发起跳转
+				uni.navigateTo({
+					url: `/pages/resource/research/detail?id=${val}&type=1`
+				});
+			}
 		},
 	};
 </script>
@@ -216,6 +243,17 @@
 				width: 200px;
 				flex-direction: column;
 				gap: 5px 0;
+
+				.nselect {
+					width: 100%;
+					display: flex;
+					flex-wrap: wrap;
+					margin: 20px 0;
+
+
+
+				}
+
 
 				.footer {
 					margin-top: 50px;
@@ -262,6 +300,7 @@
 					height: 430px;
 					box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 					box-sizing: border-box;
+					cursor: pointer;
 
 					.item-img {
 						width: 100%;

@@ -7,7 +7,10 @@ let routeUrl = {
 	schoolResourceSearch: "/index/school/getResourceSearchList",
 	schoolSearchList: "/index/school/getSchoolSearchList",
 	resourceList: "/index/resource/getResourceList",
-	schoolList:'/index/school/getSchoolList'
+	schoolList:'/index/school/getSchoolList',
+	resourceDetail:'/index/resource/getDetail',
+	scientificSearch:"index/resource/getScientificSearchList"
+	
 }
 
 export function videoApi(params) {
@@ -45,6 +48,16 @@ export function textConfig(params) {
 		params,
 	})
 }
+//科研帅选
+
+export function scientificSearch(params) {
+	return axios({
+		url: routeUrl.scientificSearch,
+		method: 'get',
+		params,
+	})
+}
+
 
 
 //夏校筛选
@@ -78,6 +91,14 @@ export function resourceList(params) {
 export function schoolList(params) {
 	return axios({
 		url: routeUrl.schoolList,
+		method: 'get',
+		params,
+	})
+}
+//资源详情
+export function resourceDetail(params) {
+	return axios({
+		url: routeUrl.resourceDetail,
 		method: 'get',
 		params,
 	})
