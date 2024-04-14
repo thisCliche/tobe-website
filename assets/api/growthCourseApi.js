@@ -1,11 +1,19 @@
 import axios from '@utils/request.js'
 let routeUrl = {
-	planningClassConfig: "/index/index/getPlanningClassConfig",
+	courseConfig: "/index/index/courseConfig",
+	getCourse:"/index/index/getCourse"
 }
 
-export function planningClassConfigApi(params) {
+export function courseConfigApi(params) {
 	return axios({
-		url: routeUrl.planningClassConfig,
+		url: routeUrl.courseConfig,
+		method: 'get',
+		params,
+	})
+}
+export function getCourseApi(params) {
+	return axios({
+		url: routeUrl.getCourse,
 		method: 'get',
 		params,
 	})

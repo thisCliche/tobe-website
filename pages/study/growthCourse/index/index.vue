@@ -3,13 +3,13 @@
 		<view class="mainWrap">
 			<view class="top">
 				<view class="topL">
-					<view class="title">规划标题</view>
+					<view class="title">{{topIntroduction.name}}</view>
 					<view class="des">
-						文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字
+						{{topIntroduction.text}}
 					</view>
 				</view>
-				<view class="topR">
-					<video-profile :introduction="introduction"></video-profile>
+				<view class="topR" v-if="topIntroduction.hasOwnProperty('introduction')">
+					<video-profile :introduction="topIntroduction.introduction"></video-profile>
 				</view>
 			</view>
 			<view class="videoRecommed commTitle">
@@ -18,27 +18,21 @@
 				<view class="filter">
 					<view class="filterRow">
 						<label for="">地区:</label>
-						<el-radio-group v-model="radio1" size="medium">
-							<el-radio-button label="美国"></el-radio-button>
-							<el-radio-button label="英国"></el-radio-button>
-							<el-radio-button label="港新"></el-radio-button>
-							<el-radio-button label="其他"></el-radio-button>
+						<el-radio-group v-model="radio2" size="medium">
+							<el-radio-button :label="item" v-for="(item,idx) in filterList.class" :key="idx"></el-radio-button>
 						</el-radio-group>
 					</view>
 					<view class="filterRow">
 						<label for="">年级:</label>
 						<el-radio-group v-model="radio1" size="medium">
-							<el-radio-button label="7年级"></el-radio-button>
-							<el-radio-button label="8年级"></el-radio-button>
-							<el-radio-button label="9年级"></el-radio-button>
-							<el-radio-button label="10年级"></el-radio-button>
+							<el-radio-button :label="item" v-for="(item,idx) in filterList.country" :key="idx"></el-radio-button>
 						</el-radio-group>
 					</view>
 				</view>
 				<view class="videoList">
 					<el-row :gutter="26">
-						<template v-for="(item,idx) in 8">
-							<el-col :key="idx" :span="6"><growth-course-unit></growth-course-unit></el-col>
+						<template v-for="(item,idx) in viewList">
+							<el-col :key="idx" :span="6"><growth-course-unit :info="item"></growth-course-unit></el-col>
 						</template>
 					</el-row>
 				</view>
@@ -47,28 +41,6 @@
 				<view class="title">通过我们的规划录取的部分offer</view>
 				<view class="hr"></view>
 				<home-case :homecase="homecase"></home-case>
-			</view>
-			<view class="videoRecommed commTitle">
-				<view class="title">最受欢迎的课</view>
-				<view class="hr"></view>
-				<view class="filter">
-					<view class="filterRow">
-						<label for="">地区:</label>
-						<el-radio-group v-model="radio1" size="medium">
-							<el-radio-button label="美国"></el-radio-button>
-							<el-radio-button label="英国"></el-radio-button>
-							<el-radio-button label="港新"></el-radio-button>
-							<el-radio-button label="其他"></el-radio-button>
-						</el-radio-group>
-					</view>
-				</view>
-				<view class="videoList">
-					<el-row :gutter="26">
-						<template v-for="(item,idx) in 8">
-							<el-col :key="idx" :span="6"><growth-course-unit></growth-course-unit></el-col>
-						</template>
-					</el-row>
-				</view>
 			</view>
 		</view>
 		<my-foot></my-foot>
@@ -79,7 +51,16 @@
 	import GrowthCourseUnit from '@components/GrowthCourseUnit.vue'
 	import VideoProfile from '@components/VideoProfile.vue';
 	import HomeCase from '@components/HomeCase.vue';
-	import {planningClassConfigApi} from '@api/growthCourseApi.js'
+	import {
+		videoApi
+	} from '@api/study.js'
+	import {
+		bannerApi
+	} from '@api/homeApi.js'
+	import {
+		courseConfigApi,
+		getCourseApi
+	} from '@api/growthCourseApi.js'
 	export default {
 		name: 'growthCourseIndex',
 		components: {
@@ -89,22 +70,73 @@
 		},
 		data() {
 			return {
-				homecase:[{engineerUrl:'http://website.tobeapp.cn/uploads/20240326/e0ba53bc86f80943022d206b2cdb26eb.jpg',contentId:1},
-				{engineerUrl:'http://website.tobeapp.cn/uploads/20240326/e0ba53bc86f80943022d206b2cdb26eb.jpg',contentId:2},
-				{engineerUrl:'http://website.tobeapp.cn/uploads/20240326/e0ba53bc86f80943022d206b2cdb26eb.jpg',contentId:3},
-				{engineerUrl:'http://website.tobeapp.cn/uploads/20240326/e0ba53bc86f80943022d206b2cdb26eb.jpg',contentId:4},
-				],
+				topIntroduction: {},
+				viewList: [],
+				homecase: [],
+				filterList: {
+					country: [],
+					class: []
+				},
 				radio1: '美国',
 				radio2: '7年级',
-				introduction: {
-					imageUrl: 'http://website.tobeapp.cn/uploads/20240326/e0ba53bc86f80943022d206b2cdb26eb.jpg',
-					videoUrl: 'http://website.tobeapp.cn/uploads/20240326/14244fcd01825d54f112d872bcf69fb1.mp4'
-				}
 			}
 		},
 		methods: {
-			async getData(){
-				let result = await Promise.all([planningClassConfigApi()])
+			async getData() {
+				let topIntroduction = {},
+					filterList = {},
+					viewList = [],
+					homecase = [];
+				let result = await Promise.all([videoApi({
+					type: 10,
+					limit: 1
+				}), courseConfigApi(), getCourseApi({
+					// class: '7年级',
+					// country: '美国'
+				}), bannerApi({
+					type: '4',
+					limit: 5
+				})]);
+				result.map((res, idx) => {
+					switch (idx) {
+						case 0:
+							let info = res.data[0];
+							topIntroduction = {
+								name: info.name,
+								text: info.text,
+								introduction: {
+									imageUrl: info.image_text,
+									videoUrl: info.video_text,
+								}
+							}
+							break;
+						case 1:
+							let classVal = Object.values(res.data.class)
+							let country = Object.values(res.data.country)
+							filterList = {
+								class: classVal,
+								country
+							}
+							break;
+						case 2:
+							viewList = res.data.data;
+							break;
+						case 3:
+							res.data.map(item => {
+								homecase.push({
+									engineerUrl: item.image_text,
+									contentId: item.id
+								})
+							})
+							break;
+						default:
+							break;
+					}
+				})
+				this.topIntroduction = topIntroduction;
+				this.filterList = filterList;
+				this.viewList = viewList;
+				this.homecase = homecase;
 			},
 		},
 		created() {
@@ -119,6 +151,7 @@
 
 		.commTitle {
 			@include modelPdOther;
+
 			.title {
 				@include sc(24px, #000);
 				font-weight: 700;
@@ -134,6 +167,7 @@
 			.videoList {
 				@include mt(20px);
 			}
+
 			.filter {
 				.filterRow {
 					margin: 10px 0;

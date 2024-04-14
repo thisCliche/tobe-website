@@ -32,9 +32,9 @@
 								<img :src="next" alt="" />
 							</view>
 						</view>
-						<!-- <view class="imgBg">
-						<img :src="three" alt="" />
-					</view> -->
+						<view class="imgBg">
+							<img :src="three" alt="" />
+						</view>
 					</view>
 				</view>
 				<view class="wrapR">
@@ -45,14 +45,14 @@
 						</vue-typed-js>
 					</view>
 					<view class="inputWrap">
-						<el-input v-model="question" placeholder="请输入问题并点击发送"></el-input>
+						<el-input v-model="question" placeholder="请输入问题并点击发送" @keyup.enter.native="sendHandle"></el-input>
 						<view class="interval"></view>
 						<el-button type="primary" @click="sendHandle">发送</el-button>
 					</view>
 				</view>
 
 			</view>
-			<view class="btnWrap">
+			<view class="btnWrap" v-if="status==5">
 				<el-button type="info">生成报告</el-button>
 			</view>
 		</view>
@@ -114,7 +114,7 @@
 				} else {
 					this.sessionList.push({
 						id: +new Date(),
-						text
+						text:'我说：' + text
 					})
 					this.resolveText(text);
 				}
@@ -141,7 +141,7 @@
 					let res = await FastGptRetApi({
 						content
 					});
-					let response = res.msg.choices.message.content;
+					let response = res.msg.choices[0].message.content;
 					this.response = response;
 					this.strings = [response];
 					this.status = 1;

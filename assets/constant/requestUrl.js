@@ -1,1 +1,2 @@
-export default 'http://website.tobeapp.cn';
+// export default '/api';
+export default 'https://website.tobeapp.cn';

@@ -2,7 +2,7 @@
 	<view class="aiTutor">
 		<view class="videoTop">
 			<view class="mask"></view>
-			<video class="myVideo" :src="videoUrl" object-fit="cover" autoplay loop muted :controls="false"></video>
+			<video class="myVideo" :src="videoTopUrl" object-fit="cover" autoplay loop muted :controls="false"></video>
 		</view>
 		<view class="mainWrap">
 			<view class="model1">
@@ -10,12 +10,12 @@
 				<view class="onlineWrap">
 					<view class="onlineWrapItem" v-for="item in zhuboList" :key="item.id">
 						<view class="imgWrap">
-							<img :src="item.bgImg" alt="" />
+							<img :src="item.image_text" alt="" />
 						</view>
 						<view class="discribe">
-							<view class="title">{{item.title}}</view>
+							<view class="title">{{item.name}}</view>
 							<view class="hr"></view>
-							<view class="des">{{item.des}}</view>
+							<view class="des">{{item.text}}</view>
 						</view>
 					</view>
 				</view>
@@ -23,11 +23,10 @@
 			<view class="model2">
 				<view class="modelTitle">
 					<view class="">
-						更懂你的留学AI系统
+						{{slogan.ai_desc_title}}
 					</view>
 					<view class="">
-						<text>机构规划师</text><text class="grayColor">VS</text><text>AI规划师</text><text
-							class="grayColor">VS</text><text>学校升学老师</text>
+						<text>{{slogan.ai_desc_text}}</text>
 					</view>
 				</view>
 				<view class="modelBanner">
@@ -47,12 +46,12 @@
 					</view>
 					<view class="wrapM">
 						<view class="sparkle">
-							<view class="item" v-for="item in sparkleList" :key="item.id">
+							<view class="item" v-for="(item,idx) in sparkleList" :key="idx">
 								<view class="row">
-									<view class="btn">{{item.label}}</view>
+									<view class="btn">{{item.code}}</view>
 									<view class="title">{{item.title}}</view>
 								</view>
-								<view class="des">{{item.des}}</view>
+								<view class="des">{{item.name}}</view>
 							</view>
 						</view>
 					</view>
@@ -85,12 +84,17 @@
 
 <script>
 	import zhubo from '@image/zhubo.jpeg';
-	import aiImg from '@image/ai.jpeg';
 	import UseCase from '../UseCase.vue';
 	import VideoProfile from '@components/VideoProfile.vue';
 	import {
 		userSide,
+		suanFa1,
+		bannerApi,
+		videoApi
 	} from '@api/study.js'
+	import {
+		AiTextConfigApi
+	} from "@api/aiTutorApi.js"
 	export default {
 		name: 'aiTutorIndex',
 		components: {
@@ -103,28 +107,11 @@
 		data() {
 			return {
 				usecase: [],
-				aiImg,
-				introduction: {
-					imageUrl: zhubo,
-					videoUrl: 'http://website.tobeapp.cn/uploads/20240326/14244fcd01825d54f112d872bcf69fb1.mp4'
-				},
-				videoUrl: 'http://website.tobeapp.cn/uploads/20240326/14244fcd01825d54f112d872bcf69fb1.mp4',
-				sparkleList: [{
-					id: 1,
-					label: '亮点一',
-					title: '底层算法智能支持',
-					des: '基于职业规划，性格测评，AI测评，人才测评，用心呵护个人用户的留学生涯，倾力协助DIY效能',
-				}, {
-					id: 2,
-					label: '亮点二',
-					title: '底层算法智能支持',
-					des: '基于职业规划，性格测评，AI测评，人才测评，用心呵护个人用户的留学生涯，倾力协助DIY效能',
-				}, {
-					id: 3,
-					label: '亮点三',
-					title: '底层算法智能支持',
-					des: '基于职业规划，性格测评，AI测评，人才测评，用心呵护个人用户的留学生涯，倾力协助DIY效能',
-				}],
+				aiImg:'',
+				slogan: {},
+				introduction: {},
+				videoTopUrl: '',
+				sparkleList: [],
 				advantageList: [{
 					id: 1,
 					icon: 'el-icon-s-help',
@@ -148,46 +135,84 @@
 				}, {
 					id: 6,
 					icon: 'el-icon-s-help',
-					text: '界别评测',
+					text: '级别评测',
 				}],
-				zhuboList: [{
-					bgImg: zhubo,
-					id: 1,
-					title: '搭建成本高',
-					des: '真人直播成本高包括但不限于人力成本、销售提成、培训成本、设备成本、场地成本、拍摄成本、搭建成本等'
-				}, {
-					bgImg: zhubo,
-					id: 2,
-					title: '真人直播效率低',
-					des: '真人主播长时间直播容易精力不足，状态不佳无法做到全天候、全时段、日不落式直播'
-				}, {
-					bgImg: zhubo,
-					id: 3,
-					title: '真人主播不可控因素多',
-					des: '真人主播存在专业度不足、身体状态不稳定、离职、话术违规导致账号限流、封禁等'
-				}]
+				zhuboList: []
 			}
 		},
 		methods: {
 			async getData() {
-				let usecase = [];
-				let res = await userSide({
+				let usecase = [],
+					sparkleList = [],
+					zhuboList = [],
+					slogan = {},
+					videoTopUrl = "",
+					introduction = {},
+					aiImg="";
+				let result = await Promise.all([userSide({
 					type: 1,
 					limit: 5
-				})
-				res.data.map(item => {
-					usecase.push({
-						engineerUrl: item.image_text,
-						desc: item.text,
-						id: item.id,
-						name: item.name
-					})
+				}), suanFa1(), bannerApi({
+					type: 28,
+					limit: 3
+				}), AiTextConfigApi(), videoApi({
+					type: 14,
+					limit: 1
+				}), videoApi({
+					type: 14,
+					limit: 1
+				}), bannerApi({
+					type: 29,
+					limit: 1
+				})]);
+				result.map((res, idx) => {
+					switch (idx) {
+						case 0:
+							res.data.map(item => {
+								usecase.push({
+									engineerUrl: item.image_text,
+									desc: item.text,
+									id: item.id,
+									name: item.name
+								})
+							})
+							break;
+						case 1:
+							sparkleList = res.data;
+							break;
+						case 2:
+							zhuboList = res.data;
+							break;
+						case 3:
+							slogan = res.data;
+							break;
+						case 4:
+							videoTopUrl = res.data[0].video_text;
+							break;
+						case 5:
+							introduction = {
+								imageUrl: res.data[0].image_text,
+								videoUrl: res.data[0].video_text,
+							};
+							break;
+						case 6:
+						aiImg = res.data[0].image_text;
+							break;
+						default:
+							break;
+					}
 				})
 				this.usecase = usecase;
+				this.sparkleList = sparkleList;
+				this.zhuboList = zhuboList;
+				this.slogan = slogan;
+				this.videoTopUrl = videoTopUrl;
+				this.introduction = introduction;
+				this.aiImg = aiImg;
 			},
 			toDetail() {
 				uni.navigateTo({
-					url:"/pages/study/aiTutor/detail"
+					url: "/pages/study/aiTutor/detail"
 				})
 			},
 		}

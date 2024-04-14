@@ -152,8 +152,8 @@
 		},
 		methods: {
 			 numberLazyLoad() {
-			      let rect = document.getElementById("anchorPoint").getBoundingClientRect();
-			      if (rect.top < 300) {
+			      let rect = document.getElementById("anchorPoint")?.getBoundingClientRect();
+			      if (rect&&rect.top < 300) {
 			        this.$refs.counToRef[0].start();
 			        this.$refs.counToRef[1].start();
 			        this.$refs.counToRef[2].start();

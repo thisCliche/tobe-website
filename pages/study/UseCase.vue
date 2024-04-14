@@ -1,18 +1,21 @@
 <template>
 	<view class="home-case">
-		<VueSlickCarousel v-bind="settings">
-			<view class="item" v-for="item in usecase" :key="item.id">
-				<view class="imgWrap">
-					<view class="header"><el-avatar shape="circle" :src="item.engineerUrl"></el-avatar></view>
-					<view class="name">{{item.name}}</view>
-					<view class="nis">大学大学大学大学大学</view>
-					<view class="city">韩国</view>
-					<view class="line"></view>
-					<view class="des">{{item.desc}}</view>
+		<template v-if="usecase.length">
+			<VueSlickCarousel v-bind="settings">
 
+				<view class="item" v-for="item in usecase" :key="item.id">
+					<view class="imgWrap">
+						<view class="header"><el-avatar shape="circle" :src="item.engineerUrl"></el-avatar></view>
+						<view class="name">{{item.name}}</view>
+						<view class="nis">大学大学大学大学大学</view>
+						<view class="city">韩国</view>
+						<view class="line"></view>
+						<view class="des">{{item.desc}}</view>
+					</view>
 				</view>
-			</view>
-		</VueSlickCarousel>
+
+			</VueSlickCarousel>
+		</template>
 	</view>
 </template>
 
@@ -47,7 +50,6 @@
 </script>
 
 <style lang="scss" scoped>
-
 	.home-case {
 		@include mt(16px);
 		height: 400px;

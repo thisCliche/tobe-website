@@ -1,9 +1,14 @@
 <template>
 	<view>
-		<el-dialog title="支付选项" :visible.sync="dialogVisible" width="940px" :close-on-click-modal="false">
+		<el-dialog title="支付选项" :visible.sync="dialogVisible" width="940px" @close="closeHandle" :close-on-click-modal="false">
 			<view class="wrap">
-				<view class="img">
-					<img :src="aiImg" alt="" />
+				<view class="wrapL">
+					<el-radio-group v-model="type" @input="changePayType">
+						<el-radio-button label="alipay">支付宝</el-radio-button>
+						<el-radio-button label="wechat">微信</el-radio-button>
+					</el-radio-group>
+					<view class="">{{statusText==1?'等待支付...':'支付成功'}}</view>
+					<div class="qrcode" ref="qrCodeUrl"></div>
 				</view>
 				<view class="wrapR">
 					<view class="optionList">
@@ -15,7 +20,7 @@
 							<view class="list-content">
 								{{item.name}}
 							</view>
-							<view class="list-money">
+							<view class="list-money" @click="changeGood">
 								{{item.active}}
 							</view>
 						</view>
@@ -28,32 +33,96 @@
 
 <script>
 	import aiImg from '@image/ai.jpeg'
+	import QRCode from 'qrcodejs2'
+	import {
+		createOrderApi,
+		probationApi,
+		GoodsForTypeApi,
+		getOrderIsPayApi
+	} from '@api/aiTutorApi.js'
 	export default {
 		data() {
 			return {
-				aiImg,
-				dialogVisible: true,
+				statusText:1, // 1未支付 2支付成功
+				checkTimer:null,
+				qrcode:null,
+				type: 'alipay',
+				dialogVisible: false,
+				order_id: "",
 				xiangmuList: [{
 					id: 1,
-					name: "7天/周卡",
+					name: "7次/周卡",
 					active: '免费试用',
 					isPopular: false
 				}, {
 					id: 2,
-					name: "30天/月卡",
+					name: "30次/月卡",
 					active: '19.9元',
 					isPopular: true
 				}, {
 					id: 1,
-					name: "365天/年卡",
+					name: "365次/年卡",
 					active: '199元',
 					isPopular: false
 				}]
 			}
 		},
 		methods: {
+			// 查询支付状态
+			checkPayStatus(){
+				this.checkTimer = setInterval(async()=>{
+					if(this.statusText==2){
+						clearInterval(this.checkTimer)
+					}else{
+						let res = await getOrderIsPayApi({order_id:this.order_id});
+						if(res.msg=='支付成功'){
+							this.statusText= 2;
+						}
+					}
+				},2000)
+			},
+			creatQrCode(text) {
+				if(this.qrcode){
+					this.qrcode.makeCode(text)
+				}else{
+					this.qrcode = new QRCode(this.$refs.qrCodeUrl, {
+						text,
+						width: 200,
+						height: 200,
+						colorDark: '#000000',
+						colorLight: '#ffffff',
+						correctLevel: QRCode.CorrectLevel.H
+					})
+				}
+				this.checkPayStatus();
+			},
+			// 获取支付二维码
+			async getPayQrCode() {
+				let res = await createOrderApi({
+					type: this.type,
+					goods_id: 2
+				})
+				this.creatQrCode(res.msg.qr_code)
+				this.order_id = res.order_id;
+			},
+			async getGoodsForTypeApi() {
+				let res = await GoodsForTypeApi({
+					type: 3
+				});
+				this.getPayQrCode();
+			},
+			changeGood() {
+				console.log('切换支付商品')
+			},
+			changePayType(e) {
+				this.getPayQrCode();
+			},
 			openDialog() {
 				this.dialogVisible = true;
+				this.getGoodsForTypeApi();
+			},
+			closeHandle(){
+				clearInterval(this.checkTimer)
 			}
 		}
 	}
@@ -62,15 +131,9 @@
 <style lang="scss" scoped>
 	.wrap {
 		@include fj();
-
-		.img {
-			@include wh(668px, 570px);
-			border-radius: 10px;
-			overflow: hidden;
-
-			img {
-				@include imgLayout;
-			}
+			
+		.qrcode{
+			@include mt(20px);
 		}
 
 		.top-list {
@@ -90,7 +153,7 @@
 				border-radius: 20px;
 
 				&::before {
-					content: "Most POPULAR";
+					content: "当前选择";
 					position: absolute;
 					top: -10px;
 					left: 45%;
@@ -155,7 +218,8 @@
 				border: 1px solid rgb(0, 188, 142);
 				border-radius: 4px;
 				background: rgb(0, 188, 142);
-				&:hover{
+
+				&:hover {
 					background: rgb(0, 225, 169);
 				}
 			}

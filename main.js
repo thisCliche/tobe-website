@@ -18,7 +18,6 @@ App.mpType = 'app'
 Vue.prototype.$wow = wow;
 Vue.use(ElementUI).use(Waves).use(VueTypedJs);
 Vue.component('MyFoot',MyFoot);
-console.log(initApp)
 initApp()  // 路由拦截
 
 const app = new Vue({

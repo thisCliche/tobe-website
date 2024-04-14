@@ -34,9 +34,9 @@
 							<el-form-item key="23" label="密码" prop="password" v-else>
 								<el-input type="password" v-model="loginForm.password"></el-input>
 							</el-form-item>
-							<el-form-item label="图片验证码" prop="vialidCode" v-if="!isValidCodeLogin">
+							<el-form-item label="图片验证码" prop="image_captcha" v-if="!isValidCodeLogin">
 								<view class="validCodeWrap">
-									<el-input class="validCode" v-model="loginForm.vialidCode"></el-input>
+									<el-input class="validCode" v-model="loginForm.image_captcha"></el-input>
 									<img @click="changeUrl" :src="vialidImgUrl" alt="" />
 								</view>
 							</el-form-item>
@@ -148,6 +148,7 @@
 		registerRequset,
 		resetPwdRequset
 	} from '@api/loginApi.js'
+	import baseURL from '@assets/constant/requestUrl.js'
 	export default {
 		name: 'login',
 		data() {
@@ -177,6 +178,7 @@
 			};
 
 			return {
+				random_code:0,
 				isValidCodeLogin: false,
 				displayFlag: 1, //1登录 2 忘记密码 3 注册 4 验证码登录
 				phoneregisRight: false, // 标记手机号是否正确
@@ -184,13 +186,14 @@
 				timerRegister: null,
 				codeDisRegister: true,
 				loginBg,
-				vialidImgUrl:'https://oaapitest.wuxunkj.com/v1/sys/login/getCaptcha?5',
+				vialidImgUrl:baseURL+`/captcha/0`,
 				loginForm: {
 					mobile: '',
 					password: '',
 					captcha: '',
-					vialidCode:'',
+					image_captcha:'',
 					type: 1,
+					random_code:0,
 				},
 				forgetForm: {
 					mobile: '',
@@ -324,7 +327,7 @@
 						message: '请输入验证码',
 						trigger: 'blur'
 					}, ],
-					vialidCode: [{
+					image_captcha: [{
 						required: true,
 						message: '请输入验证码',
 						trigger: 'blur'
@@ -334,8 +337,9 @@
 		},
 		methods: {
 			changeUrl(){
-				let random = parseInt(Math.random()*10);
-				this.vialidImgUrl = `https://oaapitest.wuxunkj.com/v1/sys/login/getCaptcha?${random}`
+				let random = parseInt(Math.random()*100);
+				this.loginForm.random_code = random;
+				this.vialidImgUrl = baseURL+`/captcha/${random}`
 			},
 			async getCode(formName) {
 				if (!this.phoneregisRight) return;

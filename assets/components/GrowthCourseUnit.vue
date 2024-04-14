@@ -1,30 +1,30 @@
 <template>
-	<view @click="toDetail">
+	<view @click="toDetail" v-if="info.hasOwnProperty('image_text')">
 		<view class="video-card-wrap" v-if="isColumn">
 			<view class="video-card-img">
-				<img :src="imgUrl" alt="" />
+				<img :src="info.image_text" alt="" />
 				<view class="video-play-info">
-					<view class="info-left"><i class="el-icon-video-play" /><text>2.5万</text></view>
-					<view class="info-right">12:30</view>
+					<view class="info-left"><i class="el-icon-video-play" /><text>{{info.times}}</text></view>
+					<view class="info-right">{{info.sort}}</view>
 				</view>
 			</view>
 			<view class="video-card-info">
 				<view class="video-card-info-tit">
-					酷态科30W电能块值不值得买？一期视频告诉你！
+					{{info.name}}
 				</view>
 			</view>
 		</view>
 		<view class="video-card-wrap-row" v-else>
 			<view class="video-card-img">
-				<img :src="imgUrl" alt="" />
+				<img :src="info.image_text" alt="" />
 			</view>
 			<view class="video-card-info">
 				<view class="video-card-info-tit">
-					酷态科30W电能块值不值得买？一期视频告诉你！
+					{{info.name}}
 				</view>
 				<view class="video-play-info">
-					<view class="info-left"><i class="el-icon-video-play" /><text>2.5万</text></view>
-					<view class="info-right">12:30</view>
+					<view class="info-left"><i class="el-icon-video-play" /><text>{{info.times}}</text></view>
+					<view class="info-right">{{info.sort}}</view>
 				</view>
 			</view>
 		</view>
@@ -32,19 +32,21 @@
 </template>
 
 <script>
-	import imgUrl from '@image/testVideoCover.png'
 	export default {
 		name: 'growthCourseUnit',
 		props: {
 			isColumn: {
 				type: Boolean,
 				default: true,
+			},
+			info:{
+				type:Object,
+				default:{}
 			}
-
 		},
 		data() {
 			return {
-				imgUrl,
+
 			}
 		},
 		methods: {
