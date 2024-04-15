@@ -31,17 +31,20 @@
 									<img :src="item.avtar" alt="" srcset="" />
 								</view>
 							</view>
-							<view class="" v-if="item.text!=''">
+							<view class="limitWith" v-if="item.text!=''">
 								<view class="paragraphR">
 									{{item.text}}
 								</view>
 							</view>
 						</view>
-						<view class="paragraphR" v-if="isTyping">
-							<vue-typed-js :strings="strings" @onComplete="typeComplete" :showCursor="false">
-								<span class="typing"></span>
-							</vue-typed-js>
+						<view class="limitWith" v-if="isTyping">
+							<view class="paragraphR">
+								<vue-typed-js :strings="strings" @onComplete="typeComplete" :showCursor="false">
+									<span class="typing"></span>
+								</vue-typed-js>
+							</view>
 						</view>
+
 					</view>
 					<view class="inputWrap">
 						<el-input v-model="question" placeholder="请输入问题并点击发送" @keyup.enter.native="sendHandle"></el-input>
@@ -168,7 +171,7 @@
 					} else {
 						clearInterval(this.scrollTimer);
 					}
-				}, 2000)
+				}, 1000)
 			},
 			typeComplete() {
 				this.isTyping = false;
@@ -189,6 +192,10 @@
 				}
 			},
 			async resolveText(content) {
+				// 预先更新一次滚动条位置；
+				this.$nextTick(() => {
+					this.recordElement.scrollTop = this.recordElement.scrollHeight;
+				})
 				try {
 					let res = await FastGptRetApi({
 						content
@@ -311,6 +318,10 @@
 				height: 580px;
 				overflow-y: auto;
 
+				.limitWith {
+					width: 730px;
+				}
+
 				.paragraphR {
 					@include ml(50px);
 					padding: 14px 16px;
@@ -321,7 +332,7 @@
 				.paragraph {
 
 					.paragraphL {
-						@include mb(10px);
+						margin: 6px 0;
 						@include wh(40px, 40px);
 						overflow: hidden;
 						border-radius: 10px;
