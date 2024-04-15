@@ -77,17 +77,17 @@
 				国内外夏校项目
 			</view>
 			<view class="container4content">
-				<view class="wapItem" v-for="(item, index) in 8" :key="index">
+				<view class="wapItem" v-for="(item, index) in otherList" :key="index" @click="getDtail(item.id)">
 					<view class="item-img">
-						<img src="" alt="" srcset="" />
+						<img :src="item.image" alt="" srcset="" />
 					</view>
 					<view class="item-logo">
-						<img src="" alt="" srcset="" />
+						<img :src="item.logo" alt="" srcset="" />
 					</view>
-					<view class="title"> 人工智能 </view>
-					<view class="subtitle"> 线上 </view>
+					<view class="title"> {{item.name}} </view>
+					<view class="subtitle"> {{item.english_name}} </view>
 					<view class="item-wap">
-						简介简介简介简介简介简介简介简介简介简介简介简介简介简介
+				{{item.introduction}}
 					</view>
 				</view>
 
@@ -98,25 +98,22 @@
 
 		<view class="container5">
 			<view class="wap1">
-				<el-select v-model="country" placeholder="地区" class="nselect">
+				<el-select v-model="area" multiple placeholder="地区" class="nselect" @change='getResoce'  >
 					<el-option v-for="item in countryList" :key="item.value" :label="item.label" :value="item.value">
 					</el-option>
 				</el-select>
 
-				<el-select v-model="class_format" placeholder="线上/线下">
-					<el-option v-for="item in class_format" :key="item.value" :label="item.label" :value="item.value">
+				<el-select v-model="class_format" multiple placeholder="线上/线下" @change='getResoce'>
+					<el-option v-for="item in class_formatList" :key="item.value" :label="item.label"
+						:value="item.value">
 					</el-option>
 				</el-select>
 
-				<el-select v-model="is_credit" placeholder="项目方向" class="nselect">
+				<el-select v-model="project_direction" multiple placeholder="项目方向" class="nselect" @change='getResoce'>
 					<el-option v-for="item in is_creditList" :key="item.value" :label="item.label" :value="item.value">
 					</el-option>
 				</el-select>
 
-				<el-select v-model="major" placeholder="年龄">
-					<el-option v-for="item in majorList" :key="item.value" :label="item.label" :value="item.value">
-					</el-option>
-				</el-select>
 				<view class="footer">
 					<view class="foot-img">
 						<img src="" alt="" srcset="" />
@@ -125,30 +122,30 @@
 				</view>
 			</view>
 			<view class="wap2">
-				<view class="wapItem" v-for="(item, index) in 12" :key="index">
+				<view class="wapItem" v-for="(item, index) in chineseList" :key="index" @click="getDtail(item.id)">
 					<view class="item-img">
-						<img src="" alt="" srcset="" />
+						<img :src="item.image" alt="" srcset="" />
 					</view>
 					<view class="item-logo">
-						<img src="" alt="" srcset="" />
+						<img :src="item.logo" alt="" srcset="" />
 					</view>
-					<view class="title"> 北京鼎石学校 </view>
-					<view class="subtitle"> Keystone Academy </view>
+					<view class="title"> {{item.name}} </view>
+					<view class="subtitle"> {{item.english_name}}  </view>
 					<view class="item-wap">
 						<view class="item-item">
-							站点 ：北京
+							地点 ：{{item.area_text}}
 
 						</view>
 						<view class="item-item">
-							类型 ：公办
+							类型 ：{{item.type}}
 
 						</view>
 						<view class="item-item">
-							课程 ：IBM
+							课程 ：{{item.class}}
 
 						</view>
 						<view class="item-item">
-							学费 ：100$
+							学费 ：{{item.tuition_fee}}
 
 						</view>
 
@@ -177,7 +174,9 @@
 		videoApi,
 		bannerApi,
 		configApi,
-		schoolResourceSearch
+		schoolResourceSearch,
+		schoolDetail,
+		schoolList
 
 	} from '@api/resource.js'
 	export default {
@@ -190,31 +189,16 @@
 			return {
 				introduction: {},
 				container3Banner: [],
-				country: [],
-				countryList: [{
-						value: "1",
-						label: "线上",
-					},
-					{
-						value: "2",
-						label: "线下",
-					},
-				],
+				area: [],
+				countryList: [],
 
+				class_formatList: [],
 				class_format: [],
-				class_formatList: [{
-						value: "1",
-						label: "线上",
-					},
-					{
-						value: "2",
-						label: "线下",
-					},
-				],
-				is_credit:[],
-				is_creditList:[],
-				major:[],
-				majorList:[],
+				chineseList: [],
+				otherList: [],
+
+				project_direction: [],
+				is_creditList: [],
 				cePinginfo: {
 					one: {
 						title: '',
@@ -329,18 +313,23 @@
 							})
 						})
 						this.container3Banner.push(data[0])
-					}
-					else if (idx == 5) {
-					const data=res.data 
-						  for (const item in data.country){
-							  console.log(item)
-							  this.countryList.push({
-								  label:data.country[item],
-								  value:item
-								  
-							  })
-						  }
-						
+					} else if (idx == 5) {
+						const {
+							area,
+							class_format,
+							project_direction
+						} = res.data
+						this.countryList = area
+						this.class_formatList = class_format
+						this.is_creditList = project_direction
+						let arr = area.map(item => {
+							return item.id
+						})
+						const [a, b] = [arr.slice(0, 2), arr.slice(2)]
+
+						this.getDiffRecource(a, 1)
+						this.getDiffRecource(b, 2)
+
 					}
 
 				})
@@ -371,9 +360,51 @@
 
 					}
 				}
-				
+
 
 			},
+
+			getDiffRecource(prams, type) {
+				let params = {
+					area: prams,
+
+				}
+				schoolList(params).then(res => {
+					const data = res.data
+
+					if (type == 1) {
+						this.chineseList = data
+					} else if (type == 2) {
+						this.otherList = data
+					}
+
+
+
+				})
+
+
+			},
+
+			getResoce() {
+
+				schoolList({
+					area: this.area,
+					class_format: this.class_format,
+					project_direction: this.project_direction
+				}).then(res => {
+					this.chineseList=res.data
+
+				})
+
+
+			},
+			getDtail(val) {
+				// 当前页面发起跳转
+				uni.navigateTo({
+					url: `/pages/resource/school/detail?id=${val}&type=3`
+				});
+			}
+			
 
 		}
 	}
@@ -463,6 +494,7 @@
 					height: 420px;
 					box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 					box-sizing: border-box;
+					cursor: pointer;
 
 					.item-img {
 						width: 100%;

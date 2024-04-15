@@ -4,10 +4,11 @@ let routeUrl = {
 	banner: "/index/index/getOtherBannerList",
 	config: "/index/index/getPlanningConfig",
 	textConfig: "/index/index/getPlanningClassConfig",
-	schoolResourceSearch: "/index/school/getResourceSearchList",
-	schoolSearchList: "/index/school/getSchoolSearchList",
+	schoolResourceSearch: "/index/resource/getSummerSchoolSearchList",
+	schoolList:'/index/resource/getSummerSchoolList',
+	schoolDetail:'/index/resource/getSummerSchoolDetail',
 	resourceList: "/index/resource/getResourceList",
-	schoolList:'/index/school/getSchoolList',
+	
 	resourceDetail:'/index/resource/getDetail',
 	scientificSearch:"index/resource/getScientificSearchList"
 	
@@ -69,15 +70,25 @@ export function schoolResourceSearch(params) {
 	})
 }
 
-//高中筛选
-
-export function schoolSchoolSearch(params) {
+//夏校列表
+export function getSchoolList(params) {
 	return axios({
-		url: routeUrl.schoolSearchList,
+		url: routeUrl.schoolList,
 		method: 'get',
 		params,
 	})
 }
+//夏校详情
+export function schoolDetail(params) {
+	return axios({
+		url: routeUrl.schoolDetail,
+		method: 'get',
+		params,
+	})
+}
+
+
+
 //资源列表
 
 export function resourceList(params) {

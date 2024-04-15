@@ -112,12 +112,7 @@
 			},
 			getShouChang() {
 				this.isShow = !this.isShow
-				if (this.isShow) {
-					this.centerDialogVisible = true
-
-
-				}
-
+				
 			}
 		},
 	};
