@@ -1,14 +1,13 @@
 <template>
 	<view>
-		<el-dialog title="支付选项" :visible.sync="dialogVisible" width="840px" @close="closeHandle"
-			:close-on-click-modal="false">
+		<el-dialog title="支付选项" :visible.sync="dialogVisible" width="940px" @close="closeHandle" :close-on-click-modal="false">
 			<view class="wrap">
 				<view class="wrapL">
 					<el-radio-group v-model="type" @input="changePayType">
 						<el-radio-button label="alipay">支付宝</el-radio-button>
 						<el-radio-button label="wechat">微信</el-radio-button>
 					</el-radio-group>
-					<view class="statusClass">{{statusText|statusTextEsc}}</view>
+					<view class="">{{statusText==1?'等待支付...':'支付成功'}}</view>
 					<div class="qrcode" ref="qrCodeUrl"></div>
 				</view>
 				<view class="wrapR">
@@ -16,13 +15,13 @@
 						<view class="top-list" v-for="(item,index) in xiangmuList "
 							:class="[item.isPopular ? 'isPopular' :'noPopular']" :key="index">
 							<view class="list-title">
-								{{item.goodName}}
+								口语练习
 							</view>
 							<view class="list-content">
 								{{item.name}}
 							</view>
-							<view class="list-money" @click="changeGood(item)">
-								{{item.price}}元
+							<view class="list-money" @click="changeGood">
+								{{item.active}}
 							</view>
 						</view>
 					</view>
@@ -40,61 +39,52 @@
 		probationApi,
 		GoodsForTypeApi,
 		getOrderIsPayApi
-	} from '@api/commonApi.js'
+	} from '@api/aiTutorApi.js'
 	export default {
 		data() {
 			return {
-				statusText: 3, // 1未支付 2支付成功 3正在生成二维码
-				checkTimer: null,
-				qrcode: null,
+				statusText:1, // 1未支付 2支付成功
+				checkTimer:null,
+				qrcode:null,
 				type: 'alipay',
-				goods_type: 4, //商品类型
-				goods_id: 0, // 当前选中的商品id
-				goods_idx: 0, // 当前选中商品的下标
 				dialogVisible: false,
 				order_id: "",
-				xiangmuList: [],
+				xiangmuList: [{
+					id: 1,
+					name: "7次/周卡",
+					active: '免费试用',
+					isPopular: false
+				}, {
+					id: 2,
+					name: "30次/月卡",
+					active: '19.9元',
+					isPopular: true
+				}, {
+					id: 1,
+					name: "365次/年卡",
+					active: '199元',
+					isPopular: false
+				}]
 			}
-		},
-		filters: {
-			statusTextEsc(val) {
-				let res = '';
-				switch (val) {
-					case 1:
-						res = '等待支付...'
-						break;
-					case 2:
-						res = '支付成功'
-						break;
-					case 3:
-						res = '正在生成二维码'
-						break;
-					default:
-						break;
-				}
-				return res;
-			},
 		},
 		methods: {
 			// 查询支付状态
-			checkPayStatus() {
-				this.checkTimer = setInterval(async () => {
-					if (this.statusText == 2) {
+			checkPayStatus(){
+				this.checkTimer = setInterval(async()=>{
+					if(this.statusText==2){
 						clearInterval(this.checkTimer)
-					} else {
-						let res = await getOrderIsPayApi({
-							order_id: this.order_id
-						});
-						if (res.msg == '支付成功') {
-							this.statusText = 2;
+					}else{
+						let res = await getOrderIsPayApi({order_id:this.order_id});
+						if(res.msg=='支付成功'){
+							this.statusText= 2;
 						}
 					}
-				}, 3000)
+				},2000)
 			},
 			creatQrCode(text) {
-				if (this.qrcode) {
+				if(this.qrcode){
 					this.qrcode.makeCode(text)
-				} else {
+				}else{
 					this.qrcode = new QRCode(this.$refs.qrCodeUrl, {
 						text,
 						width: 200,
@@ -104,60 +94,25 @@
 						correctLevel: QRCode.CorrectLevel.H
 					})
 				}
-				this.statusText = 1;
 				this.checkPayStatus();
 			},
 			// 获取支付二维码
 			async getPayQrCode() {
-				this.statusText = 3;
 				let res = await createOrderApi({
 					type: this.type,
-					goods_id: this.goods_id,
+					goods_id: 2
 				})
 				this.creatQrCode(res.msg.qr_code)
 				this.order_id = res.order_id;
 			},
 			async getGoodsForTypeApi() {
 				let res = await GoodsForTypeApi({
-					type: this.goods_type
+					type: 3
 				});
-				// 默认选中第一个有价格的，然后添加title名称
-				let isPopularFlag = true,
-					goods_id = 0,
-					currentIdx = 0;
-				let arr = res.msg.map((item, idx) => {
-					item.goodName = "AI测评";
-					item.idx = idx;
-					if (parseFloat(item.price) != 0 && isPopularFlag) {
-						isPopularFlag = false;
-						goods_id = item.id;
-						currentIdx = idx;
-						item.isPopular = true;
-					} else {
-						item.isPopular = false;
-					}
-					return item
-				})
-				this.goods_idx = currentIdx;
-				this.goods_id = goods_id;
-				this.xiangmuList = arr;
 				this.getPayQrCode();
 			},
-			async changeGood(item) {
-				if (item.price == '0.00') {
-					// 请求试用接口 但需要判断是否有试用机会
-					let res = await probationApi({
-						type: this.goods_type
-					});
-				} else {
-					let oldObj = this.xiangmuList[this.goods_idx];
-					oldObj.isPopular = false;
-					this.$set(this.xiangmuList, this.goods_idx, oldObj);
-					item.isPopular = true;
-					this.goods_idx = item.idx;
-					this.goods_id = item.id;
-					this.getPayQrCode();
-				}
+			changeGood() {
+				console.log('切换支付商品')
 			},
 			changePayType(e) {
 				this.getPayQrCode();
@@ -166,7 +121,7 @@
 				this.dialogVisible = true;
 				this.getGoodsForTypeApi();
 			},
-			closeHandle() {
+			closeHandle(){
 				clearInterval(this.checkTimer)
 			}
 		}
@@ -176,14 +131,9 @@
 <style lang="scss" scoped>
 	.wrap {
 		@include fj();
-
-		.statusClass {
-			margin: 20px 0;
-			// @include mt(20px);
-		}
-
-		.qrcode {
-			// @include mt(20px);
+			
+		.qrcode{
+			@include mt(20px);
 		}
 
 		.top-list {

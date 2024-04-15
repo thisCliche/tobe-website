@@ -6,7 +6,7 @@ import baseURL from '../constant/requestUrl.js'
 
 let config = {
   baseURL,
-  timeout: 20000,
+  timeout: 10000,
   headers: {
     "Content-Type": "application/json;charset=UTF-8"
   }
