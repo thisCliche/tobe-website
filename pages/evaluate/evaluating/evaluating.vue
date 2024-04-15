@@ -14,7 +14,7 @@
 						<view class="" v-for="(item,idx) in questionList" :key="item.id">
 							<view v-if="idx==currentIndex">
 								<view class="question">{{item.title}}</view>
-								<view class="showtransition" v-for="child in item.optionList">
+								<view class="showtransition" v-for="child in item.optionList" :key="child.id">
 									<view :class="item.Selected == child.select?'checked':''" class="option" @click="select(child.select)"
 										v-waves>
 										{{child.option}}
@@ -23,9 +23,9 @@
 							</view>
 						</view>
 						<view class="btnWrap">
-							<el-button type="primary" plain round @click="pre" key="1" v-if="isPre">上一题</el-button>
-							<el-button type="success" plain round @click="next" key="2" v-if="isNext">下一题</el-button>
-							<el-button type="success" plain round @click="submit" key="3" v-if="isOver"
+							<el-button type="primary" plain round @click="pre" key="100" v-if="isPre">上一题</el-button>
+							<el-button type="success" plain round @click="next" key="200" v-if="isNext">下一题</el-button>
+							<el-button type="success" plain round @click="submit" key="300" v-if="isOver"
 								:disabled="submited">提交</el-button>
 						</view>
 					</view>
@@ -33,7 +33,7 @@
 			</view>
 			<view class="assessFoot">
 				<view class="btn">
-					<el-button round type="info" @click="openDialog">立即测试</el-button>
+					<el-button round type="info" @click="openDialog">开始评测</el-button>
 				</view>
 				<view class="footer-head">测试说明</view>
 				<view class="profile">
@@ -65,6 +65,7 @@
 		},
 		data() {
 			return {
+				lockStatus:true,
 				introduction: '',
 				isOver: false,
 				process: 0,
@@ -99,9 +100,13 @@
 			}
 		},
 		created() {
+			// 默认未锁定状态，判断当前账号是否有评测机会
 			this.getData();
 		},
 		methods: {
+			async isChance(){
+				
+			},
 			async submit() {
 				if (this.submited) return;
 				let score = 0,
@@ -183,6 +188,7 @@
 				}
 			},
 			select(select) {
+				if(this.lockStatus) return this.$notify.info({title:'提示',message:'请先点击开始评测'});
 				let idx = this.currentIndex;
 				this.questionList[idx].Selected = select;
 				if (idx == this.maxIdx) {
