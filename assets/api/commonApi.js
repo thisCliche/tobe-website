@@ -4,6 +4,7 @@ let routeUrl = {
 	probation:"/index/index/probation",
 	getGoodsForType:"/index/index/getGoodsForType",
 	getOrderIsPay:"/index/index/getOrderIsPay",
+	userIsHadBuy:"/index/index/userIsHadBuy",
 }
 
 export function GoodsForTypeApi(params) {
@@ -11,6 +12,13 @@ export function GoodsForTypeApi(params) {
 		url: routeUrl.getGoodsForType,
 		method: 'get',
 		params,
+	})
+}
+export function userIsHadBuyApi(data) {
+	return axios({
+		url: routeUrl.userIsHadBuy,
+		method: 'post',
+		data,
 	})
 }
 export function getOrderIsPayApi(data) {

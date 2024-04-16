@@ -2,19 +2,19 @@
 	<view class="growthCourseDetail">
 		<view class="detailWrap">
 			<view class="detailTitle">
-				<view class="title">国际教育带你全方位了解IB课程</view>
+				<view class="title">{{info.name}}</view>
 				<view class="info">
-					<i class="el-icon-video-play" /><text class="views">1.5万</text><text>2023-05-01</text>
+					<i class="el-icon-video-play" /><text class="views">{{info.times}}</text><text>{{info.updatetime}}</text>
 				</view>
 			</view>
 			<view class="videoWrap">
 				<view class="VideoPlay">
-					<video class="video-player" show-mute-btn autoplay :src="url" controls></video>
+					<video class="video-player" show-mute-btn autoplay :src="info.video_text" :poster="info.image_text" controls></video>
 				</view>
 				<view class="videoRecomm">
-					<view class="title">接下来播放</view>
-					<template v-for="(item,idx) in 4">
-						<growth-course-unit :isColumn="false"></growth-course-unit>
+					<view class="title">推荐播放</view>
+					<template v-for="(item,idx) in prev">
+						<growth-course-unit :isColumn="false" :info="item"></growth-course-unit>
 					</template>
 				</view>
 			</view>
@@ -25,6 +25,8 @@
 
 <script>
 	import GrowthCourseUnit from '@components/GrowthCourseUnit.vue'
+	import {CourseDetailApi} from '@api/growthCourseApi.js'
+	import {myFormatTime} from '@utils/tools.js'
 	export default {
 		name: 'growthCourseDetail',
 		components: {
@@ -32,11 +34,22 @@
 		},
 		data() {
 			return {
-				url: 'http://website.tobeapp.cn/uploads/20240326/14244fcd01825d54f112d872bcf69fb1.mp4',
+				info:{},
+				prev:[],
 			}
 		},
 		methods: {
-
+			async getData(id) {
+				let res = await CourseDetailApi({id});
+				// 需要鉴权 但是目前没有
+				res.data.now.updatetime = myFormatTime(res.data.now.updatetime)
+				this.info = res.data.now;
+				this.prev = res.data.prev;
+			},
+		},
+		created() {
+			let id = this.$route.query.id;
+			this.getData(id);
 		}
 	}
 </script>
@@ -78,7 +91,7 @@
 				@include mt(10px);
 
 				.views {
-					@include mr(10px);
+					margin: 0 10px 0 6px;
 				}
 			}
 		}

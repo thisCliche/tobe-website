@@ -40,7 +40,9 @@
 			<view class="commTitle">
 				<view class="title">通过我们的规划录取的部分offer</view>
 				<view class="hr"></view>
-				<home-case :homecase="homecase"></home-case>
+				<view v-if="homecase.length">
+					<home-case :homecase="homecase"></home-case>
+				</view>
 			</view>
 		</view>
 		<my-foot></my-foot>

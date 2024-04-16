@@ -26,11 +26,14 @@ service.interceptors.request.use(config => {
 service.interceptors.response.use(
   response => {
     let data = response.data
-    // 未完善 缺少权限判断 登录过期等等
     if (data.code == 200) {
       return data;
     } else {
-      Notification.error({title:'错误',message:data.error})
+			if(data.hasOwnProperty('msg')){
+				Notification.info({title:'提示',message:data.msg})
+			}else{
+				Notification.error({title:'错误',message:data.error})
+			}
       return Promise.reject(data);
     }
   },

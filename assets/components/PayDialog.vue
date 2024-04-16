@@ -36,19 +36,27 @@
 	import aiImg from '@image/ai.jpeg'
 	import QRCode from 'qrcodejs2'
 	import {
+		goodsType
+	} from '@utils/staticData.js'
+	import {
 		createOrderApi,
 		probationApi,
 		GoodsForTypeApi,
 		getOrderIsPayApi
 	} from '@api/commonApi.js'
 	export default {
+		props: {
+			goods_type: {
+				type: String,
+				default: '0',
+			},
+		},
 		data() {
 			return {
 				statusText: 3, // 1未支付 2支付成功 3正在生成二维码
 				checkTimer: null,
 				qrcode: null,
 				type: 'alipay',
-				goods_type: 4, //商品类型
 				goods_id: 0, // 当前选中的商品id
 				goods_idx: 0, // 当前选中商品的下标
 				dialogVisible: false,
@@ -64,7 +72,7 @@
 						res = '等待支付...'
 						break;
 					case 2:
-						res = '支付成功'
+						res = '支付成功,请开始使用'
 						break;
 					case 3:
 						res = '正在生成二维码'
@@ -87,6 +95,9 @@
 						});
 						if (res.msg == '支付成功') {
 							this.statusText = 2;
+							setTimeout(() => {
+								this.dialogVisible = false;
+							}, 2000)
 						}
 					}
 				}, 3000)
@@ -121,12 +132,13 @@
 				let res = await GoodsForTypeApi({
 					type: this.goods_type
 				});
-				// 默认选中第一个有价格的，然后添加title名称
 				let isPopularFlag = true,
 					goods_id = 0,
-					currentIdx = 0;
+					currentIdx = 0,
+					goodName = '';
+				goodName = goodsType.find(item => item.type == res.msg[0].type).name;
 				let arr = res.msg.map((item, idx) => {
-					item.goodName = "AI测评";
+					item.goodName = goodName;
 					item.idx = idx;
 					if (parseFloat(item.price) != 0 && isPopularFlag) {
 						isPopularFlag = false;
@@ -149,6 +161,10 @@
 					let res = await probationApi({
 						type: this.goods_type
 					});
+					if (res.code == 200) {
+						this.$notify.success('试用成功');
+						this.dialogVisible = false;
+					}
 				} else {
 					let oldObj = this.xiangmuList[this.goods_idx];
 					oldObj.isPopular = false;
