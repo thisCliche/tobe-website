@@ -53,7 +53,7 @@
 <script>
 import VideoProfile from "@/assets/components/VideoProfile.vue";
 import HomeCase from "../HomeCase.vue";
-import { schoolDetail } from "@api/resource.js";
+import { schoolDetail,setResourceCollect} from "@api/resource.js";
 export default {
   name: "PagesIndex",
   components: {
@@ -89,8 +89,24 @@ export default {
 
     },
 	
-	getShouChang() {
-	  this.isShow = !this.isShow;
+	 async getShouChang() {
+    if(!this.isShow){
+       await setResourceCollect({
+        id: this.descript.id,
+       type:"夏校" ,
+      });
+      this.isShow = !this.isShow
+      
+
+      
+    }
+    else{
+      this.$message({
+          message: '已经收藏,无须重复收藏',
+          type: 'warning'
+        });
+    }
+    
 	},
   },
 };

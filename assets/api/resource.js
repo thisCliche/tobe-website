@@ -8,9 +8,9 @@ let routeUrl = {
 	schoolList:'/index/resource/getSummerSchoolList',
 	schoolDetail:'/index/resource/getSummerSchoolDetail',
 	resourceList: "/index/resource/getResourceList",
-	
 	resourceDetail:'/index/resource/getDetail',
-	scientificSearch:"index/resource/getScientificSearchList"
+	scientificSearch:"index/resource/getScientificSearchList",
+	resourceCollect: "/index/resource/collect",
 	
 }
 
@@ -114,7 +114,13 @@ export function resourceDetail(params) {
 		params,
 	})
 }
-
+export function setResourceCollect(data) {
+	return axios({
+		url: routeUrl.resourceCollect,
+		method: 'post',
+		data,
+	})
+}
 
 
 

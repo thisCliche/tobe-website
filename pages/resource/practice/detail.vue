@@ -33,7 +33,7 @@
 <script>
 import { tagIcon } from "../export.js";
 
-import { resourceDetail } from "@api/resource.js";
+import { resourceDetail, setResourceCollect } from "@api/resource.js";
 export default {
   name: "PagesIndex",
   data() {
@@ -65,8 +65,19 @@ export default {
         }
       });
     },
-    getShouChang() {
-      this.isShow = !this.isShow;
+    async getShouChang() {
+      if (!this.isShow) {
+        await setResourceCollect({
+          id: this.descript.id,
+          type:"实习" ,
+        });
+        this.isShow = !this.isShow;
+      } else {
+        this.$message({
+          message: "已经收藏,无须重复收藏",
+          type: "warning",
+        });
+      }
     },
   },
 };
@@ -131,13 +142,13 @@ export default {
       line-height: 60px;
       margin-top: 20px;
     }
-	.common-line{
-		margin: 10px 0;
-		color: rgb(0, 0, 0);
-		font-size: 24px;
-		font-weight: 700;
-		line-height: 30px;
-	}
+    .common-line {
+      margin: 10px 0;
+      color: rgb(0, 0, 0);
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 30px;
+    }
 
     .content {
       display: flex;

@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { resourceDetail } from "@api/resource.js";
+import { resourceDetail, setResourceCollect } from "@api/resource.js";
 export default {
   name: "PagesIndex",
   data() {
@@ -89,8 +89,19 @@ export default {
         }
       });
     },
-    getShouChang() {
-      this.isShow = !this.isShow;
+    async getShouChang() {
+      if (!this.isShow) {
+        await setResourceCollect({
+          id: this.descript.id,
+          type: "科研",
+        });
+        this.isShow = !this.isShow;
+      } else {
+        this.$message({
+          message: "已经收藏,无须重复收藏",
+          type: "warning",
+        });
+      }
     },
   },
 };
