@@ -162,7 +162,7 @@
 
 			<view class="model2Scroll">
 
-				<HomeCase />
+				<HomeCase :slides="banner3dList" v-if="banner3dList.length>0" />
 
 			</view>
 			<view class="container4">
@@ -236,7 +236,8 @@
 				},
 
 				tagIcon,
-				qrcode:''
+				qrcode:'',
+				banner3dList:[]
 
 
 
@@ -281,6 +282,10 @@
 					bannerApi({
 						type: 37,
 						limit: 1
+					}),
+					bannerApi({
+						type: 49,
+						limit: 5
 					}),
 
 
@@ -396,6 +401,30 @@
 						
 						
 					}
+					else if(idx==9){
+		let data=[]
+						res.data.map(item => {
+							data.push({
+								imageUrl:item.image_text,
+								name:item.name,
+								url:item.url
+						
+							})
+						})
+						
+						this.$nextTick(()=>{
+							this.banner3dList=data
+							console.log(this.banner3dList)
+							
+							
+						})
+						
+						
+					
+						
+						
+					}
+					
 
 				})
 

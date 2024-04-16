@@ -6,13 +6,13 @@
 		<view class="container1">
 			<view class="title"> 最受欢迎 </view>
 			<view class="container1wap">
-				<HomeCase></HomeCase>
+				<HomeCase :slides="popularList" v-if="popularList.length>0"></HomeCase>
 			</view>
 		</view>
 		<view class="container1">
 			<view class="title"> 最近上新 </view>
 			<view class="container1wap">
-				<HomeCase></HomeCase>
+				<HomeCase :slides="newsList" v-if="newsList.length>0"></HomeCase>
 			</view>
 		</view>
 
@@ -21,7 +21,7 @@
 				<view class="nselect">
 
 					<el-checkbox-group v-model="format" @change="getRecoce">
-						<el-checkbox :label="item.id"  v-for="(item,index) in formatList"
+						<el-checkbox :label="item.id" v-for="(item,index) in formatList"
 							:key="index">{{item.value}}</el-checkbox>
 						</el-checkbox>
 
@@ -45,7 +45,8 @@
 				</view>
 			</view>
 			<view class="wap2">
-				<view class="wapItem" v-for="(item, index) in schollResourceList" :key="item.id" @click="getDtail(item.id)">
+				<view class="wapItem" v-for="(item, index) in schollResourceList" :key="item.id"
+					@click="getDtail(item.id)">
 					<view class="item-img">
 						<img :src="item.image" alt="" srcset="" />
 					</view>
@@ -96,6 +97,8 @@
 				major: '',
 				formatList: [],
 				majorList: [],
+				popularList: [],
+				newsList: []
 
 
 			};
@@ -117,7 +120,15 @@
 					resourceList({
 						type: "科研"
 					}),
-					scientificSearch({})
+					scientificSearch({}),
+					bannerApi({
+						type: 46,
+						limit: 5
+					}),
+					bannerApi({
+						type: 47,
+						limit: 5
+					}),
 
 
 
@@ -163,6 +174,37 @@
 						} = res.data
 						this.formatList = format
 						this.majorList = major
+					} else if (idx == 4) {
+						let data = []
+
+						res.data.map(item => {
+							data.push({
+								imageUrl: item.image_text,
+								name: item.name,
+								url: item.url
+
+							})
+						})
+
+						this.popularList = data
+
+
+					}
+					else if (idx == 5) {
+						let data = []
+					
+						res.data.map(item => {
+							data.push({
+								imageUrl: item.image_text,
+								name: item.name,
+								url: item.url
+					
+							})
+						})
+					
+						this.newsList = data
+					
+					
 					}
 
 				});

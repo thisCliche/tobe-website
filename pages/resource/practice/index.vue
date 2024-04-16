@@ -13,7 +13,7 @@
 				海外实地/线上实训
 			</view>
 			<view class="container3wap">
-				<HomeCase></HomeCase>
+				<HomeCase :slides="banner3dList" v-if="banner3dList.length>0" />
 			</view>
 		</view>
 
@@ -100,7 +100,8 @@
 		data() {
 			return {
 				topBanner: {},
-				resourceList: []
+				resourceList: [],
+				banner3dList:[]
 
 
 
@@ -119,6 +120,10 @@
 					resourceList({
 						type: "实习",
 						limit: 9
+					}),
+					bannerApi({
+						type: 48,
+						limit: 5
 					}),
 
 
@@ -146,6 +151,20 @@
 								introduction: item.introduction
 							})
 						})
+					}
+					else if (idx==2){
+						
+						let data=[]
+						res.data.map(item => {
+							data.push({
+								imageUrl:item.image_text,
+								name:item.name,
+								url:item.url
+						
+							})
+						})
+						this.banner3dList=data
+						
 					}
 
 				})
