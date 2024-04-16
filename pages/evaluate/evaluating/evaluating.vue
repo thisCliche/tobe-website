@@ -44,7 +44,7 @@
 				<img :src="homebgpc" alt="" />
 			</view>
 		</view>
-		<pay-dialog ref="payDialogRef"></pay-dialog>
+		<pay-dialog ref="payDialogRef" goods_type="4"></pay-dialog>
 		<my-foot></my-foot>
 	</view>
 </template>
@@ -58,6 +58,9 @@
 		AllQuestionApi,
 		submitQuestionApi
 	} from '@api/evaluatingApi.js'
+	import {
+		userIsHadBuyApi
+	} from '@api/commonApi.js'
 	export default {
 		name: 'evaluate',
 		components: {
@@ -104,9 +107,6 @@
 			this.getData();
 		},
 		methods: {
-			async isChance(){
-				
-			},
 			async submit() {
 				if (this.submited) return;
 				let score = 0,
@@ -156,8 +156,16 @@
 				this.maxIdx = arr.length - 1;
 				this.questionList = arr;
 			},
-			openDialog() {
-				this.$refs.payDialogRef.openDialog();
+			async openDialog() {
+				try{
+					let res = await userIsHadBuyApi({
+						order_type: 4
+					});
+					this.$notify.success({title:'提示',message:'请开始答题'});
+					this.lockStatus = false;
+				}catch(e){
+					this.$refs.payDialogRef.openDialog();
+				}
 			},
 			calculationProcess() {
 				if (this.isSelected) {

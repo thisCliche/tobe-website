@@ -3,7 +3,7 @@
 		<view class="icon" @click="closeVideo">
 			<i class="el-icon-circle-close"></i>
 		</view>
-		<video class="video-player" autoplay :src="url" controls></video>
+		<video class="video-player" autoplay :src="url" controls ></video>
 	</view>
 </template>
 

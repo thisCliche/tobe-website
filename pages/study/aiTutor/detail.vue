@@ -58,7 +58,7 @@
 				<el-button type="info">生成报告</el-button>
 			</view>
 		</view>
-
+		<pay-dialog goods_type="2" ref="payDialogRef"></pay-dialog>
 		<my-foot></my-foot>
 	</view>
 </template>
@@ -74,6 +74,9 @@
 	import aiAvatar from '@image/aiAvatar.png';
 	import Speech from 'speak-tts';
 	import {
+		userIsHadBuyApi
+	} from '@api/commonApi.js'
+	import {
 		Local
 	} from "@utils/storage";
 	import {
@@ -82,6 +85,7 @@
 	export default {
 		data() {
 			return {
+				isLocked:true,
 				question: '',
 				scrollTimer: null,
 				speech: null,
@@ -131,8 +135,17 @@
 			}
 		},
 		methods: {
+			async preCheck(){
+				try{
+					let res = await userIsHadBuyApi({order_type:2});
+					this.isLocked =false;
+				}catch(e){
+					this.$refs.payDialogRef.openDialog();
+				}
+			},
 			//手动添加问题
-			sendHandle() {
+			async sendHandle() {
+				if(this.isLocked) return;
 				// 问题为空或为重置为默认状态 禁止发送
 				if (this.question == '' || this.status != 1) return;
 				let question = this.question;
@@ -147,7 +160,7 @@
 				this.question = '';
 			},
 			//添加我的录音
-			pushMyRecord(text) {
+			async pushMyRecord(text) {
 				if (text == '') {
 					this.status = 1;
 					this.$notify.info({
@@ -218,6 +231,7 @@
 			},
 			start() {
 				if (this.status == 1) {
+					if(this.isLocked) return;
 					this.xfVoice.start();
 					this.status = 2;
 				} else if (this.status == 2) {
@@ -249,6 +263,7 @@
 			},
 		},
 		created() {
+			this.preCheck();
 			let userInfo = Local.get('accountInfo');
 			if (userInfo) {
 				this.userInfo.userAvatar = userInfo.user.avatar;

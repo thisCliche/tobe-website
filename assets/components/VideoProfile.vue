@@ -1,13 +1,6 @@
 <template>
 	<view class="video-profile" :style="{width:withValue,height:heightValue,borderRadius:borderRidius}">
-		<video class="video-player" :autoplay="false" object-fit="cover" :poster="introduction.imageUrl" :src="introduction.videoUrl" controls :style="{width:withValue,height:heightValue}"></video>
-		<!-- <view class="cover" @click="play">
-			<view class="leggings">
-				<img :src="introduction.imageUrl" alt="" />
-			</view>
-			<img :src="playImg" alt="">
-		</view>
-		<video-play :url="introduction.videoUrl" :visble="visble" @closeVideo="closeVideo" /> -->
+		<video class="video-player" :autoplay="false" object-fit="cover" show-mute-btn :poster="introduction.imageUrl" :src="introduction.videoUrl" :controls="true" :style="{width:withValue,height:heightValue}"></video>
 	</view>
 </template>
 

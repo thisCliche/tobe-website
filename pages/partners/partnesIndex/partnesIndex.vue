@@ -307,10 +307,11 @@
 		}
 
 		.imgWrap {
-			width: 200px;
-
+			@include wh(200px,160px);
 			img {
-				@include imgLayout;
+				@include wh(100%,100%);
+				object-fit: contain;
+				// @include imgLayout;
 			}
 		}
 	}

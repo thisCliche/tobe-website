@@ -2,9 +2,9 @@
 	<view class="IndexPage">
 		<view class="banner">
 
-			<view class="mask"></view>
-			<video class="myVideo" :src="introduction.videoUrl" object-fit="cover" autoplay loop muted
-				:controls="false"></video>
+			<!-- <view class="mask"></view> -->
+			<video class="myVideo" :src="introduction.videoUrl" object-fit="cover" autoplay loop
+				:controls="true"></video>
 		</view>
 		<view class="model1">
 			<view class="slogan fadeIn animated">{{PlanningConfigInfo.planning_title}}</view>

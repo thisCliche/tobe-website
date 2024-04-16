@@ -1,8 +1,8 @@
 <template>
 	<view class="aiTutor">
 		<view class="videoTop">
-			<view class="mask"></view>
-			<video class="myVideo" :src="videoTopUrl" object-fit="cover" autoplay loop muted :controls="false"></video>
+			<!-- <view class="mask"></view> -->
+			<video class="myVideo" :src="videoTopUrl" object-fit="cover" autoplay loop :controls="true"></video>
 		</view>
 		<view class="mainWrap">
 			<view class="model1">

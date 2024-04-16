@@ -6,7 +6,7 @@
 					<img :src="info.image_text" alt="" />
 					<view class="video-play-info">
 						<view class="info-left"><i class="el-icon-video-play" /><text>{{info.times}}</text></view>
-						<view class="info-right">{{info.sort}}</view>
+						<view class="info-right">{{info.is_free | freeFilter}}</view>
 					</view>
 				</view>
 				<view class="video-card-info">
@@ -25,7 +25,7 @@
 					</view>
 					<view class="video-play-info">
 						<view class="info-left"><i class="el-icon-video-play" /><text>{{info.times}}</text></view>
-						<view class="info-right">{{info.sort}}</view>
+						<view class="info-right">{{info.is_free | freeFilter}}</view>
 					</view>
 				</view>
 			</view>
@@ -41,6 +41,15 @@
 	} from '@api/commonApi.js'
 	export default {
 		name: 'growthCourseUnit',
+		filters:{
+			freeFilter(val){
+				if(val==0){
+					return '会员'
+				}else{
+					return '免费'
+				}
+			},
+		},
 		props: {
 			isColumn: {
 				type: Boolean,
