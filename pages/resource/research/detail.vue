@@ -79,29 +79,26 @@ export default {
           id: id,
         }),
       ]);
-      let resorce = [];
 
       resDataList.map((res, idx) => {
         console.log(res, idx);
         if (idx == 0) {
           this.descript = res.data;
+           if(this.descript.is_colect){
+            this.isShow = true
+          }
           this.content = this.descript.detail;
         }
       });
     },
-    async getShouChang() {
-      if (!this.isShow) {
-        await setResourceCollect({
-          id: this.descript.id,
-          type: "科研",
-        });
-        this.isShow = !this.isShow;
-      } else {
-        this.$message({
-          message: "已经收藏,无须重复收藏",
-          type: "warning",
-        });
-      }
+     async getShouChang() {
+      await setResourceCollect({
+        id: this.descript.id,
+        type: "资源",
+         detail:'实习'
+
+      });
+      this.isShow = !this.isShow;
     },
   },
 };
