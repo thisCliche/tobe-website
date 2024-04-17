@@ -97,6 +97,7 @@
 							this.statusText = 2;
 							setTimeout(() => {
 								this.dialogVisible = false;
+								this.$emit('payLoad')
 							}, 2000)
 						}
 					}

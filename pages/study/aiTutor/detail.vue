@@ -58,7 +58,7 @@
 				<el-button type="info">生成报告</el-button>
 			</view>
 		</view>
-		<pay-dialog goods_type="2" ref="payDialogRef"></pay-dialog>
+		<pay-dialog goods_type="2" ref="payDialogRef" @payLoad="payLoad"></pay-dialog>
 		<my-foot></my-foot>
 	</view>
 </template>
@@ -130,6 +130,9 @@
 			}
 		},
 		methods: {
+			payLoad(){
+				this.isLocked = false;
+			},
 			async preCheck() {
 				try {
 					let res = await userIsHadBuyApi({
@@ -195,6 +198,7 @@
 				this.status = 5;
 			},
 			pause() {
+				if(this.status==5) return;
 				if (this.status == 4) {
 					this.status = 1;
 				} else {
