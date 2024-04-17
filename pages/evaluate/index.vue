@@ -208,7 +208,6 @@
 	} from './export.js'
 	import HomeCase from './HomeCase.vue';
 	import UseCase from './UseCase.vue';
-	import VideoProfile from './VideoProfile.vue';
 	import {
 		videoApi,
 		bannerApi,
@@ -221,7 +220,6 @@
 		components: {
 			HomeCase,
 			UseCase,
-			VideoProfile
 		},
 		data() {
 			return {

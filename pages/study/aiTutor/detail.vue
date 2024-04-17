@@ -66,48 +66,43 @@
 <script>
 	import {
 		FastGptRetApi
-	} from '@api/aiTutorApi.js'
-	import three from '@image/three.png'
-	import next from '@image/interview-next.png'
-	import over from '@image/interview-over.png'
-	import speak from '@image/interview-speak.png';
-	import aiAvatar from '@image/aiAvatar.png';
-	import Speech from 'speak-tts';
+	} from '@api/aiTutorApi.js';
+	import bgImg from './export.js';
+	import PayDialog from '@components/PayDialog.vue';
 	import {
 		userIsHadBuyApi
-	} from '@api/commonApi.js'
+	} from '@api/commonApi.js';
 	import {
 		Local
 	} from "@utils/storage";
 	import {
 		XfVoiceDictation
 	} from '@muguilin/xf-voice-dictation';
+	import TtsRecorder from '@assets/tts/audio'
+	const ttsRecorder = new TtsRecorder()
+
 	export default {
 		data() {
 			return {
-				isLocked:true,
+				isLocked: true,
 				question: '',
 				scrollTimer: null,
-				speech: null,
 				status: 1, // 分为5个状态 1：默认状态 提示点击录音 2：录音状态 提示正在录音，录音时长小于60秒 再次点击结束录音 3：录音结束 提示等待回复 展示录入的文字 4 :暂停绘画 5：结束绘画
 				isTyping: false,
-				BrowserSupportSpeech: false,
 				xfVoice: null,
 				userInfo: {
-					aiAvatar,
+					aiAvatar:bgImg.aiAvatar,
 					userAvatar: '',
 				},
-				bgImg: {
-					three,
-					next,
-					over,
-					speak,
-				},
+				bgImg,
 				strings: [],
 				sessionList: [],
 				response: '', // 临时存一下回复
 				recordElement: null,
 			}
+		},
+		components: {
+			PayDialog
 		},
 		filters: {
 			statusTextEsc(val) {
@@ -135,17 +130,19 @@
 			}
 		},
 		methods: {
-			async preCheck(){
-				try{
-					let res = await userIsHadBuyApi({order_type:2});
-					this.isLocked =false;
-				}catch(e){
+			async preCheck() {
+				try {
+					let res = await userIsHadBuyApi({
+						order_type: 2
+					});
+					this.isLocked = false;
+				} catch (e) {
 					this.$refs.payDialogRef.openDialog();
 				}
 			},
 			//手动添加问题
 			async sendHandle() {
-				if(this.isLocked) return;
+				if (this.isLocked) return;
 				// 问题为空或为重置为默认状态 禁止发送
 				if (this.question == '' || this.status != 1) return;
 				let question = this.question;
@@ -231,7 +228,7 @@
 			},
 			start() {
 				if (this.status == 1) {
-					if(this.isLocked) return;
+					if (this.isLocked) return;
 					this.xfVoice.start();
 					this.status = 2;
 				} else if (this.status == 2) {
@@ -244,22 +241,9 @@
 				}
 			},
 			playVioce(text) {
-				if (!this.BrowserSupportSpeech) return;
-				this.speech.cancel();
-				this.speech.speak({
-					text,
-					listeners: {
-						onstart: () => {
-							console.log("Start utterance")
-						},
-						onend: () => {
-							console.log("End utterance")
-						},
-						onresume: () => {
-							console.log("Resume utterance")
-						}
-					}
-				})
+				ttsRecorder.resetAudio();
+				ttsRecorder.setParams({text});
+				ttsRecorder.start();
 			},
 		},
 		created() {
@@ -267,26 +251,6 @@
 			let userInfo = Local.get('accountInfo');
 			if (userInfo) {
 				this.userInfo.userAvatar = userInfo.user.avatar;
-			}
-			this.speech = new Speech();
-			// 先检查是否支持语音
-			if (this.speech.hasBrowserSupport()) {
-				this.BrowserSupportSpeech = true;
-				this.speech.init({
-					'volume': 1,
-					'lang': 'zh-CN',
-					'rate': 1,
-					'pitch': 1,
-					'voice': "Microsoft Huihui - Chinese (Simplified, PRC)",
-					'splitSentences': true,
-					'listeners': {
-						'onvoiceschanged': (voices) => {
-							// console.log("Event voiceschanged", voices)
-						}
-					}
-				})
-			} else {
-				this.BrowserSupportSpeech = false;
 			}
 		},
 		mounted() {

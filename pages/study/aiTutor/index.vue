@@ -1,8 +1,7 @@
 <template>
 	<view class="aiTutor">
 		<view class="videoTop">
-			<!-- <view class="mask"></view> -->
-			<video class="myVideo" :src="videoTopUrl" object-fit="cover" autoplay loop :controls="true"></video>
+			<video class="myVideo" :src="videoTopUrl" :poster="videoImageUrl" object-fit="cover" autoplay loop :controls="true"></video>
 		</view>
 		<view class="mainWrap">
 			<view class="model1">
@@ -55,7 +54,7 @@
 							</view>
 						</view>
 					</view>
-					<view class="wrapR">
+					<view class="wrapR" v-if="introduction.hasOwnProperty('videoUrl')">
 						<video-profile :introduction="introduction" withValue="350px" heightValue="400px"></video-profile>
 					</view>
 				</view>
@@ -111,6 +110,7 @@
 				slogan: {},
 				introduction: {},
 				videoTopUrl: '',
+				videoImageUrl:'',
 				sparkleList: [],
 				advantageList: [{
 					id: 1,
@@ -148,7 +148,7 @@
 					slogan = {},
 					videoTopUrl = "",
 					introduction = {},
-					aiImg="";
+					aiImg="",videoImageUrl="";
 				let result = await Promise.all([userSide({
 					type: 1,
 					limit: 5
@@ -188,6 +188,7 @@
 							break;
 						case 4:
 							videoTopUrl = res.data[0].video_text;
+							videoImageUrl= res.data[0].image_text;
 							break;
 						case 5:
 							introduction = {
@@ -207,6 +208,7 @@
 				this.zhuboList = zhuboList;
 				this.slogan = slogan;
 				this.videoTopUrl = videoTopUrl;
+				this.videoImageUrl = videoImageUrl;
 				this.introduction = introduction;
 				this.aiImg = aiImg;
 			},

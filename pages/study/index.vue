@@ -2,7 +2,6 @@
 	<view class="IndexPage">
 		<view class="banner">
 
-			<!-- <view class="mask"></view> -->
 			<video class="myVideo" :src="introduction.videoUrl" object-fit="cover" autoplay loop
 				:controls="true"></video>
 		</view>
@@ -13,7 +12,6 @@
 				<view class="pictureComWrap fadeIn animated  list0" v-for="(item,idx) in model1ComImg" :key="idx">
 					<view class="wapIcon">
 						<img :src="tagIcon.iconList[idx]" alt="" srcset="" />
-
 					</view>
 					<view class="wapTitle">
 						{{item.subname}}
@@ -166,7 +164,7 @@
 						<view class="video-list">
 							<view class="video-item" v-for="(item,index) in howVideoInfo" :key="item.id">
 								<view class="video-item-video">
-									<VideoProfile :introduction='item.introduction' withValue="300px" heightValue="180px" />
+									<VideoProfile :introduction='item.introduction' withValue="300px" heightValue="180px" borderRidius="0px 20px 20px 20px"/>
 
 								</view>
 								<text class="video-item-des">{{item.name}}</text>

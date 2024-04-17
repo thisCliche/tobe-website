@@ -223,7 +223,7 @@
 				}).then(res => {
 					let dataRes = [];
 					res.data.map(item => {
-
+					
 						dataRes.push({
 							id: item.id,
 							image: item.image,
