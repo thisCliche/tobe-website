@@ -4,11 +4,42 @@
 
 			<img :src="topBanner.imageUrl" alt="" srcset="" />
 
+			<view class="banner-word">
+				<view class="word-name">
+					<view class="name-cn">
+						名企实训
+
+					</view>
+					<view class="name-en">
+						COMPANY&nbsp;TRAINING
+					</view>
+
+				</view>
+				<view class="word-body">
+					训机会均来自知名企业或机构构的内部推荐
+					由中高层专业管理者一对一带领学生
+					在实训中将有效运用专业知识分析case与project
+					实现理论与实践能力的提高
+					实训结束均获得导师个人推荐信，助力留学申请！
+				</view>
+
+
+
+			</view>
+
 
 
 		</view>
 
+
 		<view class="container3">
+			<view class="positon">
+
+				所在位置：<text class="cursor-pointer">首页</text><i class="el-icon-arrow-right
+"></i><text class="cursor-pointer">资源</text><i class="el-icon-arrow-right
+"></i><text class="cursor-pointer">实习</text>
+
+			</view>
 			<view class="container3Title">
 				海外实地/线上实训
 			</view>
@@ -30,47 +61,9 @@
 
 			</view>
 
-			<view class="container2wap2">
-				<view class="wap21">
-					<view class="zixun">
-						报名咨询
-					</view>
-					<view class="more">
-						扫描了解更多项目信息
-					</view>
-
-				</view>
-
-				<view class="wap22">
-					<img src="https://img1.baidu.com/it/u=2578175001,3807510909&fm=253&fmt=auto&app=138&f=GIF?w=200&h=200"
-						alt="" srcset="" />
-
-
-				</view>
-
-
-
-			</view>
 		</view>
 
-		<view class="container4">
 
-			<view class="container4content">
-				<view class="wapItem" v-for="(item, index) in resourceList" :key="index" @click="getDtail(item.id)">
-					<view class="item-img">
-						<img :src="item.image" alt="" srcset="" />
-					</view>
-
-					<view class="title"> {{item.name}} </view>
-					<view class="item-wap">
-						{{item.introduction}}
-					</view>
-				</view>
-
-			</view>
-
-
-		</view>
 
 		<my-foot></my-foot>
 	</view>
@@ -101,7 +94,7 @@
 			return {
 				topBanner: {},
 				resourceList: [],
-				banner3dList:[]
+				banner3dList: []
 
 
 
@@ -151,20 +144,19 @@
 								introduction: item.introduction
 							})
 						})
-					}
-					else if (idx==2){
-						
-						let data=[]
+					} else if (idx == 2) {
+
+						let data = []
 						res.data.map(item => {
 							data.push({
-								imageUrl:item.image_text,
-								name:item.name,
-								url:item.url
-						
+								imageUrl: item.image_text,
+								name: item.name,
+								url: item.url
+
 							})
 						})
-						this.banner3dList=data
-						
+						this.banner3dList = data
+
 					}
 
 				})
@@ -193,13 +185,62 @@
 		.banner {
 			@include fj(center);
 			width: 100%;
-			height: 700px;
-			background: rgb(196, 196, 196);
+			height: vw(500);
+			position: relative;
 
 			img {
 				width: 100%;
 				height: 100%;
 				object-fit: cover
+			}
+
+			.banner-word {
+				position: absolute;
+				top: vw(105);
+				left: vw(298);
+				display: flex;
+				flex-direction: column;
+
+				.word-name {
+					display: inline-flex;
+					align-items: center;
+
+					.name-cn {
+						color: #fff;
+						font-size: vw(52);
+						line-height: vw(68);
+
+					}
+
+					.name-en {
+						overflow-wrap: break-word;
+						color: rgba(255, 255, 255, 0.5);
+						font-weight: normal;
+						text-align: justify;
+						white-space: nowrap;
+						line-height: vw(34);
+						font-size: vw(30);
+						margin-left: 5px;
+
+					}
+				}
+
+				.word-body {
+					width: vw(460);
+					word-wrap: break-word;
+					/* 允许在单词内换行 */
+					overflow-wrap: break-word;
+					/* 对于兼容性更好的浏览器 */
+					font-size: vw(24);
+					line-height: vw(40);
+					color: #fff;
+
+
+
+
+				}
+
+
 			}
 		}
 
@@ -293,9 +334,26 @@
 
 		}
 
+
 		.container3 {
-			@include ct1200;
-			padding: 40px 0;
+			width: 100%;
+			background: #F4F6FE;
+			padding: 0 vw(240);
+			box-sizing: border-box;
+
+			.positon {
+				margin: 10px 0;
+				color: #666666;
+				line-height: vw(17);
+				text-align: left;
+				font-style: normal;
+
+				.cursor-pointer {
+					cursor: pointer;
+				}
+
+
+			}
 
 			.container3Title {
 				color: black;

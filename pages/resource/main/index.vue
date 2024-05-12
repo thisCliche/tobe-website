@@ -2,190 +2,110 @@
 	<view class="IndexPage">
 		<view class="banner">
 
-			<VideoProfile :introduction='introduction' withValue="100%" heightValue="700px" borderRidius="0px"/>
-
-		</view>
-		<view class="container1">
-			<view class="containerWap">
-				<view class="wap1">
-					<VideoProfile :introduction='container1Info.introduction' withValue="550px" heightValue="460px" />
-
-				</view>
-				<view class="wap2">
-					{{container1Info.content}}
-
-				</view>
-
-			</view>
-
-		</view>
-		<view class="container2">
-			<view class="containerWap">
-				<view class="wap1">
-					<view class="title">
-						海外名校看中的5大要素
-					</view>
-					<view class="wapYuan">
-						<view class="yuan-item " v-for="item in 5" :key="item">
-							<div class="num">35%</div>
-							<view class='mt num'>
-								领导能力
-
-							</view>
-
-						</view>
-
-					</view>
-
-				</view>
-
-				<view class="wap2">
-					<view class="miantitle">
-						申请者应该提升的软实力
-					</view>
-					<view class="wapList">
-						<view class="lsit-item" v-for="(item,index) in 6" :key="index">
-							<view class="title">
-								leaderShip
-
-							</view>
-							<view class="subtitle">
-								领导能力
-							</view>
-
-						</view>
-
-					</view>
-					<view class="wapfoot">
-
-						<view class="foot-item" v-for="(item,index) in 2" :key="index">
-							<view class="title">
-								Community Contribution
-
-							</view>
-							<view class="subtitle">
-								社区贡献
-
-							</view>
-
-
-
-						</view>
-
-
-					</view>
-
-				</view>
-				<!-- <view class="wap2">
-					<view class="title">
-						申请者应该提升的软实力
-					</view>
-					<view class="wapList">
-						<view class="list-item">
-
-						</view>
-
-					</view>
-
-				</view> -->
-			</view>
-		</view>
-
-		<view class="container3">
-			<view class="containerWapItme" v-for="(item,index) in container3Banner " :key="index">
-
-				<img :src="item.imageUrl" alt="" srcset="" />
-
-
-			</view>
-
+			<VideoProfile :introduction='introduction' withValue="100%" heightValue="700px" borderRidius="0px" />
 
 		</view>
 
 		<view class="model2">
 
 			<view class="model2Item">
-				<view class="top">
-					<view class="textDiscipt">
-						<view class="textTitle">
-							{{model2Info.item1.name}}
-						</view>
-
-
-					</view>
-					<view class="video">
-						<VideoProfile :introduction='model2Info.item1.introduction' withValue="510px"
-							heightValue="300px" />
-					</view>
-
-				</view>
-
 				<view class="bottom">
 
 					<view class="video">
-						<VideoProfile :introduction='model2Info.item2.introduction' withValue="510px"
-							heightValue="300px" />
+						<img src="@image/resource/科研配图.png" alt="" srcset="" />
 					</view>
 					<view class="textDiscipt">
 						<view class="textTitle">
-							{{model2Info.item2.name}}
+							<view class="name_en">
+								SCIENTIFIC
+							</view>
+							<view class="name_cn">
+								科研
+							</view>
 						</view>
 
 						<view class="textBody">
-							{{model2Info.item2.text}}
+							帮你找到匹配包括
+							美国、英国、香港等顶尖教授、实验室
+
+						</view>
+						<view class="text-button">
+							立刻了解
 
 						</view>
 
 					</view>
 
 				</view>
+
 
 				<view class="top">
+					
 					<view class="textDiscipt">
 						<view class="textTitle">
-							{{model2Info.item3.name}}
+							<view class="name_cn">
+								实习
+							</view>
+							<view class="name_en">
+								PRACTICE
+							</view>
+							
 						</view>
-
-
+									
+						<view class="textBody">
+	最强软实力资源平台，囊括全网最全科研界面
+	帮助你在社科、商科、工科、理科、艺术等
+	所有领域达到科研实习目标
+									
+						</view>
+						<view class="text-button">
+							立刻了解
+						</view>
+									
 					</view>
+				
 					<view class="video">
-						<VideoProfile :introduction='model2Info.item3.introduction' withValue="510px"
-							heightValue="300px" />
+						<img src="@image/resource/科研配图.png" alt="" srcset="" />
+					</view>
+				
+				
+				</view>
+				
+
+			<view class="bottom">
+
+					<view class="video">
+						<img src="@image/resource/科研配图.png" alt="" srcset="" />
+					</view>
+					<view class="textDiscipt">
+						<view class="textTitle">
+							<view class="name_en">
+								FIELDWORK
+							</view>
+							<view class="name_cn">
+								夏校
+							</view>
+						</view>
+
+						<view class="textBody">
+							帮你找到匹配包括
+							美国、英国、香港等顶尖教授、实验室
+
+						</view>
+						<view class="text-button">
+							立刻了解
+
+						</view>
+
 					</view>
 
 				</view>
 
 
-
 			</view>
 
 
-			<view class="model2Scroll">
 
-				<HomeCase :slides="banner3dList" v-if="banner3dList.length>0" />
-
-			</view>
-			<view class="container4">
-				<view class="container4Wap">
-					<view class="wap1">
-						了解更多，添加微信
-					</view>
-					<view class="wap2">
-						<view class="wap2img">
-							<img :src="qrcode" alt="" srcset="" />
-						</view>
-						<view class="waptext">
-							入学申请咨询
-
-						</view>
-
-
-					</view>
-
-				</view>
-
-
-			</view>
 		</view>
 
 		<my-foot></my-foot>
@@ -236,8 +156,8 @@
 				},
 
 				tagIcon,
-				qrcode:'',
-				banner3dList:[]
+				qrcode: '',
+				banner3dList: []
 
 
 
@@ -388,43 +308,41 @@
 							})
 						})
 						this.container3Banner.push(container3BannerItem3[0])
-					}
-					else if(idx==8){
-						let data=[]
+					} else if (idx == 8) {
+						let data = []
 						res.data.map(item => {
 							data.push({
 								imageUrl: item.image_text,
-						
+
 							})
 						})
-						this.qrcode=data[0].imageUrl
-						
-						
-					}
-					else if(idx==9){
-		let data=[]
+						this.qrcode = data[0].imageUrl
+
+
+					} else if (idx == 9) {
+						let data = []
 						res.data.map(item => {
 							data.push({
-								imageUrl:item.image_text,
-								name:item.name,
-								url:item.url
-						
+								imageUrl: item.image_text,
+								name: item.name,
+								url: item.url
+
 							})
 						})
-						
-						this.$nextTick(()=>{
-							this.banner3dList=data
+
+						this.$nextTick(() => {
+							this.banner3dList = data
 							console.log(this.banner3dList)
-							
-							
+
+
 						})
-						
-						
-					
-						
-						
+
+
+
+
+
 					}
-					
+
 
 				})
 
@@ -440,7 +358,7 @@
 					content: container1Info[0].text
 
 				};
-				
+
 
 				this.model2Info = {
 					item1: {
@@ -714,34 +632,6 @@
 
 		}
 
-		.container3 {
-			@include ct1200;
-			@include modelPd;
-			@include fj();
-
-			.containerWapItme {
-
-				width: 32%;
-				height: 480px;
-				margin: 0 20px;
-				border-radius: 20px;
-				background: rgb(196, 196, 196);
-
-				img {
-
-					width: 100%;
-					height: 100%;
-					object-fit: cover
-				}
-
-
-
-			}
-
-
-
-
-		}
 
 		.container4 {
 			@include ct1200;
@@ -794,44 +684,82 @@
 
 
 		.model2 {
-			@include ct1200;
-			padding: 40px 0;
-
 			.model2Item {
 				@include wh(100%, 100%);
 
 				.top {
 					width: 100%;
 					display: flex;
+					height: vw(602);
+					background-image: url(@/assets/image/resource/reBg1.png);
+					background-size: 100% 100%;
+					background-repeat: no-repeat;
+					justify-content: space-between;
+					padding: vw(100) vw(270);
+					box-sizing: border-box;
+
 
 					.textDiscipt {
 						display: flex;
 						flex-direction: column;
-						justify-content: center;
-						align-items: center;
 						padding: 0 20px;
-						margin-right: 20px;
+						margin-left: 20px;
 						flex: 1;
 
 						.textTitle {
-							font-family: 思源黑体;
-							font-size: 30px;
-							font-weight: 700;
-							line-height: -1px;
-							letter-spacing: 0px;
-							text-align: left;
+							margin-top: vw(64);
+							display: inline-flex;
 
+							align-items: center;
+
+							.name_en {
+								font-size: vw(60);
+								color: rgba(63, 71, 192, 0.05)
+							}
+
+							.name_cn {
+								font-size: vw(52);
+								margin-right: 0.5vw;
+								color: #000000
+							}
 
 						}
 
+						.textBody {
+							display: flex;
 
+							width: vw(294);
+							font-size: vh(24);
+							text-align: left;
+							margin-top: 10px;
+							line-height: vw(30);
+						}
+
+						.text-button {
+							margin-top: vw(30);
+							width: vw(236);
+							height: vw(60);
+							background: linear-gradient(90deg, #5A5DE6 0%, #B443C2 100%);
+							border-radius: 30px;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+							color: #fff;
+							font-size: vw(22);
+							cursor: pointer;
+
+						}
 					}
 
 					.video {
-						width: 510px;
-						height: 300px;
-						border-radius: 20px;
-						background: rgb(196, 196, 196);
+						width: vw(744);
+						height: vw(420);
+
+						img {
+							width: 100%;
+							height: 100%;
+							object-fit: cover;
+						}
 
 					}
 
@@ -840,7 +768,14 @@
 				.bottom {
 					width: 100%;
 					display: flex;
-					@include mt(20px);
+					height: vw(602);
+					background-image: url(@/assets/image/resource/reBg1.png);
+					background-size: 100% 100%;
+					background-repeat: no-repeat;
+					justify-content: space-between;
+					padding: vw(100) vw(270);
+					box-sizing: border-box;
+
 
 					.textDiscipt {
 						display: flex;
@@ -851,30 +786,59 @@
 						flex: 1;
 
 						.textTitle {
-							@include multi-ellipsis--l(4);
-							@include mt(20px);
-							font-family: 思源黑体;
-							font-size: 30px;
-							font-weight: 700;
-							line-height: -1px;
-							letter-spacing: 0px;
-							text-align: left;
+							margin-top: vw(64);
+							display: inline-flex;
 
+							align-items: center;
+
+							.name_en {
+								font-size: vw(60);
+								color: rgba(63, 71, 192, 0.05)
+							}
+
+							.name_cn {
+								font-size: vw(52);
+								margin-left: 0.5vw;
+								color: #000000
+							}
 
 						}
 
 						.textBody {
-							@include multi-ellipsis--l(4);
-							font-family: 思源黑体;
-							font-size: 30px;
+							display: flex;
+
+							width: vw(294);
+							font-size: vh(24);
+							text-align: right;
+							margin-top: 10px;
+							line-height: vw(30);
+						}
+
+						.text-button {
+							margin-top: vw(30);
+							width: vw(236);
+							height: vw(60);
+							background: linear-gradient(90deg, #5A5DE6 0%, #B443C2 100%);
+							border-radius: 30px;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+							color: #fff;
+							font-size: vw(22);
+							cursor: pointer;
+
 						}
 					}
 
 					.video {
-						width: 510px;
-						height: 300px;
-						border-radius: 20px;
-						background: rgb(196, 196, 196);
+						width: vw(744);
+						height: vw(420);
+
+						img {
+							width: 100%;
+							height: 100%;
+							object-fit: cover;
+						}
 
 					}
 
@@ -883,13 +847,7 @@
 
 			}
 
-			.model2Scroll {
 
-				.banner12 {}
-
-
-
-			}
 		}
 
 	}

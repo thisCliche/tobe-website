@@ -7,6 +7,8 @@ module.exports = {
 			scss: {
 				prependData: `
 	         @import "@styles/minix.scss";
+			  @import "@styles/wh.scss";
+			 
 	        `,
 			},
 		},
