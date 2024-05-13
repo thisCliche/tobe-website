@@ -41,10 +41,13 @@
 
 			</view>
 			<view class="container3Title">
-				海外实地/线上实训
+				国内顶尖企业——定制化实习
+			</view>
+			<view class="container3subTitle">
+				结合顶尖企业资源优势，开展深度定制化实习项目，为青年学子提供实践平台，培养专业技能
 			</view>
 			<view class="container3wap">
-				<HomeCase :slides="banner3dList" v-if="banner3dList.length>0" />
+				
 			</view>
 		</view>
 
@@ -253,6 +256,8 @@
 				font-size: 32px;
 				font-weight: 700;
 				line-height: 48px;
+				display: flex;
+				justify-content: center;
 			}
 
 			.container2wap {
@@ -356,15 +361,26 @@
 			}
 
 			.container3Title {
-				color: black;
-				font-size: 32px;
+				color: #333;
+				font-size: vw(38);
 				font-weight: 700;
-				line-height: 48px;
+				line-height: vw(48);
+				display: flex;
+				justify-content: center;
+				margin-top: vw(50);
 
+			}
+			.container3subTitle{
+				color: #999999;
+				font-size: vw(22);
+				line-height: vw(30);
+				display: flex;
+				justify-content: center;
+				
 			}
 
 			.container3wap {
-				margin-top: 10px
+				margin-top: vw(79)
 			}
 
 
