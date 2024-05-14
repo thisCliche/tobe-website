@@ -3,12 +3,21 @@
 		<VueSlickCarousel v-bind="settings">
 			<view class="item" v-for="item in usecase" :key="item.id">
 				<view class="imgWrap">
-					<view class="header"><el-avatar shape="circle" :src="item.engineerUrl"></el-avatar></view>
-					<view class="name">{{item.name}}</view>
-					<view class="nis">大学大学大学大学大学</view>
-					<view class="city">韩国</view>
-					<view class="line"></view>
-					<view class="des">{{item.desc}}</view>
+					<image :src='item.imageUrl' class='iamgeCase' />
+					<view class="footerWap">
+						<view class="title">
+							夏威夷州政府实习
+						</view>
+						<view class="line">
+							参与人群：高中生/成人
+						</view>
+						<view class="line">
+							形式地点：线上/线下
+						</view>
+
+					</view>
+
+
 
 				</view>
 			</view>
@@ -29,13 +38,11 @@
 					draggable: false,
 					autoplay: true,
 					arrows: true,
-					"dots": false,
+					"focusOnSelect": true,
 					"infinite": true,
-					"initialSlide": 2,
-					"speed": 500,
-					"slidesToShow": 4,
+					"slidesToShow": 3,
 					"slidesToScroll": 1,
-					"swipeToSlide": false
+					"speed": 500
 				},
 			}
 		},
@@ -51,7 +58,6 @@
 
 	.home-case {
 		@include mt(16px);
-		height: 400px;
 		overflow: hidden;
 
 		::v-deep .slick-next {
@@ -59,7 +65,7 @@
 			@include wh(30px, 30px);
 
 			&:before {
-				color: $tagBg;
+				color: red;
 				font-size: 30px;
 			}
 		}
@@ -70,7 +76,7 @@
 			z-index: 99;
 
 			&:before {
-				color: $tagBg;
+				color: red;
 				font-size: 30px;
 			}
 		}
@@ -78,58 +84,51 @@
 
 	.item {
 		outline: none;
+		margin: 0 vw(17);
 
 		.imgWrap {
-			@include wh(200px, 380px);
-			overflow: hidden;
-			border-radius: 10px;
-			padding: 26px 16px;
+			width: vw(455);
+			height: vw(430);
 			box-sizing: border-box;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
+			position: relative;
+			background-color: #fff;
 
-			.header {
+			.iamgeCase {
+				width: vw(455);
+				height: vw(387);
+				object-fit: cover;
+			}
+
+			.footerWap {
+				position: absolute;
+				top: 16vw;
+				left: vw(31);
 				display: flex;
-				justify-content: center;
+				flex-direction: column;
+				z-index: 10;
+				box-sizing: border-box;
+
+				.title {
+					font-weight: 600;
+					font-size: vw(18);
+					line-height: vw(25);
+					color: #222326;
+					margin: vw(8) 0;
+				}
+
+				.line {
+					font-size: vw(16);
+					color: #222326;
+					line-height: vw(22);
+					text-align: left;
+					margin: vw(4) 0;
+				}
 			}
 
-			.des {
-				color: $themeColor;
-				line-height: 26px;
-				@include mt(20px);
-				@include multi-ellipsis--l(6);
-				height: 156px;
-			}
 
-			.name {
-				@include mt(5px);
-				font-weight: 700;
-				color: #3B6AAB;
-				text-align: center;
 
-			}
 
-			.nis {
-				@include mt(5px);
-				text-align: center;
-			}
 
-			.city {
-				@include mt(5px);
-				text-align: center;
-			}
-
-			.line {
-				@include mt(10px);
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				width: 30px;
-				height: 5px;
-				background-color: #3B6AAB;
-			}
 
 
 		}

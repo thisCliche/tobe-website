@@ -47,20 +47,31 @@
 				结合顶尖企业资源优势，开展深度定制化实习项目，为青年学子提供实践平台，培养专业技能
 			</view>
 			<view class="container3wap">
-				
+
+				<el-carousel indicator-position="outside" :autoplay="false" trigger="click">
+					<el-carousel-item v-for="item in 4" :key="item">
+						<view class="banner-carousel-item">
+							<view class="banner_img" v-for="item2 in 19" :key="item2">
+								<img src="https://img2.baidu.com/it/u=671610231,3191155332&fm=253&fmt=auto&app=120&f=JPEG?w=667&h=500"
+									alt="" srcset="" />
+							</view>
+
+						</view>
+					</el-carousel-item>
+				</el-carousel>
+
 			</view>
 		</view>
 
 		<view class="container2">
-			<view class="container2Title">
-				国内顶尖企业——定制实训
+			<view class="container3Title">
+				实习场景
+			</view>
+			<view class="container3subTitle">
+				选择大于努力是共识，选定一个合适的能发挥自身价值的赛道是提升人生成功概率的最有方法论
 			</view>
 			<view class="container2wap">
-				<view class="wap2-item" v-for="(item,index) in 24 " :key="index">
-					<img src="https://img2.baidu.com/it/u=671610231,3191155332&fm=253&fmt=auto&app=120&f=JPEG?w=667&h=500"
-						alt="" srcset="" />
-
-				</view>
+				<UesCase :usecase="usecase"/>
 
 			</view>
 
@@ -77,9 +88,9 @@
 		tagIcon,
 	} from '../export.js'
 
-
+import imageDemo from '@image/resource/配图3.png';
 	import VideoProfile from '@/assets/components/VideoProfile.vue';
-	import HomeCase from '../HomeCase.vue';
+	import UesCase from '../UseCase.vue';
 	import {
 		videoApi,
 		bannerApi,
@@ -91,13 +102,14 @@
 		name: 'PagesIndex',
 		components: {
 			VideoProfile,
-			HomeCase,
+			UesCase,
 		},
 		data() {
 			return {
 				topBanner: {},
 				resourceList: [],
-				banner3dList: []
+				banner3dList: [],
+				usecase:[{id:1,imageUrl:imageDemo,title:'夏威夷州政府实习',peple:'高中生/成人',address:'线上/线下'},{id:2,imageUrl:imageDemo,title:'夏威夷州政府实习',peple:'高中生/成人',address:'线上/线下'},{id:3,imageUrl:imageDemo,title:'夏威夷州政府实习',peple:'高中生/成人',address:'线上/线下'}]
 
 
 
@@ -248,16 +260,30 @@
 		}
 
 		.container2 {
-			@include ct1200;
-			padding: 40px 0;
+		width: 100%;
+		background: rgba(244, 246, 254, 0.57);
+		padding: vw(80) vw(240);
+		height: vw(744);
+		box-sizing: border-box;
 
-			.container2Title {
-				color: black;
-				font-size: 32px;
+			.container3Title {
+				color: #333;
+				font-size: vw(38);
 				font-weight: 700;
-				line-height: 48px;
+				line-height: vw(48);
 				display: flex;
 				justify-content: center;
+				margin-top: vw(50);
+			
+			}
+			
+			.container3subTitle {
+				color: #999999;
+				font-size: vw(22);
+				line-height: vw(30);
+				display: flex;
+				justify-content: center;
+			
 			}
 
 			.container2wap {
@@ -347,7 +373,7 @@
 			box-sizing: border-box;
 
 			.positon {
-				margin: 10px 0;
+				margin: 15px 0;
 				color: #666666;
 				line-height: vw(17);
 				text-align: left;
@@ -370,85 +396,88 @@
 				margin-top: vw(50);
 
 			}
-			.container3subTitle{
+
+			.container3subTitle {
 				color: #999999;
 				font-size: vw(22);
 				line-height: vw(30);
 				display: flex;
 				justify-content: center;
-				
+
 			}
 
 			.container3wap {
-				margin-top: vw(79)
+				margin-top: vw(20)
 			}
 
 
 		}
 
-		.container4 {
-			@include ct1200;
+	}
 
-			.container4content {
+	::v-deep .el-carousel {
+
+		.el-carousel__item {
+			.banner-carousel-item {
+				width: 100%;
+				box-sizing: border-box;
 				display: flex;
 				flex-wrap: wrap;
 
-				.wapItem {
-					@include fj(flex-start);
-					flex-direction: column;
-					margin: 0 45px 45px 0;
-					width: 300px;
-					height: 420px;
-					box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
-					box-sizing: border-box;
-					cursor: pointer;
+				.banner_img {
+					width: vw(150);
+					height: vw(60);
+					margin: vw(20) vw(13);
 
-					.item-img {
-						width: 100%;
-						height: 150px;
-
-						img {
-							width: 100%;
-							height: 100%;
-							object-fit: cover;
-						}
+					&:nth-child(1),
+					// 第一个 div
+					&:nth-child(15) {
+						// 第七个 div
+						padding-left: vw(160); // 添加左右 20px 的 padding
 					}
 
+					;
+					&:nth-child(6) // 第一个 div
 
-
-					.title {
-						color: rgb(0, 0, 0);
-						margin-top: 20px;
-						font-size: 26px;
-						font-weight: 700;
-						line-height: 30px;
-						padding-right: 10px;
-						display: flex;
-						box-sizing: border-box;
-						padding: 0 20px;
+						{
+						// 第七个 div
+						padding-right: vw(160); // 添加左右 20px 的 padding
 					}
 
+					;
 
-					.item-wap {
+					img {
 						width: 100%;
-						overflow-wrap: break-word;
-						color: rgb(0, 0, 0);
-						font-size: 18px;
-						font-weight: 700;
-						line-height: 24px;
-						letter-spacing: 0px;
-						padding: 0 20px;
-						margin-top: 20px;
-						box-sizing: border-box;
+						height: 100%;
+						object-fit: cover;
 					}
 				}
 
 
+			}
+
+
+		}
+
+
+
+		.el-carousel__indicator {
+			.el-carousel__button {
+				background-color: #D8D8D8;
+				width: vw(74);
+				height: 4px;
+			}
+
+			&.is-active {
+				.el-carousel__button {
+					background-color: #5053E3;
+					width: vw(70);
+					height: 4px;
+				}
 
 			}
 
 		}
-
 
 	}
 </style>
