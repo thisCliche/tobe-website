@@ -5,8 +5,16 @@ let routeUrl = {
 	getGoodsForType:"/index/index/getGoodsForType",
 	getOrderIsPay:"/index/index/getOrderIsPay",
 	userIsHadBuy:"/index/index/userIsHadBuy",
+	video: "/index/index/getOtherVideoList",
 }
 
+export function videoApi(params) {
+	return axios({
+		url: routeUrl.video,
+		method: 'get',
+		params,
+	})
+}
 export function GoodsForTypeApi(params) {
 	return axios({
 		url: routeUrl.getGoodsForType,

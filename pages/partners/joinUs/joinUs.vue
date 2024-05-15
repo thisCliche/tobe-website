@@ -3,35 +3,12 @@
 		<view class="banner">
 			<img :src="aboutUs" alt="" />
 		</view>
-		<view class="mainWrap">
-			<view class="main">
-				<view class="mainL animate__animated animate__fadeInUp">
-					<view class="row1">
-						扫描二维码
-					</view>
-					<view class="">
-						<view class="row2">
-							立即添加小助手，
-						</view>
-						<view class="row2">
-							开启你的合作之旅
-						</view>
-					</view>
-					<view class="row3">
-						通过小助手的材料真实性审核后，小助手会帮您把个人信息发布在平台上，开启您的合作之旅
-					</view>
-				</view>
-				<view class="mainR animate__animated animate__fadeIn">
-					<img :src="aboutUsCode" alt="" />
-				</view>
-			</view>
-			<view class="bottomSlogan animate__animated animate__fadeInUp">
-				<view class="row1">
-					TOBE正成为最具创造力和责任心的留学平台
-				</view>
-				<view class="row2">
-					致力于以创意方式助学生实现梦想。我们聚集最优秀的年轻人，恪守严格的道德准则，以几近苛刻的要求和最卓越的专业水平，希望加入我们的你也能成为我们的一员，让学生更好的成长！
-				</view>
+		<view class="model9">
+			<view class="model9Wrap">
+				<view class="row1 wow animate__animated animate__fadeInUp">TOBE正成为最具创造力和责任心的留学公司</view>
+				<view class="hr"></view>
+				<view class="row2 wow animate__animated animate__fadeInUp">
+					致力于以创意方式助学生实现梦想。我们聚集最优秀的年轻人，恪守严格的道德准则，以几近苛刻的要求和最卓越的专业水平为客户提供一流的留学咨询和能力培养服务。</view>
 			</view>
 		</view>
 		<my-foot></my-foot>
@@ -39,65 +16,112 @@
 </template>
 
 <script>
-	import aboutUs from '@image/aboutUs.png'
+	import aboutUs from '@image/aboutUs/JoinUs.jpg'
 	import aboutUsCode from '@image/aboutUsCode.png'
 	export default {
 		data() {
 			return {
-				aboutUs,aboutUsCode
+				aboutUs,
+				aboutUsCode
 			}
 		},
 		methods: {
-			
+
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-.banner {
-		height: 700px;
+	.banner {
+		// height: 500px;
 
 		img {
-			@include imgLayout;
+			// @include imgLayout;
+			    vertical-align: sub;
 		}
 
 	}
-	.mainWrap{
+
+	.model9 {
+		@include bis-self("../../../assets/image/science/modelBg3.jpg");
+		@include modelPd;
+
+		.model9Wrap {
+			@include ct1200;
+			text-align: center;
+
+			.row1 {
+				font-weight: 600;
+				font-size: 38px;
+				color: #000;
+				line-height: 53px;
+				@include mb(12px);
+			}
+
+			.hr {
+				@include wh(46px, 8px);
+				background: #000;
+				border-radius: 20px;
+				margin: 0 auto;
+			}
+
+			.row2 {
+				font-weight: 400;
+				font-size: 22px;
+				color: #999999;
+				line-height: 50px;
+				width: 700px;
+				margin: 0 auto;
+			}
+		}
+	}
+
+	.mainWrap {
 		@include modelPdOther;
 		@include ct1200;
-		.bottomSlogan{
+
+		.bottomSlogan {
 			text-align: center;
 			margin: 60px 0 100px;
-			.row1{
+
+			.row1 {
 				font-size: 30px;
 				font-weight: 700;
 			}
-			.row2{
+
+			.row2 {
 				@include mt(20px);
-				@include sc(22px,$partnerTitle)
+				@include sc(22px, $partnerTitle)
 			}
 		}
-		.main{
+
+		.main {
 			@include fj();
-			.mainL{
+
+			.mainL {
 				@include fj(space-around);
 				flex-direction: column;
 				padding: 60px 0;
 				text-align: center;
-				.row1{
+
+				.row1 {
 					font-size: 40px;
 					font-weight: 700;
 				}
-				.row2{
-					@include sc(26px,$partnerTitle)
+
+				.row2 {
+					@include sc(26px, $partnerTitle)
 				}
-				.row3{
-					@include sc(22px,$partnerTitle)
+
+				.row3 {
+					@include sc(22px, $partnerTitle)
 				}
 			}
-			.mainR{
+
+			.mainR {
 				width: 700px;
-				img{
+
+				img {
 					@include imgLayout;
 				}
 			}
