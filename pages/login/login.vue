@@ -3,7 +3,7 @@
 		<view class="loginWrap">
 			<view class="loginL">
 				<img class="loginBg" :src="loginBg" alt="" />
-				<view class="slogan">
+				<!-- <view class="slogan">
 					<view class="">
 						TOBE 让留学没有信息差
 					</view>
@@ -13,13 +13,17 @@
 					<view class="">
 						未来已来
 					</view>
-				</view>
+				</view> -->
 			</view>
 			<view class="loginR">
 				<view key="1" v-if="displayFlag==1" class="loginIn common">
 					<view class="formWrap">
 						<view class="row1">登录</view>
 						<view class="row2">免费登录到您的TOBE留学账号</view>
+						<view class="changeTab">
+							<view class="tabItem" :class="isValidCodeLogin?'':'active'" @click="toggle(4)">密码登录</view>
+							<view class="tabItem" :class="isValidCodeLogin?'active':''" @click="toggle(4)">验证码登录</view>
+						</view>
 						<el-form size="small" :model="loginForm" :rules="rulesLogin" ref="loginFormRef">
 							<el-form-item label="手机号" prop="mobile">
 								<el-input v-model="loginForm.mobile"></el-input>
@@ -43,7 +47,6 @@
 							<el-form-item>
 								<view class="forgetPas">
 									<span @click="toggle(2)">忘记密码</span>
-									<span @click="toggle(4)" class="linkColor">{{isValidCodeLogin?'密码登录':'验证码登录'}}</span>
 								</view>
 							</el-form-item>
 							<el-form-item>
@@ -140,8 +143,10 @@
 
 <script>
 	import eventBus from '@utils/eventBus.js'
-	import loginBg from '@image/loginBg.png'
-	import {Local} from '@utils/storage.js'
+	import loginBg from '@image/loginBg.jpg'
+	import {
+		Local
+	} from '@utils/storage.js'
 	import {
 		smsSendRequset,
 		loginRequset,
@@ -178,7 +183,7 @@
 			};
 
 			return {
-				random_code:0,
+				random_code: 0,
 				isValidCodeLogin: false,
 				displayFlag: 1, //1登录 2 忘记密码 3 注册 4 验证码登录
 				phoneregisRight: false, // 标记手机号是否正确
@@ -186,14 +191,14 @@
 				timerRegister: null,
 				codeDisRegister: true,
 				loginBg,
-				vialidImgUrl:baseURL+`/captcha/0`,
+				vialidImgUrl: baseURL + `/captcha/0`,
 				loginForm: {
 					mobile: '',
 					password: '',
 					captcha: '',
-					image_captcha:'',
+					image_captcha: '',
 					type: 1,
-					random_code:0,
+					random_code: 0,
 				},
 				forgetForm: {
 					mobile: '',
@@ -336,10 +341,10 @@
 			}
 		},
 		methods: {
-			changeUrl(){
-				let random = parseInt(Math.random()*100);
+			changeUrl() {
+				let random = parseInt(Math.random() * 100);
 				this.loginForm.random_code = random;
-				this.vialidImgUrl = baseURL+`/captcha/${random}`
+				this.vialidImgUrl = baseURL + `/captcha/${random}`
 			},
 			async getCode(formName) {
 				if (!this.phoneregisRight) return;
@@ -434,11 +439,11 @@
 							});
 							if (prepa.toFlag == '1') {
 								this.displayFlag = 1;
-							}else{
-								Local.set('accountInfo',res.data)
+							} else {
+								Local.set('accountInfo', res.data)
 								eventBus.emit('loginEvent')
 								uni.navigateTo({
-									url:"/"
+									url: "/"
 								})
 							}
 						}
@@ -451,7 +456,7 @@
 		},
 
 		created() {
-			if(this.$route.query.hasOwnProperty('type')){
+			if (this.$route.query.hasOwnProperty('type')) {
 				this.displayFlag = 3;
 			}
 		}
@@ -459,7 +464,6 @@
 </script>
 
 <style lang="scss" scoped>
-
 	.login {
 		.loginWrap {
 			@include fj();
@@ -491,10 +495,12 @@
 						.validCodeWrap {
 							@include fj();
 							width: 100%;
-							img{
+
+							img {
 								height: 32px;
 								cursor: pointer;
 							}
+
 							.validCode {
 								width: 80%;
 								@include mr(10px);
@@ -514,12 +520,13 @@
 							width: 100%;
 							height: 40px;
 							color: #fff;
-							background: #000;
-							border-radius: 6px;
+							// background: #000;
+							border-radius: 40px;
 							text-align: center;
 							@include mt(20px);
 							cursor: pointer;
 							line-height: 40px;
+							background-image: linear-gradient(to right, $gradientS, $gradientE);
 						}
 
 						width: 400px;
@@ -534,6 +541,28 @@
 						.row2 {
 							font-size: 24px;
 							@include mb(20px);
+							border-bottom: 1px solid #D9D9D9;
+							padding-bottom: 18px;
+						}
+
+						.changeTab {
+							@include fj(space-around);
+@include mb(20px);
+							.tabItem {
+								font-size: 18px;
+								cursor: pointer;
+							}
+
+							.active {
+								&::after {
+									display: block;
+									content: '';
+									@include wh(36px, 4px);
+									// margin-left: 50%;
+									transform:translate(20px,10px);
+									background-image: linear-gradient(to right, $gradientS, $gradientE);
+								}
+							}
 						}
 					}
 

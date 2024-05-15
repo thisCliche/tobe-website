@@ -247,7 +247,7 @@
 					cursor: pointer;
 					border-radius: 50px;
 					color: #fff;
-					background-color: #000;
+					background-image:linear-gradient(to right,$gradientS,$gradientE);
 					font-size: 20px;
 					font-weight: 700;
 					overflow: hidden;

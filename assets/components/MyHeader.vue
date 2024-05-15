@@ -6,18 +6,13 @@
 				<view class="menus firstRow">
 					<view class="menusInner">
 						<view class="ulEle" @mouseover="mouseIn" @mouseleave="mouseOut">
-							<view class="ulWrap ulWrapL">
-								<view @click="toDetail(item)" v-for="(item) in homeMenus.slice(0,3)" :key="item.id" :data-idx="1"
-									:class="item.id == currentId ? 'active' : ''" class="liEle" :data-id="item.id">
-									<span>{{ item.nickname }}</span>
-								</view>
-							</view>
 							<view class="logo" @click="toDetail({isOut:false,url:'/'})">
 								<img :src="logoImg" alt="" />
 							</view>
-							<view class="ulWrap ulWrapR">
-								<view @click="toDetail(item)" v-for="(item) in homeMenus.slice(3,7)" :key="item.id" :data-idx="2"
-									:class="item.id == currentId ? 'active' : ''" class="liEle" :data-id="item.id">
+							<view class="placeholder"></view>
+							<view class="ulWrap ulWrapL">
+								<view @click="toDetail(item)" v-for="(item,idx) in homeMenus.slice(0,7)" :key="item.id"
+									:class="item.id == currentId ? 'active' : ''" class="liEle" :data-id="item.id" :data-idx="idx">
 									<span>{{ item.nickname }}</span>
 								</view>
 							</view>
@@ -43,18 +38,22 @@
 									</el-dropdown-menu>
 								</el-dropdown>
 							</view>
-							<view class="loginBtn" @click="loginBtn" v-else>login</view>
+							<view class="loginBtn" @click="loginBtn" v-else>
+								<view class="" data-idx="login">
+									login
+								</view>
+								<view class="" data-idx="register">
+									sign up
+								</view>
+							</view>
 						</view>
 					</view>
 				</view>
 				<view class="menus secondRow">
 					<view class="menusInner">
 						<view class="ulEle">
-							<view @click="toDetail(item)" v-for="(item) in homeMenus.slice(7,10)" :key="item.id" class="liEle">
-								<span>{{ item.name }}</span>
-							</view>
 							<view class="placehold"></view>
-							<view @click="toDetail(item)" v-for="(item) in homeMenus.slice(10,13)" :key="item.id" class="liEle">
+							<view @click="toDetail(item)" v-for="(item) in homeMenus.slice(7,13)" :key="item.id" class="liEle">
 								<span>{{ item.name }}</span>
 							</view>
 						</view>
@@ -112,13 +111,23 @@
 					message: '退出登录'
 				})
 			},
-			loginBtn() {
-				uni.navigateTo({
-					url: "/pages/login/login"
-				})
+			loginBtn(e) {
+				let {
+					idx
+				} = e.target.dataset;
+				if (idx == 'register') {
+					uni.navigateTo({
+						url: "/pages/login/login?type=" + idx,
+					})
+				} else {
+					uni.navigateTo({
+						url: "/pages/login/login",
+					})
+				}
+
 			},
 			mouseIn(e) {
-				if (e.target.dataset.hasOwnProperty('idx')) {
+				if (e.target.dataset.hasOwnProperty('id')) {
 					let {
 						id,
 						idx
@@ -130,17 +139,11 @@
 					} else {
 						this.isPriming = true;
 						this.subList = item.childlist;
-						this.$nextTick(() => {
-							let innerBoxLeft = 0;
-							uni.createSelectorQuery().in(this).select('.ulEle').boundingClientRect(data => {
-								innerBoxLeft = data.left;
-							}).exec()
-							if (idx == 2) {
-								this.leftLength = innerBoxLeft + 874;
-							} else {
-								this.leftLength = innerBoxLeft + 80;
-							}
-						})
+						if (idx > 3) {
+							this.leftLength = e.target.offsetLeft - 314;
+						} else {
+							this.leftLength = e.target.offsetLeft;
+						}
 					}
 				}
 			},
@@ -154,7 +157,6 @@
 				if (item.isOut) {
 					window.open(item.url)
 				} else {
-					console.log(item)
 					uni.navigateTo({
 						url: item.url
 					})

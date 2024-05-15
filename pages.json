@@ -21,7 +21,6 @@
 			}
 		},
 		{
-
 			"path": "pages/partners/partnesIndex/partnesIndex",
 			"style": {
 				"navigationBarTitleText": "伙伴",
@@ -156,6 +155,30 @@
 			"style" : 
 			{
 				"navigationBarTitleText" : "AI导师",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/science/professIntro",
+			"style" : 
+			{
+				"navigationBarTitleText" : "专业介绍",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/science/index",
+			"style" : 
+			{
+				"navigationBarTitleText" : "学术",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/science/spoken",
+			"style" : 
+			{
+				"navigationBarTitleText" : "口语训练",
 				"enablePullDownRefresh" : false
 			}
 		}

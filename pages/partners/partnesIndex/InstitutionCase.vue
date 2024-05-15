@@ -10,9 +10,12 @@
 							<view class="dec">{{item.subname}}</view>
 						</view>
 					</view>
-					<view class="recommend">推荐理由</view>
+					<view class="hr">
+						<view class="recommend">推荐理由</view>
+						<view class="ckyq">查看要求 <i class="el-icon-caret-right
+"></i></view>
+					</view>
 					<view class="des">{{item.text}}</view>
-					<view class="btn">查看要求</view>
 				</view>
 			</view>
 		</VueSlickCarousel>
@@ -50,7 +53,6 @@
 </script>
 
 <style lang="scss" scoped>
-
 	.home-case {
 		@include mt(16px);
 		height: 360px;
@@ -82,7 +84,7 @@
 		outline: none;
 
 		.imgWrap {
-			@include wh(350px, 330px);
+			@include wh(350px, 270px);
 			overflow: hidden;
 			margin: 0 auto;
 			// background: $bc;
@@ -90,6 +92,7 @@
 			border-radius: 10px;
 			padding: 30px 24px;
 			box-sizing: border-box;
+			background: #fff;
 
 			.header {
 				@include fj(flex-start);
@@ -108,9 +111,9 @@
 					width: 220px;
 
 					.name {
-						font-size: 22px;
+						font-size: 20px;
 						line-height: 30px;
-						font-weight: 700;
+						// font-weight: 700;
 						@include ellipsis;
 					}
 
@@ -128,31 +131,39 @@
 				@include multi-ellipsis--l(4);
 				height: 104px;
 			}
-			.btn{
-				margin: 20px auto 0;
+			.hr{
+				position: relative;
+			}
+			.ckyq{
+				position: absolute;
+				color: #666;
+				font-size: 12px;
+				top: 8px;
+				right: 0px;
 				cursor: pointer;
-				border-radius: 50px;
-				color: $recommendColor;
-				font-size: 14px;
-				font-weight: 700;
-				padding: 6px 20px;
-				border: 1px solid $recommendColor;
-				text-align: center;
-				width: 160px;
 			}
 			.recommend {
 				@include mt(10px);
-				color: $recommendColor;
+				// color: $recommendColor;
 				line-height: 30px;
 				position: relative;
+				background-image: linear-gradient(90deg, #5053e3 0, #7f3588 100%);
+				// width: 156px;
+				// height: 65px;
+				overflow-wrap: break-word;
+				color: #333333;
+				white-space: nowrap;
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+
 
 				&::after {
 					content: '';
-					width: 228px;
-					border-top: 1px solid #65c798;
+					width: 158px;
+					border-top: 1px dashed #979797;
 					position: absolute;
 					top: 16px;
-					right: 0px;
+					right: 70px;
 				}
 			}
 		}
