@@ -109,7 +109,7 @@ import imageDemo from '@image/resource/配图3.png';
 				topBanner: {},
 				resourceList: [],
 				banner3dList: [],
-				usecase:[{id:1,imageUrl:imageDemo,title:'夏威夷州政府实习',peple:'高中生/成人',address:'线上/线下'},{id:2,imageUrl:imageDemo,title:'夏威夷州政府实习',peple:'高中生/成人',address:'线上/线下'},{id:3,imageUrl:imageDemo,title:'夏威夷州政府实习',peple:'高中生/成人',address:'线上/线下'}]
+				usecase:[{id:1,imageUrl:imageDemo,title:'夏威夷州政府实习',peple:'高中生/成人',address:'线上/线下'},{id:2,imageUrl:imageDemo,title:'夏威夷州政府实习',peple:'高中生/成人',address:'线上/线下'},{id:3,imageUrl:imageDemo,title:'夏威夷州政府实习',peple:'高中生/成人',address:'线上/线下'},{id:4,imageUrl:imageDemo,title:'夏威夷州政府实习',peple:'高中生/成人',address:'线上/线下'}]
 
 
 

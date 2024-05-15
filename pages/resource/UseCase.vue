@@ -35,14 +35,13 @@
 		data() {
 			return {
 				settings: {
-					draggable: false,
-					autoplay: true,
-					arrows: true,
-					"focusOnSelect": true,
-					"infinite": true,
-					"slidesToShow": 3,
-					"slidesToScroll": 1,
-					"speed": 500
+					focusOnSelect: true,
+					 arrows: true, //展示箭头
+					  infinite: true,
+					  slidesToShow: 3,
+					  slidesToScroll: 3,
+					  speed: 500,
+					  
 				},
 			}
 		},
@@ -58,33 +57,32 @@
 
 	.home-case {
 		@include mt(16px);
-		overflow: hidden;
-
+	
+width: 100%;
 		::v-deep .slick-next {
-			right: 0px;
-			@include wh(30px, 30px);
+	
 
 			&:before {
-				color: red;
-				font-size: 30px;
+				color: #5053E3;
+				font-size: 37px;
 			}
 		}
 
 		::v-deep .slick-prev {
-			left: 0px;
-			@include wh(30px, 30px);
-			z-index: 99;
+			left: -80px !important;
+			  z-index: 10;
+
 
 			&:before {
-				color: red;
-				font-size: 30px;
+				color: #5053E3;
+				font-size: 37px;
 			}
 		}
 	}
 
 	.item {
 		outline: none;
-		margin: 0 vw(17);
+
 
 		.imgWrap {
 			width: vw(455);
