@@ -189,6 +189,38 @@
 				"navigationBarTitleText" : "活动主页",
 				"enablePullDownRefresh" : false
 			}
+		},
+		{
+			"path" : "pages/activity/club",
+			"style" : 
+			{
+				"navigationBarTitleText" : "活动社区",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/activity/clubDteail",
+			"style" : 
+			{
+				"navigationBarTitleText" : "社区详情",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/activity/welfare",
+			"style" : 
+			{
+				"navigationBarTitleText" : "活动公益",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/activity/learn",
+			"style" : 
+			{
+				"navigationBarTitleText" : "学术",
+				"enablePullDownRefresh" : false
+			}
 		}
 	],
 	"globalStyle": {

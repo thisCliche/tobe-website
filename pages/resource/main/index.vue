@@ -40,7 +40,7 @@
 
 
 				<view class="top">
-					
+
 					<view class="textDiscipt">
 						<view class="textTitle">
 							<view class="name_cn">
@@ -49,30 +49,30 @@
 							<view class="name_en">
 								PRACTICE
 							</view>
-							
+
 						</view>
-									
+
 						<view class="textBody">
-	最强软实力资源平台，囊括全网最全科研界面
-	帮助你在社科、商科、工科、理科、艺术等
-	所有领域达到科研实习目标
-									
+							最强软实力资源平台，囊括全网最全科研界面
+							帮助你在社科、商科、工科、理科、艺术等
+							所有领域达到科研实习目标
+
 						</view>
 						<view class="text-button">
 							立刻了解
 						</view>
-									
+
 					</view>
-				
+
 					<view class="video">
 						<img src="@image/resource/科研配图.png" alt="" srcset="" />
 					</view>
-				
-				
-				</view>
-				
 
-			<view class="bottom">
+
+				</view>
+
+
+				<view class="bottom">
 
 					<view class="video">
 						<img src="@image/resource/科研配图.png" alt="" srcset="" />
