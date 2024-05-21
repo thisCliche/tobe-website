@@ -14,7 +14,7 @@
 						</div>
 						<el-collapse-transition>
 							<div class="content" v-show="item.show">
-								<div class="btnItem" v-for="child of item.itemList" :key="child.id">
+								<div class="btnItem" @click="toDetail" v-for="child of item.itemList" :key="child.id">
 									<div class="text">{{child.name}}</div>
 								</div>
 							</div>
@@ -103,6 +103,11 @@
 			}
 		},
 		methods: {
+			toDetail(){
+				uni.navigateTo({
+					url:'/pages/science/scienceDetail'
+				})
+			},
 			async getData() {
 				let apiRequestArr = [videoApi({
 					type: 4,

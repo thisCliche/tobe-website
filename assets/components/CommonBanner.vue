@@ -31,7 +31,7 @@
 			z-index: 99;
 			
 			.maskPng {
-				@include wh(370px, 100%);
+				@include wh(auto, 60px);
 			}
 
 			.desText {

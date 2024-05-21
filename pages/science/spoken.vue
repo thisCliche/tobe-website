@@ -28,7 +28,7 @@
 							留学之路，学术领航；专业指导，助力前行。选择我们，让学术梦想照进现实
 						</view>
 					</view>
-					<carousel-3d @slide-change="handleSlideChange" :perspective="0" :space="300" :display="5" :width="300"
+					<carousel-3d :perspective="0" :space="300" :display="5" :width="300"
 						:height="500" :border="0">
 						<slide v-for="(slide, i) in 7" :index="i" :key="i">
 							<view class="teacherItem">

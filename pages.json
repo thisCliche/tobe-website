@@ -127,67 +127,102 @@
 			}
 		},
 		{
-			"path" : "pages/study/growthCourse/detail/detail",
-			"style" : 
-			{
-				"navigationBarTitleText" : "成长课",
-				"enablePullDownRefresh" : false
+			"path": "pages/study/growthCourse/detail/detail",
+			"style": {
+				"navigationBarTitleText": "成长课",
+				"enablePullDownRefresh": false
 			}
 		},
 		{
-			"path" : "pages/evaluate/evaluating/evaluating",
-			"style" : 
-			{
-				"navigationBarTitleText" : "AI评测",
-				"enablePullDownRefresh" : false
+			"path": "pages/evaluate/evaluating/evaluating",
+			"style": {
+				"navigationBarTitleText": "AI评测",
+				"enablePullDownRefresh": false
 			}
 		},
 		{
-			"path" : "pages/study/aiTutor/index",
-			"style" : 
-			{
-				"navigationBarTitleText" : "AI导师",
-				"enablePullDownRefresh" : false
+			"path": "pages/study/aiTutor/index",
+			"style": {
+				"navigationBarTitleText": "AI导师",
+				"enablePullDownRefresh": false
 			}
 		},
 		{
-			"path" : "pages/study/aiTutor/detail",
-			"style" : 
-			{
-				"navigationBarTitleText" : "AI导师",
-				"enablePullDownRefresh" : false
+			"path": "pages/study/aiTutor/detail",
+			"style": {
+				"navigationBarTitleText": "AI导师",
+				"enablePullDownRefresh": false
 			}
 		},
 		{
-			"path" : "pages/science/professIntro",
-			"style" : 
-			{
-				"navigationBarTitleText" : "专业介绍",
-				"enablePullDownRefresh" : false
+			"path": "pages/science/professIntro",
+			"style": {
+				"navigationBarTitleText": "专业介绍",
+				"enablePullDownRefresh": false
 			}
 		},
 		{
-			"path" : "pages/science/index",
-			"style" : 
-			{
-				"navigationBarTitleText" : "学术",
-				"enablePullDownRefresh" : false
+			"path": "pages/science/index",
+			"style": {
+				"navigationBarTitleText": "学术",
+				"enablePullDownRefresh": false
 			}
 		},
 		{
-			"path" : "pages/science/spoken",
-			"style" : 
-			{
-				"navigationBarTitleText" : "口语训练",
-				"enablePullDownRefresh" : false
+			"path": "pages/science/spoken",
+			"style": {
+				"navigationBarTitleText": "口语训练",
+				"enablePullDownRefresh": false
 			}
 		},
 		{
-			"path" : "pages/activity/index",
-			"style" : 
-			{
-				"navigationBarTitleText" : "活动主页",
-				"enablePullDownRefresh" : false
+
+			"path": "pages/activity/index",
+			"style": {
+				"navigationBarTitleText": "活动主页",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/science/interCollege",
+			"style": {
+				"navigationBarTitleText": "国际本科",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/science/competition",
+			"style": {
+				"navigationBarTitleText": "竞赛",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/science/interHightSchool",
+			"style": {
+				"navigationBarTitleText": "高中国际学校",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/science/assistant",
+			"style": {
+				"navigationBarTitleText": "学科助教",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/science/universityIntroduction",
+			"style": {
+				"navigationBarTitleText": "大学介绍",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/science/scienceDetail",
+			"style": {
+				"navigationBarTitleText": "学术详情",
+				"enablePullDownRefresh": false
 			}
 		}
 	],

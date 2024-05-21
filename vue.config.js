@@ -3,12 +3,12 @@ const resolve = dir => path.join(__dirname, dir);
 module.exports = {
 	productionSourceMap: false,
 	css: {
+		requireModuleExtension: true,
 		loaderOptions: {
 			scss: {
 				prependData: `
 	         @import "@styles/minix.scss";
-			  @import "@styles/wh.scss";
-			 
+					 @import "@styles/wh.scss";
 	        `,
 			},
 		},

@@ -19,3 +19,9 @@
 	}
 	
 }
+	
+.el-radio-group{
+	 .el-radio-button__orig-radio:checked + .el-radio-button__inner{
+	background-image: linear-gradient( 90deg, #5053E3 0%, #7F3588 100%);
+}
+}
