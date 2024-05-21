@@ -156,7 +156,7 @@
 		      top: 40px;
 					background-color: rgba(100, 91, 255, 0.8);
 		      // background-image: linear-gradient(to right,$gradientS,$gradientE);
-					@include wh(434px,52px);
+					@include wh(634px,52px);
 		      z-index: 10;
 		      .subMenus {
 		        @include sc(15px,#fff);

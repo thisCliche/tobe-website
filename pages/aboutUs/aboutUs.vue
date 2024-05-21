@@ -19,7 +19,7 @@
 		<view class="map">
 			<view class="mapWrap">
 				<view class="mapL">
-					<img :src="resourceImg.map" alt="" />
+					<baidu-map @ready="mapHandle" style="width:600px;height:400px" :scroll-wheel-zoom='true'></baidu-map>
 				</view>
 				<view class="mapM">
 					<view class="locationItem">
@@ -76,6 +76,27 @@
 			}
 		},
 		methods: {
+			mapHandle({
+				BMap,
+				map
+			}) {
+				var point = new BMap.Point(116.304386,39.904655);
+				map.centerAndZoom(point, 15)
+				var marker = new BMap.Marker(point) 
+				map.addOverlay(marker) 
+				var html = [];
+				var opts = {
+					width: 250,
+					height: 30,
+				}
+				html.push('<div class="mapTipWindow"> <ul>');
+				html.push("<li>" + '某某位置' + "</li>");
+				html.push("</ul></div>");
+				var infowindow = new BMap.InfoWindow(html.join(""), opts);
+				marker.addEventListener("click", function() {
+					this.openInfoWindow(infowindow);
+				});
+			},
 			async getData() {
 				let res = await configApi();
 				this.aboutUsInfo = res.data
@@ -101,35 +122,46 @@
 			@include ct1200;
 			@include fj();
 			align-items: center;
-			.mapL{
-				img{width: 600px};
+
+			.mapL {
+				img {
+					width: 600px
+				}
+
+				;
 			}
+
 			.mapM {
 				.locationItem {
 					@include fj(flex-start);
 					align-items: flex-start;
 					margin: 30px 0;
+
 					.info {
 						@include ml(14px);
+
 						.title {
 							@include mb(10px);
 							@include sc(18px, #333);
 						}
+
 						.desc {
 							@include sc(14px, #333);
 						}
 					}
 				}
 			}
-			.mapR{
+
+			.mapR {
 				.rqItem {
 					text-align: center;
 					margin: 0 30px;
-					@include wh(140px,140px);
+					@include wh(140px, 140px);
+
 					img {
 						@include imgLayout;
 					}
-				
+
 					.label {
 						@include mt(10px);
 						font-size: 16px;
@@ -137,7 +169,7 @@
 				}
 			}
 		}
-		
+
 		.mainWrap {
 			@include modelPdOther;
 			@include ct1200;
@@ -150,7 +182,7 @@
 				}
 			}
 
-		
+
 			.main {
 				// @include fj();
 				padding: 40px 0 100px;

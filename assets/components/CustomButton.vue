@@ -12,7 +12,13 @@
 				type:Boolean,
 				default:false,
 			},
-			wh:{type:Object},
+			wh:{type:Object,
+			default:{
+				width:284,
+				size:16,
+				height:50
+			}
+			},
 		},
 		methods: {
 			customClick(){
