@@ -181,6 +181,14 @@
 				"navigationBarTitleText" : "口语训练",
 				"enablePullDownRefresh" : false
 			}
+		},
+		{
+			"path" : "pages/activity/index",
+			"style" : 
+			{
+				"navigationBarTitleText" : "活动主页",
+				"enablePullDownRefresh" : false
+			}
 		}
 	],
 	"globalStyle": {
